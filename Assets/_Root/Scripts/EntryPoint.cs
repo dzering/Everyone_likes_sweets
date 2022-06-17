@@ -1,12 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
-namespace MyGame
+namespace SweetGame
 {
-    internal class EntryPoint
+    internal class EntryPoint : MonoBehaviour
     {
+        [SerializeField] private Bird bird;
+        [SerializeField] private float speed;
+
+        private void Start()
+        {
+            bird.Init(speed);
+        }
+
+        private void Update()
+        {
+            
+        }
     }
 }

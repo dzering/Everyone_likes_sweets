@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MyGame.Background
+namespace SweetGame.Background
 {
     internal class Background : MonoBehaviour
     {
@@ -26,7 +26,7 @@ namespace MyGame.Background
             if (transform.position.x > widthCam / 100 || transform.position.x < -widthCam / 100)
                 transform.position = startPos;
 
-            transform.position += Vector3.right * speed * relativeSpeed * Time.deltaTime;
+            transform.position += Vector3.right * - speed * relativeSpeed * Time.deltaTime;
         }
     }
 }

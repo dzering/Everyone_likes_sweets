@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MyGame.Background
+namespace SweetGame.Background
 {
     internal class TapeBackground
     {
