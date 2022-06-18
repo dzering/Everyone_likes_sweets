@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer playerView;
     [SerializeField] private float gravity = - 9.81f;
-    [SerializeField] private float jump = 20;
+    [SerializeField] private float jump = 10;
 
     private float velocity;
 
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
             velocity = jump;
 
         velocity += gravity * Time.deltaTime;
