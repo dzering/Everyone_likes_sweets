@@ -1,12 +1,15 @@
 ﻿using SweetGame.Abstractions;
 using SweetGame.Enemy;
 using SweetGame.Enemy.Bird;
+using UnityEngine;
+using SweetGame.Utils.AssetsInjector;
 
 namespace SweetGame.Spawner
 {
     internal class EnemyFactory
     {
         private readonly ProfileGame profile;
+        [InjectAsset("Child")] private GameObject child;
 
         public EnemyFactory(ProfileGame profile)
         {
@@ -20,10 +23,14 @@ namespace SweetGame.Spawner
                 case EnemyType.Bird:
                     IEnemy bird = new Bird(profile.GameSpeed);
                     return bird;
+
                 case EnemyType.Child:
-                    IEnemy child = new Child(profile.GameSpeed);
-                    return child;
+                    GameObject childGO = GameObject.Instantiate(child);
+                    IEnemy childEnemy = childGO.GetComponent<Child>();
+
+                    return childEnemy;
             }
+
             return new NullEnemy();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using SweetGame.Enemy;
 using SweetGame.Spawner;
+using SweetGame.Utils.AssetsInjector;
 using UnityEngine;
 
 namespace SweetGame
@@ -7,8 +8,9 @@ namespace SweetGame
     internal class EntryPoint : MonoBehaviour
     {
         [SerializeField] private float speed;
-        [SerializeField] private EnemyFactory enemyFactory;
+        [SerializeField] private AssetsContext assetsContext;
 
+        private EnemyFactory enemyFactory;
         private ProfileGame profileGame;
         private MainController mainController;
 
@@ -16,8 +18,9 @@ namespace SweetGame
         {
             profileGame = new ProfileGame(StateGame.Menu);
             enemyFactory = new EnemyFactory(profileGame);
-            enemyFactory.GetEnemy(EnemyType.Bird);
+            assetsContext.Inject(enemyFactory);
 
+            enemyFactory.GetEnemy(EnemyType.Child);
             mainController = new MainController(profileGame);
         }
     }
