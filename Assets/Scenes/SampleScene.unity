@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  assetsContext: {fileID: 11400000, guid: 8413257130b98e2469b5432a9961ea94, type: 2}
 --- !u!1 &726619063
 GameObject:
   m_ObjectHideFlags: 0

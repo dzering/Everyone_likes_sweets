@@ -3,16 +3,14 @@ using SweetGame.Abstractions;
 
 namespace SweetGame.Enemy
 {
-    internal class Child : MonoBehaviour, IEnemy
+    internal class Child : EnemyBase
     {
-        private float speed;
-        public Child(float speed)
+        private float speedRelative = 1.5f;
+        private float speed = 2;
+        public override void Move()
         {
-            this.speed = speed;
+            transform.position += Vector3.left * speed * speedRelative * Time.deltaTime;
         }
-        public void Move()
-        {
-            Debug.Log("Child is moving.");
-        }
+
     }
 }

@@ -2,9 +2,9 @@
 
 namespace SweetGame.Enemy
 {
-    internal class NullEnemy : IEnemy
+    internal class NullEnemy : EnemyBase
     {
-        public void Move()
+        public override void Move()
         {
             throw new System.NotImplementedException();
         }

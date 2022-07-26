@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SweetGame.Abstractions
 {
-    internal interface IEnemy
+    internal interface IMove
     {
         void Move();
     }

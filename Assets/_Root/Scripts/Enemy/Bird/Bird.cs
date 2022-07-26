@@ -3,7 +3,7 @@ using SweetGame.Abstractions;
 
 namespace SweetGame.Enemy.Bird
 {
-    internal class Bird : BaseController, IEnemy
+    internal class Bird : IMove
     {
         private float speedRelative;
         private float speed;
@@ -20,7 +20,6 @@ namespace SweetGame.Enemy.Bird
         {
             GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/Bird");
             GameObject obj =  Object.Instantiate(pref);
-            AddGameObject(obj);
 
             return obj.GetComponent<BirdView>();
         }
