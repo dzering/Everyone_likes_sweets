@@ -1,5 +1,6 @@
 ﻿using SweetGame.Abstractions;
 using SweetGame.Abstractions.Base;
+using SweetGame.Animations;
 using SweetGame.Enemy;
 using SweetGame.Spawner;
 using SweetGame.Utils.AssetsInjector;
@@ -13,6 +14,7 @@ namespace SweetGame
         [SerializeField] private BoardField boardField;
         [SerializeField] private float speed;
         [SerializeField] private AssetsContext assetsContext;
+        [SerializeField] private SpriteAnimationsConfig spriteAnimationsConfig;
 
         private ListExecutiveObject listExecutiveObjects;
 
@@ -39,6 +41,11 @@ namespace SweetGame
 
             //
             mainController = new MainController(profileGame);
+
+
+            SpriteAnimator spriteAnimator = new SpriteAnimator(spriteAnimationsConfig);
+
+
         }
 
         private void GameOver()
@@ -48,6 +55,7 @@ namespace SweetGame
 
         private void Update()
         {
+            SpriteAnimator.instance.Update();
             for (int i = 0; i < listExecutiveObjects.Length; i++)
             {
                 var execute = listExecutiveObjects[i];

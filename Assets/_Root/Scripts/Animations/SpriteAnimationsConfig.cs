@@ -4,12 +4,6 @@ using UnityEngine;
 
 namespace SweetGame.Animations
 {
-    public enum Track
-    {
-        Bird_fly
-    }
-
-
     [CreateAssetMenu(fileName = nameof(SpriteAnimationsConfig), menuName = "SweetGame/" + nameof(SpriteAnimationsConfig))]
     public class SpriteAnimationsConfig : ScriptableObject
     {
@@ -21,6 +15,21 @@ namespace SweetGame.Animations
         }
 
         public List<SpritesSequence> Sprites = new List<SpritesSequence>(); 
+
+        public List<Sprite> GetAnimations(Track track)
+        {
+            List<Sprite> sprites = new List<Sprite>();
+            for (int i = 0; i < Sprites.Count; i++)
+            {
+                if(Sprites[i].Track == track)
+                {
+                    sprites = Sprites[i].Sprites;
+                    return sprites;
+                }
+
+            }
+            return sprites;
+        }
 
     }
 }
