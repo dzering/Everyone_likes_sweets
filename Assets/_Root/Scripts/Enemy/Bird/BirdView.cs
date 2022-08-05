@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SweetGame.Enemy.Bird
+namespace SweetGame.Enemy
 {
     internal class BirdView : MonoBehaviour
     {

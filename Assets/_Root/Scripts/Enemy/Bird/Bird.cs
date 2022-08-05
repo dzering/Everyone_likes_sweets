@@ -1,32 +1,21 @@
 ﻿using UnityEngine;
-using SweetGame.Abstractions;
+using SweetGame.Abstractions.Base;
 
-namespace SweetGame.Enemy.Bird
+namespace SweetGame.Enemy
 {
-    internal class Bird : IMove
+    internal class Bird : EnemyBase
     {
-        private float speedRelative;
-        private float speed;
-        private BirdView view;
-
-        public Bird(float speed)
+        [SerializeField] private float speedRelative = -1.5f;
+        private float speed = 2f;
+        public override void Move()
         {
-            this.speed = speed;
-            view = LoadView();
-            speedRelative = view.SpeedRelative;
+            transform.position += Vector3.left * speed * speedRelative * Time.deltaTime;
         }
 
-        private BirdView LoadView()
+        public override void Interaction()
         {
-            GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/Bird");
-            GameObject obj =  Object.Instantiate(pref);
+            base.Interaction();
 
-            return obj.GetComponent<BirdView>();
-        }
-
-        public void Move()
-        {
-            view.transform.position += Vector3.left * speed * speedRelative * Time.deltaTime;
         }
     }
 }

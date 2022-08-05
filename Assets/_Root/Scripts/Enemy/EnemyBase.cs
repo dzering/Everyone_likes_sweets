@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using SweetGame.Abstractions;
+﻿using SweetGame.Abstractions;
 
-namespace SweetGame.Enemy
+namespace SweetGame.Abstractions.Base
 {
     internal abstract class EnemyBase : InteractiveObject, IMove
     {

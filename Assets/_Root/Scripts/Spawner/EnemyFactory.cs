@@ -1,5 +1,5 @@
 ﻿using SweetGame.Enemy;
-using SweetGame.Enemy.Bird;
+using SweetGame.Abstractions.Base;
 using SweetGame.Abstractions;
 using SweetGame.Utils.AssetsInjector;
 using UnityEngine;
@@ -7,23 +7,25 @@ using Object = UnityEngine.Object;
 
 namespace SweetGame.Spawner
 {
-    internal class EnemyFactory
+    internal class EnemyFactory : IEnemyFactory<EnemyBase>
     {
         private readonly ProfileGame profile;
-        [InjectAsset("Child")] private readonly GameObject child;
+        [InjectAsset("Child")] private GameObject child;
 
         public EnemyFactory(ProfileGame profile)
         {
             this.profile = profile;
         }
 
-        public IMove GetEnemy(EnemyType enemyType)
+        public EnemyBase GetEnemy(EnemyType enemyType)
         {
             switch (enemyType)
             {
                 case EnemyType.Bird:
-                    IMove bird = new Bird(profile.GameSpeed);
-                    return bird;
+                    GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/Bird");
+                    GameObject obj = Object.Instantiate(pref);
+
+                    return obj.GetComponent<Bird>();
 
                 case EnemyType.Child:
                     GameObject go = Object.Instantiate(child);

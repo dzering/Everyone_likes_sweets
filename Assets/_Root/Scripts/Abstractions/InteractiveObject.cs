@@ -6,10 +6,13 @@ namespace SweetGame.Abstractions
     {
         public virtual void Execute()
         {
-            Interaction();
+
         }
 
-        protected virtual void Interaction() { }
+        public virtual void Interaction() 
+        {
+            Debug.Log(this.name + "was interactive");
+        }
 
     }
 }

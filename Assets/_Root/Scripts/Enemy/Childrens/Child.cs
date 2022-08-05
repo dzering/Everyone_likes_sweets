@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using SweetGame.Abstractions;
+using SweetGame.Abstractions.Base;
 
 namespace SweetGame.Enemy
 {
     internal class Child : EnemyBase
     {
-        private float speedRelative = 1.5f;
+        [SerializeField] private float speedRelative = 1.2f;
         private float speed = 2;
         public override void Move()
         {

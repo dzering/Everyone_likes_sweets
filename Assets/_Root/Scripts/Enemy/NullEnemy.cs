@@ -1,4 +1,4 @@
-﻿using SweetGame.Abstractions;
+﻿using SweetGame.Abstractions.Base;
 
 namespace SweetGame.Enemy
 {
