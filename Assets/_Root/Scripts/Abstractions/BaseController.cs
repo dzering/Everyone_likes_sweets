@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SweetGame.Enemy;
 
-namespace SweetGame
+namespace SweetGame.Abstractions
 {
     internal abstract class BaseController : IDisposable
     {

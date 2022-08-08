@@ -2,31 +2,35 @@ using UnityEngine;
 
 namespace SweetGame.Background
 {
+    [RequireComponent(typeof(SpriteRenderer))]
     internal class Background : MonoBehaviour
     {
         [SerializeField] private float relativeSpeed = 1;
+        private SpriteRenderer spriteRenderer;
 
-        private float widthCam;
-        private Vector3 startPos;
-
-        private void Start()
+        private Vector2 cashPosition;
+        private Vector2 size;
+                
+        private float leftBorder => cashPosition.x - size.x / 2;
+        private float rightBorder => cashPosition.x + size.x / 2;
+        private void Awake()
         {
-            widthCam = Screen.width;
-            startPos = transform.position;
-
-            Debug.Log(widthCam);
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            size = spriteRenderer.bounds.size;
+            cashPosition = transform.position;
         }
-
-        private void Update()
+        public void Move()
         {
-            Move(2);
-        }
-        public void Move(float speed)
-        {
-            if (transform.position.x > widthCam / 100 || transform.position.x < -widthCam / 100)
-                transform.position = startPos;
+            Vector3 position = transform.position;
+            position += -Vector3.right * Time.deltaTime * relativeSpeed;
 
-            transform.position += Vector3.right * - speed * relativeSpeed * Time.deltaTime;
+            if(position.x <= leftBorder) 
+                position.x = rightBorder - (leftBorder - position.x);
+
+            if(position.x >= rightBorder)
+                position.x = leftBorder + (rightBorder - position.x);
+
+            transform.position = position;
         }
     }
 }

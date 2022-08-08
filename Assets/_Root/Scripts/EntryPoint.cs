@@ -4,6 +4,7 @@ using SweetGame.Animations;
 using SweetGame.Enemy;
 using SweetGame.Spawner;
 using SweetGame.Utils.AssetsInjector;
+using SweetGame.Background;
 using UnityEngine;
 
 namespace SweetGame
@@ -21,15 +22,16 @@ namespace SweetGame
         private EnemyFactory enemyFactory;
         private ProfileGame profileGame;
         private MainController mainController;
+        private TapeBackground background;
 
         private void Start()
         {
-            profileGame = new ProfileGame(StateGame.Menu);
+            profileGame = new ProfileGame();
+            listExecutiveObjects = new ListExecutiveObject();
+            playerController.OnDead += GameOver;
+
             enemyFactory = new EnemyFactory(profileGame);
             assetsContext.Inject(enemyFactory);
-            playerController.OnDead += GameOver;
-           
-            listExecutiveObjects = new ListExecutiveObject();
 
             // Inject spawnPoint to fields in SpawnController
             SpawnController spawnController = new SpawnController(enemyFactory, listExecutiveObjects);
@@ -37,6 +39,9 @@ namespace SweetGame
             spawnController.CreateObject();
 
             boardField.Points = spawnController.Points;
+
+            BackgroundController backgroundController = assetsContext.Inject(new BackgroundController());
+            listExecutiveObjects.AddExecuteObject(backgroundController);
 
 
             //
