@@ -27,6 +27,11 @@ namespace SweetGame
             set { executiveObjects[index] = value; }
         }
 
+        public void ClearList()
+        {
+            executiveObjects = null;
+        }
+
         public void AddExecuteObject(IExecute execute)
         {
             if(executiveObjects == null)

@@ -5,7 +5,7 @@ using SweetGame.Utils.AssetsInjector;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SweetGame.Spawner
+namespace SweetGame.Game.Spawner
 {
     internal class EnemyFactory : IEnemyFactory<EnemyBase>
     {

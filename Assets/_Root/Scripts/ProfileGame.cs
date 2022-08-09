@@ -1,17 +1,16 @@
-﻿using SweetGame.Utils.Reaction;
+﻿using SweetGame.Tools.Reaction;
 
 
 namespace SweetGame
 {
     internal class ProfileGame
     {
-        public readonly SubscriptionProperty<StateGame> state = new SubscriptionProperty<StateGame>();
+        public readonly SubscriptionProperty<StateGame> State = new SubscriptionProperty<StateGame>();
         public float GameSpeed = 2;
 
         public ProfileGame()
         {
-            state.Value = StateGame.Menu;
-            GameSpeed = 2;
+            State.Value = StateGame.Menu;
         }
     }
 }

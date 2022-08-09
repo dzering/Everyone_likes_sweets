@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SweetGame.Utils.Reaction
+namespace SweetGame.Tools.Reaction
 {
     internal sealed class SubscriptionProperty<T> : IReadOnlySubscriptionProperty<T>
     {

@@ -2,16 +2,12 @@
 using SweetGame.Enemy;
 using UnityEngine;
 
-namespace SweetGame.Spawner
+namespace SweetGame.Game.Spawner
 {
-    internal sealed class BoardField : MonoBehaviour
+    internal sealed class BoardFieldView : MonoBehaviour
     {
         private Transform[] points;
-        public Transform[] Points
-        {
-            get { return points; }
-            set { points = value; }
-        }
+
         public void Init(Transform[] points)
         {
             this.points = points;

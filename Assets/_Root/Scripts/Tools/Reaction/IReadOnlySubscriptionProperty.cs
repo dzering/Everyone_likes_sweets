@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SweetGame.Utils.Reaction
+namespace SweetGame.Tools.Reaction
 {
     internal interface IReadOnlySubscriptionProperty<out TValue>
     {

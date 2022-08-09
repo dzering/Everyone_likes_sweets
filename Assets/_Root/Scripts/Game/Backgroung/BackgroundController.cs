@@ -10,10 +10,14 @@ namespace SweetGame.Background
         private TapeBackground tapeBackground;
 
         public void Execute()
-        {
-            if(tapeBackground == null)
-                tapeBackground = GameObject.Instantiate(background).GetComponent<TapeBackground>();
+        { 
             tapeBackground.Execute();
+        }
+
+        public void Init()
+        {
+            if (tapeBackground == null)
+                tapeBackground = GameObject.Instantiate(background).GetComponent<TapeBackground>();
         }
     }
 }

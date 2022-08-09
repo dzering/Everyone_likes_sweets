@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SweetGame.Utils.AssetsInjector;
 using UnityEngine;
 
 namespace SweetGame.Animations
 {
     internal class SpriteAnimator : IDisposable
     {
+        [InjectAsset("SpriteAnimationsConfig")] private SpriteAnimationsConfig config;
         public static SpriteAnimator instance;
 
         private class Animation
@@ -23,7 +23,9 @@ namespace SweetGame.Animations
             {
                 if (Sleep)
                     return;
+
                 Counter += Time.deltaTime * Speed;
+
                 if (Loop)
                 {
                     while(Counter > Sprites.Count)
@@ -36,11 +38,9 @@ namespace SweetGame.Animations
             }
         }
 
-        private SpriteAnimationsConfig config;
         private Dictionary<SpriteRenderer, Animation> activeAnimations = new Dictionary<SpriteRenderer, Animation>();
-        public SpriteAnimator(SpriteAnimationsConfig config)
+        public SpriteAnimator()
         {
-            this.config = config;
             if(instance == null)
                 instance = this;
 
@@ -50,7 +50,6 @@ namespace SweetGame.Animations
             }
                 
         }
-
 
         public void StartAnimation(SpriteRenderer spriteRenderer, Track track, bool loop, float Speed)
         {
@@ -94,7 +93,6 @@ namespace SweetGame.Animations
             {
                 animation.Value.Update();
                 animation.Key.sprite = animation.Value.Sprites[(int)animation.Value.Counter];
-
             }
         }
 

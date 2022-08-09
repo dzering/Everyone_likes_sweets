@@ -4,7 +4,7 @@ using SweetGame.Utils.AssetsInjector;
 using SweetGame.Enemy;
 using UnityEngine;
 
-namespace SweetGame.Spawner
+namespace SweetGame.Game.Spawner
 {
     internal sealed class SpawnController
     {
