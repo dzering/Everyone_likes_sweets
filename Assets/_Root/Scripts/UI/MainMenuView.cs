@@ -1,7 +1,7 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
-using SweetGame.Player;
+using SweetGame.Game.Sweets;
 
 namespace SweetGame.UI
 {
@@ -10,24 +10,22 @@ namespace SweetGame.UI
         [SerializeField] private Button startButton;
         [SerializeField] private Button prevButton;
         [SerializeField] private Button nextButton;
-        [SerializeField] private Image currentPlayer;
+        [SerializeField] public Image Image;
 
-        private ProfileGame profileGame;
-
-        public void Init(UnityAction startGame, ProfileGame profileGame)
+        public void Init(UnityAction startGame, UnityAction chooseNext, UnityAction choosePrevious)
         {
             startButton.onClick.AddListener(startGame);
-            this.profileGame = profileGame;
+            nextButton.onClick.AddListener(chooseNext);
+            prevButton.onClick.AddListener(choosePrevious);
         }
 
         private void OnDestroy()
         {
             startButton.onClick.RemoveAllListeners();
+            nextButton.onClick.RemoveAllListeners();
+            prevButton.onClick.RemoveAllListeners();
         }
 
-        private void ChoosePlayer()
-        {
-
-        }
+        
     }
 }

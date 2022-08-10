@@ -2,16 +2,17 @@
 using SweetGame.Abstractions;
 using SweetGame.Abstractions.Base;
 using UnityEngine.Events;
-using System;
 
-namespace SweetGame.Player
+
+namespace SweetGame.Game.Sweets
 {
-    internal sealed class PlayerView : MonoBehaviour
+    internal class CandyView : MonoBehaviour
     {
-        [SerializeField] public float Gravity = - 9.81f;
+        private UnityAction OnDeath;
+
+        [SerializeField] public float Gravity = -9.81f;
         [SerializeField] public float JumpForce = 10;
 
-        private UnityAction OnDeath;
 
         public void Init(UnityAction action)
         {
@@ -29,8 +30,6 @@ namespace SweetGame.Player
             {
                 OnDeath?.Invoke();
             }
-
         }
-
     }
 }

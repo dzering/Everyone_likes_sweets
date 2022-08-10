@@ -1,5 +1,5 @@
 ﻿using SweetGame.Abstractions;
-using SweetGame.Player;
+using SweetGame.Game.Sweets;
 using SweetGame.Game.Spawner;
 using SweetGame.Background;
 using SweetGame.Utils.AssetsInjector;
@@ -14,7 +14,7 @@ namespace SweetGame.Game
         private readonly ProfileGame profileGame;
         private readonly Transform placeForUI;
        
-        private PlayerController player;
+        private CakeController player;
 
         private BoardField boardField;
 
@@ -35,7 +35,7 @@ namespace SweetGame.Game
             this.placeForUI = placeForUI;
             listExecutiveObjects = new ListExecutiveObject();
            
-            player = new PlayerController();
+            player = new CakeController();
             player.OnDead += GameOver;
 
             enemyFactory = new EnemyFactory(profileGame);

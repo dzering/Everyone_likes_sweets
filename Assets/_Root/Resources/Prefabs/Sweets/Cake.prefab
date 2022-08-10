@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8744143728706948572}
   - component: {fileID: 8744143728706948573}
-  - component: {fileID: 8744143728706948574}
   - component: {fileID: 8744143728706948563}
   - component: {fileID: 8744143728706948562}
+  - component: {fileID: 7378445893557911880}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Cake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,20 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8744143728706948574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8744143728706948575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca7d3e70a27dc54eb93b0c80c5ad055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Gravity: -9.81
-  JumpForce: 3
 --- !u!50 &8744143728706948563
 Rigidbody2D:
   serializedVersion: 4
@@ -148,3 +134,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2916666, y: 1.4641666}
   m_EdgeRadius: 0
+--- !u!114 &7378445893557911880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8744143728706948575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f24e6293ecc1b498b646b1e6b24d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gravity: -9.81
+  JumpForce: 10

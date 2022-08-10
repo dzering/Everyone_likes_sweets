@@ -1,38 +1,38 @@
 using SweetGame.Tools.Resource;
-using SweetGame.Abstractions;
 using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 using JoostenProductions;
 
-namespace SweetGame.Player
+namespace SweetGame.Game.Sweets
 {
-    internal class PlayerController : BaseController
+    internal class CakeController : SweetController
     {
         public UnityAction OnDead;
-        private readonly ResourcePath path = new ResourcePath("Prefabs/Player/Player");
+        private readonly ResourcePath path = new ResourcePath("Prefabs/Sweets/Cake");
 
-        private PlayerView playerView;
+        private CakeView playerView;
 
         private float gravity;
         private float jumpForce;
 
         private float velocity;
 
-        public PlayerController()
+        public CakeController()
         {
             velocity = 0;
             playerView = LoadView();
             playerView.Init(Death);
             gravity = playerView.Gravity;
             jumpForce = playerView.JumpForce;
-            JoostenProductions.UpdateManager.SubscribeToUpdate(Update);
+            UpdateManager.SubscribeToUpdate(Update);
         }
-        private PlayerView LoadView()
+        private CakeView LoadView()
         {
             GameObject pref = ResourceLoader.LoadGameObject(path);
-            GameObject go = Object.Instantiate(pref);
-            return go.GetComponent<PlayerView>();
+            Sweet = Object.Instantiate(pref);
+            AddGameObject(Sweet);
+            return Sweet.GetComponent<CakeView>();
         }
         private void Death()
         {
