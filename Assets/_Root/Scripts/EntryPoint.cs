@@ -10,6 +10,7 @@ namespace SweetGame
     internal class EntryPoint : MonoBehaviour
     {
         [SerializeField] private AssetsContext assetsContext;
+        [SerializeField] private Transform placeForUI;
 
         private ProfileGame profileGame;
         private MainController mainController;
@@ -17,8 +18,8 @@ namespace SweetGame
         private void Start()
         {
             profileGame = new ProfileGame();
-            mainController = new MainController(profileGame, assetsContext);
-            profileGame.State.Value = StateGame.Game;
+            mainController = new MainController(profileGame, assetsContext, placeForUI);
+            profileGame.State.Value = StateGame.Menu;
         }
 
         

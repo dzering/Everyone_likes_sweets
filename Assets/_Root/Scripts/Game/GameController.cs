@@ -12,6 +12,7 @@ namespace SweetGame.Game
     internal class GameController : BaseController
     {
         private readonly ProfileGame profileGame;
+        private readonly Transform placeForUI;
        
         private PlayerController player;
 
@@ -28,9 +29,10 @@ namespace SweetGame.Game
             JoostenProductions.UpdateManager.UnsubscribeFromUpdate(Update);
         }
 
-        public GameController(ProfileGame profileGame, AssetsContext assetsContext)
+        public GameController(ProfileGame profileGame, AssetsContext assetsContext, Transform placeForUI)
         {
             this.profileGame = profileGame;
+            this.placeForUI = placeForUI;
             listExecutiveObjects = new ListExecutiveObject();
            
             player = new PlayerController();

@@ -1,7 +1,8 @@
 ﻿using SweetGame.Abstractions;
 using SweetGame.Utils.AssetsInjector;
 using SweetGame.Game;
-using System;
+using SweetGame.UI;
+using UnityEngine;
 
 namespace SweetGame
 {
@@ -9,13 +10,17 @@ namespace SweetGame
     {
         private readonly ProfileGame profileGame;
         private readonly AssetsContext assetsContext;
+        private readonly Transform placeForUI;
 
         private GameController gameController;
+        private MainMenuController mainMenuController;
 
-        public MainController(ProfileGame profileGame, AssetsContext assetsContext)
+        public MainController(ProfileGame profileGame, AssetsContext assetsContext, Transform placeForUI)
         {
+            this.placeForUI = placeForUI;
             this.profileGame = profileGame;
             this.assetsContext = assetsContext;
+
             profileGame.State.SubscribeOnChange(ChooseGameState);
         }
 
@@ -34,9 +39,10 @@ namespace SweetGame
                 case StateGame.None:
                     break;
                 case StateGame.Menu:
+                    mainMenuController = new MainMenuController(profileGame, placeForUI);
                     break;
                 case StateGame.Game:
-                    gameController = new GameController(profileGame, assetsContext);
+                    gameController = new GameController(profileGame, assetsContext, placeForUI);
                     AddController(gameController);
                     break;
 
@@ -48,6 +54,7 @@ namespace SweetGame
         private void DisposeControllers()
         {
             gameController?.Dispose();
+            mainMenuController?.Dispose();
         }
     }
 }
