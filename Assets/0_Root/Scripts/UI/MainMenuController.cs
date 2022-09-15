@@ -20,6 +20,7 @@ namespace SweetGame.UI
             this.profileGame = profileGame;
             view = LoadView(placeForUI);
             view.Init(StartGame, ChooseNext, ChoosePrevious);
+            ChooseNext();
         }
 
 
