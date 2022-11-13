@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SweetGame.Animations
 {
-    internal class SpriteAnimator : IDisposable
+    public class SpriteAnimator : IDisposable
     {
         [InjectAsset("SpriteAnimationsConfig")] private SpriteAnimationsConfig config;
         public static SpriteAnimator instance;

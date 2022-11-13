@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using SweetGame.Abstractions.Base;
+using SweetGame.Abstractions;
 
 namespace SweetGame.Enemy
 {

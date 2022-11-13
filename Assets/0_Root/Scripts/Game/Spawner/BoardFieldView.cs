@@ -1,4 +1,4 @@
-﻿using SweetGame.Abstractions.Base;
+﻿using SweetGame.Abstractions;
 using SweetGame.Enemy;
 using UnityEngine;
 

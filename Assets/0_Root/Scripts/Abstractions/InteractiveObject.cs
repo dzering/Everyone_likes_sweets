@@ -2,7 +2,7 @@
 
 namespace SweetGame.Abstractions
 {
-    internal abstract class InteractiveObject : MonoBehaviour, IExecute
+    public abstract class InteractiveObject : MonoBehaviour, IExecute
     {
         public virtual void Execute()
         {

@@ -1,5 +1,4 @@
-﻿using SweetGame.Abstractions.Base;
-using SweetGame.Abstractions;
+﻿using SweetGame.Abstractions;
 using SweetGame.Utils.AssetsInjector;
 using SweetGame.Enemy;
 using UnityEngine;

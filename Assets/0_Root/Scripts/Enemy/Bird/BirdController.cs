@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using SweetGame.Abstractions.Base;
+using SweetGame.Abstractions;
+using SweetGame.Enemy.States;
 
 namespace SweetGame.Enemy
 {
@@ -8,17 +9,18 @@ namespace SweetGame.Enemy
         private float speedRelative;
         private float speed;
         private BirdView view;
+        private StateBase _state;
 
         public BirdController(float speed)
         {
             this.speed = speed;
             view = LoadView();
-            speedRelative = view.SpeedRelative;
+            _state = new PatrolState(this);
         }
-
+        
         private BirdView LoadView()
         {
-            GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/Bird");
+            GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/BirdView");
             GameObject obj =  Object.Instantiate(pref);
 
             return obj.GetComponent<BirdView>();
@@ -27,6 +29,7 @@ namespace SweetGame.Enemy
         public override void Move()
         {
             view.transform.position += Vector3.left * speed * speedRelative * Time.deltaTime;
+            _state.Move();
         }
     }
 }

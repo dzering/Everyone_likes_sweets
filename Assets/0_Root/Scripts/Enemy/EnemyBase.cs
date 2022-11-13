@@ -1,9 +1,10 @@
-﻿using SweetGame.Abstractions;
+﻿using SweetGame.Enemy;
 
-namespace SweetGame.Abstractions.Base
+namespace SweetGame.Abstractions
 {
-    internal abstract class EnemyBase : InteractiveObject, IMove
+    public abstract class EnemyBase : InteractiveObject, IMove
     {
+        public ViewBase View { get; set; }
         public abstract void Move();
         public override void Execute()
         {
