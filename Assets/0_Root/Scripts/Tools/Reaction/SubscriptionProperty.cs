@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SweetGame.Tools.Reaction
 {
-    internal sealed class SubscriptionProperty<T> : IReadOnlySubscriptionProperty<T>
+    public sealed class SubscriptionProperty<T> : IReadOnlySubscriptionProperty<T>
     {
         private T value;
         private event Action<T> OnChange;

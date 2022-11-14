@@ -8,10 +8,10 @@ namespace SweetGame.Game.Spawner
 {
     internal class EnemyFactory : IEnemyFactory<EnemyBase>
     {
-        private readonly ProfileGame profile;
+        private readonly GameContext profile;
         [InjectAsset("Child")] private GameObject child;
 
-        public EnemyFactory(ProfileGame profile)
+        public EnemyFactory(GameContext profile)
         {
             this.profile = profile;
         }

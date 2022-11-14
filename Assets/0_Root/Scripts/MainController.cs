@@ -8,14 +8,14 @@ namespace SweetGame
 {
     internal class MainController : BaseController
     {
-        private readonly ProfileGame profileGame;
+        private readonly GameContext profileGame;
         private readonly AssetsContext assetsContext;
         private readonly Transform placeForUI;
 
         private GameController gameController;
         private MainMenuController mainMenuController;
 
-        public MainController(ProfileGame profileGame, AssetsContext assetsContext, Transform placeForUI)
+        public MainController(GameContext profileGame, AssetsContext assetsContext, Transform placeForUI)
         {
             this.placeForUI = placeForUI;
             this.profileGame = profileGame;

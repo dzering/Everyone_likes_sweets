@@ -11,11 +11,11 @@ namespace SweetGame.UI
     internal class MainMenuController : BaseController
     {
         private readonly ResourcePath path = new ResourcePath("Prefabs/UI/MainMenu");
-        private readonly ProfileGame profileGame;
+        private readonly GameContext profileGame;
         private readonly MainMenuView view;
         private SweetController sweetController;
 
-        public MainMenuController(ProfileGame profileGame, Transform placeForUI)
+        public MainMenuController(GameContext profileGame, Transform placeForUI)
         {
             this.profileGame = profileGame;
             view = LoadView(placeForUI);

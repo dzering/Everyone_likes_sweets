@@ -1,6 +1,6 @@
 ﻿namespace SweetGame
 {
-    internal enum StateGame
+    public enum StateGame
     {
         None,
         Menu,

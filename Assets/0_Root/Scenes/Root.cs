@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private BirdController _birdController;
     void Start()
     {
-        new BirdController(1.5f);
+        _birdController = new BirdController(1.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        _birdController.Execute();
     }
 }

@@ -4,6 +4,7 @@ using SweetGame.Game.Spawner;
 using SweetGame.Background;
 using SweetGame.Utils.AssetsInjector;
 using SweetGame.Animations;
+using SweetGame.Enemy;
 using UnityEngine;
 using JoostenProductions;
 
@@ -11,8 +12,8 @@ namespace SweetGame.Game
 {
     internal class GameController : BaseController
     {
-        private readonly ProfileGame profileGame;
-        private readonly Transform placeForUI;
+        private readonly GameContext _context;
+        private readonly Transform _placeForUI;
        
         private CakeController player;
 
@@ -29,10 +30,10 @@ namespace SweetGame.Game
             JoostenProductions.UpdateManager.UnsubscribeFromUpdate(Update);
         }
 
-        public GameController(ProfileGame profileGame, AssetsContext assetsContext, Transform placeForUI)
+        public GameController(GameContext profileGame, AssetsContext assetsContext, Transform placeForUI)
         {
-            this.profileGame = profileGame;
-            this.placeForUI = placeForUI;
+            this._context = profileGame;
+            this._placeForUI = placeForUI;
             listExecutiveObjects = new ListExecutiveObject();
            
             player = new CakeController();
@@ -54,7 +55,6 @@ namespace SweetGame.Game
             boardField = new BoardField(spawnController.Points);
 
             JoostenProductions.UpdateManager.SubscribeToUpdate(Update);
-
         }
 
         private void Update()

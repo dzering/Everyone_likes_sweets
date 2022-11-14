@@ -12,14 +12,32 @@ namespace SweetGame
         [SerializeField] private AssetsContext assetsContext;
         [SerializeField] private Transform placeForUI;
 
-        private ProfileGame profileGame;
+        [SerializeField] private GameContext _gameContext;
         private MainController mainController;
+
+        public bool IsInit { get; set; }
 
         private void Start()
         {
-            profileGame = new ProfileGame();
-            mainController = new MainController(profileGame, assetsContext, placeForUI);
-            profileGame.State.Value = StateGame.Menu;
+            Init();
+        }
+
+        private void Init()
+        {
+            if (IsInit)
+            {
+                return;
+            }
+
+            if (_gameContext == null)
+            {
+                _gameContext = gameObject.GetComponent<GameContext>();
+            }
+
+            mainController = new MainController(_gameContext, assetsContext, placeForUI);
+            _gameContext.State.Value = StateGame.Menu;
+
+            IsInit = true;
         }
 
         

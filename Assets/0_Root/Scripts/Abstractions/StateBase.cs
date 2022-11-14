@@ -1,10 +1,13 @@
-﻿namespace SweetGame.Abstractions
+﻿using SweetGame.Abstractions;
+
+
+namespace SweetGame.Abstractions
 {
     public abstract class StateBase
     {
-        protected EnemyBase _enemy;
+        protected NewEnemyBase _enemy;
 
-        public StateBase(EnemyBase enemy)
+        public StateBase(NewEnemyBase enemy)
         {
             _enemy = enemy;
         }
