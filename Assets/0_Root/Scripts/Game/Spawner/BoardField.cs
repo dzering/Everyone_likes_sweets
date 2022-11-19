@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SweetGame.Game.Spawner
+namespace SweetGame.Game.Spawn
 {
     internal sealed class BoardField
     {

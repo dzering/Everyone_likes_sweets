@@ -1,6 +1,6 @@
 ﻿using SweetGame.Abstractions;
 using SweetGame.Animations;
-using SweetGame.Game.Spawner;
+using SweetGame.Game.Spawn;
 using SweetGame.Utils.AssetsInjector;
 using SweetGame.Background;
 using UnityEngine;
@@ -12,8 +12,8 @@ namespace SweetGame
         [SerializeField] private AssetsContext assetsContext;
         [SerializeField] private Transform placeForUI;
 
-        [SerializeField] private GameContext _gameContext;
-        private MainController mainController;
+        [SerializeField] private GameContext _context;
+        private MainController _mainController;
 
         public bool IsInit { get; set; }
 
@@ -29,13 +29,13 @@ namespace SweetGame
                 return;
             }
 
-            if (_gameContext == null)
+            if (_context == null)
             {
-                _gameContext = gameObject.GetComponent<GameContext>();
+                _context = gameObject.GetComponent<GameContext>();
             }
 
-            mainController = new MainController(_gameContext, assetsContext, placeForUI);
-            _gameContext.State.Value = StateGame.Menu;
+            _mainController = new MainController(_context, assetsContext, placeForUI);
+            _context.State.Value = StateGame.Menu;
 
             IsInit = true;
         }

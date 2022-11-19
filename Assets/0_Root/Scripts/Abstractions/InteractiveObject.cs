@@ -2,17 +2,11 @@
 
 namespace SweetGame.Abstractions
 {
-    public abstract class InteractiveObject : MonoBehaviour, IExecute
+    public abstract class InteractiveObject : IExecute
     {
-        public virtual void Execute()
-        {
+        public abstract void Execute();
 
-        }
-
-        public virtual void Interaction() 
-        {
-            Debug.Log(this.name + "was interactive");
-        }
+        public abstract void Interaction();
 
     }
 }

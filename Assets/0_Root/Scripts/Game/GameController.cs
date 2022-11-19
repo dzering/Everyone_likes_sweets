@@ -1,6 +1,6 @@
 ﻿using SweetGame.Abstractions;
 using SweetGame.Game.Sweets;
-using SweetGame.Game.Spawner;
+using SweetGame.Game.Spawn;
 using SweetGame.Background;
 using SweetGame.Utils.AssetsInjector;
 using SweetGame.Animations;
@@ -16,6 +16,7 @@ namespace SweetGame.Game
         private readonly Transform _placeForUI;
        
         private CakeController player;
+        private readonly Spawner _spawner;
 
         private BoardField boardField;
 
@@ -32,27 +33,22 @@ namespace SweetGame.Game
 
         public GameController(GameContext profileGame, AssetsContext assetsContext, Transform placeForUI)
         {
-            this._context = profileGame;
-            this._placeForUI = placeForUI;
+            _context = profileGame;
+            _placeForUI = placeForUI;
             listExecutiveObjects = new ListExecutiveObject();
            
             player = new CakeController();
             player.OnDead += GameOver;
 
-            enemyFactory = new EnemyFactory(profileGame);
-            assetsContext.Inject(enemyFactory);
 
             BackgroundController backgroundController = assetsContext.Inject(new BackgroundController());
             backgroundController.Init();
             listExecutiveObjects.AddExecuteObject(backgroundController);
 
             SpriteAnimator spriteAnimator = assetsContext.Inject(new SpriteAnimator());
-
-            SpawnController spawnController = new SpawnController(enemyFactory, listExecutiveObjects);
-            assetsContext.Inject(spawnController);
-            spawnController.CreateObject();
-
-            boardField = new BoardField(spawnController.Points);
+            _spawner = new Spawner(_context);
+            _spawner.CreateEnemy(new BirdCreator());
+          //  boardField = new BoardField(spawnController.Points);
 
             JoostenProductions.UpdateManager.SubscribeToUpdate(Update);
         }

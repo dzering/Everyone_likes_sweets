@@ -14,11 +14,11 @@ namespace SweetGame
 
         public ListExecutiveObject()
         {
-            IExecute[] list = Object.FindObjectsOfType<InteractiveObject>();
-            for (int i = 0; i < list.Length; i++)
-            {
-                AddExecuteObject(list[i]);
-            }
+            //IExecute[] list = Object.FindObjectsOfType<InteractiveObject>();
+            //for (int i = 0; i < list.Length; i++)
+            //{
+            //    AddExecuteObject(list[i]);
+            //}
         }
 
         public IExecute this[int index]

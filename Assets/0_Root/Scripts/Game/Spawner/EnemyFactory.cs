@@ -4,7 +4,7 @@ using SweetGame.Utils.AssetsInjector;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SweetGame.Game.Spawner
+namespace SweetGame.Game.Spawn
 {
     internal class EnemyFactory : IEnemyFactory<EnemyBase>
     {
@@ -24,7 +24,7 @@ namespace SweetGame.Game.Spawner
                     GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/Bird");
                     GameObject obj = Object.Instantiate(pref);
 
-                    return obj.GetComponent<Bird>();
+                    return obj.GetComponent<BirdController>();
 
                 case EnemyType.Child:
                     GameObject go = Object.Instantiate(child);

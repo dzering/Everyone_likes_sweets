@@ -4,20 +4,20 @@ using SweetGame.Enemy.States;
 
 namespace SweetGame.Enemy
 {
-    internal class BirdController : NewEnemyBase
+    internal class BirdController : EnemyBase
     {
-        private float speedRelative;
-        private float speed;
-        private BirdView view;
+        private float speedRelative = 1;
+        private float _gameSpeed;
+        private BirdView _view;
         private StateBase _state;
 
         public BirdController(float speed)
         {
-            this.speed = speed;
-            view = LoadView();
+            this._gameSpeed = speed;
+            _view = LoadView();
             _state = new PatrolState(this);
 
-            view.OnChatchPlayer += CatchPlayer;
+            _view.OnChatchPlayer += CatchPlayer;
         }
         
         private BirdView LoadView()
@@ -33,9 +33,9 @@ namespace SweetGame.Enemy
             Move();
         }
 
-        public void Move()
+        public override void Move()
         {
-            view.transform.position += Vector3.left * speed * speedRelative * Time.deltaTime;
+            _view.transform.position += Vector3.left * _gameSpeed * speedRelative * Time.deltaTime;
             _state.Move();
         }
 
@@ -45,5 +45,15 @@ namespace SweetGame.Enemy
         }
 
         public void CatchPlayer() { }
+
+        public override void Interaction()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void SetPosition(Vector3 position)
+        {
+            _view.transform.position = position;
+        }
     }
 }

@@ -2,7 +2,7 @@
 using SweetGame.Enemy;
 using UnityEngine;
 
-namespace SweetGame.Game.Spawner
+namespace SweetGame.Game.Spawn
 {
     internal sealed class BoardFieldView : MonoBehaviour
     {
@@ -15,19 +15,19 @@ namespace SweetGame.Game.Spawner
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.TryGetComponent(out EnemyBase enemy))
-            {
-                if (enemy is Child)
-                {
-                    enemy.transform.position = points[2].position;
-                    return;
-                }
-                if (enemy is Bird)
-                {
-                    enemy.transform.position = points[1].position;
-                    return;
-                }
-            }
+            //if (collision.TryGetComponent(out EnemyBase enemy))
+            //{
+            //    if (enemy is ChildController)
+            //    {
+            //        enemy.transform.position = points[2].position;
+            //        return;
+            //    }
+            //    if (enemy is Bird)
+            //    {
+            //        enemy.transform.position = points[1].position;
+            //        return;
+            //    }
+            //}
         }
     }
 }
