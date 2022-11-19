@@ -5,6 +5,8 @@ namespace SweetGame.Enemy
 {
     internal class NullEnemy : EnemyBase
     {
+        public override Vector3 Position { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
         public override void Interaction()
         {
             throw new System.NotImplementedException();

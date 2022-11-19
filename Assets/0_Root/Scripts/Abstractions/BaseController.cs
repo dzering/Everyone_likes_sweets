@@ -5,7 +5,7 @@ using SweetGame.Enemy;
 
 namespace SweetGame.Abstractions
 {
-    internal abstract class BaseController : IDisposable
+    public abstract class BaseController : IDisposable
     {
         private List<IDisposable> controllers;
         private List<GameObject> gameObjects;

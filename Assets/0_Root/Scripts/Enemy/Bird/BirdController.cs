@@ -2,19 +2,29 @@
 using SweetGame.Abstractions;
 using SweetGame.Enemy.States;
 
+
 namespace SweetGame.Enemy
 {
-    internal class BirdController : EnemyBase
+    public class BirdController : EnemyBase, IFly
     {
         private float speedRelative = 1;
         private float _gameSpeed;
         private BirdView _view;
         private StateBase _state;
+        public override Vector3 Position
+        {
+            get { return _view.transform.position; }
+            set
+            {
+                _view.transform.position = value;
+            }
+        }
 
         public BirdController(float speed)
         {
             this._gameSpeed = speed;
             _view = LoadView();
+
             _state = new PatrolState(this);
 
             _view.OnChatchPlayer += CatchPlayer;

@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 namespace SweetGame.Utils.AssetsInjector
 {
     [CreateAssetMenu(fileName =nameof(AssetsContext), menuName = "SweetGame/" + nameof(AssetsContext))]
-    internal class AssetsContext : ScriptableObject
+    public class AssetsContext : ScriptableObject
     {
         [SerializeField] private Object[] assets;
 

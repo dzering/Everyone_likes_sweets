@@ -4,11 +4,16 @@ using SweetGame.Abstractions;
 
 namespace SweetGame.Enemy
 {
-    public sealed class ChildController : EnemyBase
+    public sealed class ChildController : EnemyBase, IGround
     {
         private float speed = 2;
         private float _relativeSpeed;
         private ChildView _view;
+        public override Vector3 Position 
+        {
+            get {return _view.transform.position; }
+            set { _view.transform.position = value; } 
+        }
 
         public ChildController(float relativeSpeed)
         {
@@ -18,7 +23,7 @@ namespace SweetGame.Enemy
 
         private ChildView LoadView()
         {
-            GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/GirlView");
+            GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/Child");
             GameObject obj = UnityEngine.Object.Instantiate(pref);
 
             return obj.GetComponent<ChildView>();

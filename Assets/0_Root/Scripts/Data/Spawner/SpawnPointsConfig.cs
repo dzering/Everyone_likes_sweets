@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using SweetGame.Enemy;
 using System;
+using System.Collections.Generic;
 
 
 namespace SweetGame.Data.Spawner
@@ -8,18 +10,28 @@ namespace SweetGame.Data.Spawner
     public class SpawnPointsConfig : ScriptableObject
     {
         [SerializeField] public SpawnPoint[] SpawnPoints;
+
+        public List<SpawnPoint> GetStackOfPoints(EnemyMovingType type)
+        {
+            List<SpawnPoint> stack = new List<SpawnPoint>();
+
+            for (int i = 0; i < SpawnPoints.Length; i++)
+            {
+                if (SpawnPoints[i].TypeEnemy == type)
+                {
+                    stack.Add(SpawnPoints[i]);
+                }
+            }
+            return stack;
+        }
     }
+
 
     [Serializable]
     public struct SpawnPoint
     {
-        public TypeEnemy TypeEnemy;
+        public EnemyMovingType TypeEnemy;
         public Vector2 position;
     }
 
-    public enum TypeEnemy
-    {
-        Fly = 0,
-        Groung = 1
-    }
 }

@@ -16,18 +16,18 @@ namespace SweetGame.Game.Sweets
             OnDeath += action;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.TryGetComponent(out InteractiveObject interactible))
-            {
-                interactible.Interaction();
-            }
+        //private void OnTriggerEnter2D(Collider2D collision)
+        //{
+        //    if (collision.TryGetComponent(out InteractiveObject interactible))
+        //    {
+        //        interactible.Interaction();
+        //    }
 
-            if (interactible is EnemyBase)
-            {
-                OnDeath?.Invoke();
-            }
-        }
+        //    if (interactible is EnemyBase)
+        //    {
+        //        OnDeath?.Invoke();
+        //    }
+        //}
 
     }
 }

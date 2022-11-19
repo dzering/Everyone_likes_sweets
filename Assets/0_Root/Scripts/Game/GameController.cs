@@ -10,7 +10,7 @@ using JoostenProductions;
 
 namespace SweetGame.Game
 {
-    internal class GameController : BaseController
+    public class GameController : BaseController
     {
         private readonly GameContext _context;
         private readonly Transform _placeForUI;
@@ -48,6 +48,7 @@ namespace SweetGame.Game
             SpriteAnimator spriteAnimator = assetsContext.Inject(new SpriteAnimator());
             _spawner = new Spawner(_context);
             _spawner.CreateEnemy(new BirdCreator());
+            _spawner.CreateEnemy(new ChildCreator());
           //  boardField = new BoardField(spawnController.Points);
 
             JoostenProductions.UpdateManager.SubscribeToUpdate(Update);
