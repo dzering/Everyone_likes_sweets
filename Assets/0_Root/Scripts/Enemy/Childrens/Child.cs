@@ -4,21 +4,27 @@ using SweetGame.Abstractions;
 
 namespace SweetGame.Enemy
 {
-    public sealed class ChildController : EnemyBase, IGround
+    public sealed class Child : EnemyBase, IGround
     {
-        private float speed = 2;
-        private float _relativeSpeed;
+        private float _relativeSpeed = 2;
         private ChildView _view;
+
+        private float _speedCummulative;
         public override Vector3 Position 
         {
             get {return _view.transform.position; }
             set { _view.transform.position = value; } 
         }
-
-        public ChildController(float relativeSpeed)
+        public override float Speed 
         {
-            _relativeSpeed = relativeSpeed;
+            get { return _speedCummulative; }
+        }
+
+
+        public Child(float gameSpeed)
+        {
             _view = LoadView();
+            _speedCummulative = _relativeSpeed * gameSpeed;
         }
 
         private ChildView LoadView()
@@ -36,7 +42,7 @@ namespace SweetGame.Enemy
 
         public override void Move()
         {
-            _view.transform.position += Vector3.left * speed * _relativeSpeed * Time.deltaTime;
+            _view.transform.position += Vector3.left * _speedCummulative * Time.deltaTime;
         }
 
         public override void SetPosition(Vector3 position)
@@ -44,5 +50,9 @@ namespace SweetGame.Enemy
             _view.transform.position = position;
         }
 
+        public override void ChangeState(StateBase state)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

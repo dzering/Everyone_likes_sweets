@@ -9,6 +9,8 @@ namespace SweetGame
 {
     public sealed class GameContext : MonoBehaviour
     {
+        [HideInInspector] public ListExecutiveObject ExecutiveObjects;
+
         [Header("General settings")]
         [SerializeField] public float GameSpeed = 2;
 
@@ -30,6 +32,7 @@ namespace SweetGame
         private void Start()
         {
             _enemies = new List<EnemyBase>();
+            ExecutiveObjects = new ListExecutiveObject();
             State = new SubscriptionProperty<StateGame>();
             State.Value = StateGame.Menu;
             currentPlayer = 0;

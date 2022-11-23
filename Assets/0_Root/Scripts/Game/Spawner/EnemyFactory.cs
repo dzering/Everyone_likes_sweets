@@ -24,7 +24,7 @@ namespace SweetGame.Game.Spawn
                     GameObject pref = Resources.Load<GameObject>("Prefabs/Enemies/Bird");
                     GameObject obj = Object.Instantiate(pref);
 
-                    return obj.GetComponent<BirdController>();
+                    return obj.GetComponent<Bird>();
 
                 case EnemyType.Child:
                     GameObject go = Object.Instantiate(child);

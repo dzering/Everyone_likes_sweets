@@ -13,7 +13,7 @@ namespace SweetGame.UI
         private readonly ResourcePath path = new ResourcePath("Prefabs/UI/MainMenu");
         private readonly GameContext profileGame;
         private readonly MainMenuView view;
-        private SweetController sweetController;
+        private PlayerController sweetController;
 
         public MainMenuController(GameContext profileGame, Transform placeForUI)
         {
@@ -59,7 +59,7 @@ namespace SweetGame.UI
         private Sprite ChoosePlayer()
         {
             view.Image.sprite = null;
-            SweetController sweetController =
+            PlayerController sweetController =
                 profileGame.currentPlayer switch
                 {
                     SweetType.Cake => new CakeController(),

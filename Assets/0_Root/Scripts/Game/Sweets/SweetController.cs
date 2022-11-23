@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SweetGame.Game.Sweets
 {
-    internal class SweetController : BaseController
+    internal class PlayerController : BaseController
     {
         public GameObject Sweet;
 

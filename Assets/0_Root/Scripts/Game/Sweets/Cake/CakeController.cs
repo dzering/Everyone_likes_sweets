@@ -6,7 +6,7 @@ using JoostenProductions;
 
 namespace SweetGame.Game.Sweets
 {
-    internal class CakeController : SweetController
+    internal class CakeController : PlayerController
     {
         public UnityAction OnDead;
         private readonly ResourcePath path = new ResourcePath("Prefabs/Sweets/Cake");

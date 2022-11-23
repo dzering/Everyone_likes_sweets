@@ -7,6 +7,13 @@ namespace SweetGame.Enemy
     {
         public override Vector3 Position { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
+        public override float Speed => throw new System.NotImplementedException();
+
+        public override void ChangeState(StateBase state)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void Interaction()
         {
             throw new System.NotImplementedException();

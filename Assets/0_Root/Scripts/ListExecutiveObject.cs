@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 namespace SweetGame
 {
-    internal sealed class ListExecutiveObject : IEnumerator, IEnumerable, IDisposable
+    public sealed class ListExecutiveObject : IEnumerator, IEnumerable, IDisposable
     {
         private IExecute[] executiveObjects;
         private int position = -1;

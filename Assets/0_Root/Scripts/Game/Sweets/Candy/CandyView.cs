@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace SweetGame.Game.Sweets
 {
-    internal class CandyView : MonoBehaviour
+    internal class CandyView : PlayerViewBase
     {
         private UnityAction OnDeath;
 

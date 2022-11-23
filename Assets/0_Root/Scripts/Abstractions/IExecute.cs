@@ -1,6 +1,6 @@
 ﻿namespace SweetGame.Abstractions
 {
-    internal interface IExecute
+    public interface IExecute
     {
         void Execute();
     }

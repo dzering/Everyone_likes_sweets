@@ -5,12 +5,18 @@ using SweetGame.Enemy.States;
 
 namespace SweetGame.Enemy
 {
-    public class BirdController : EnemyBase, IFly
+    public class Bird : EnemyBase, IFly
     {
+        private BirdView _view;
+        private EnemiAI _enemyAI;
+        private StateBase _state;
         private float speedRelative = 1;
         private float _gameSpeed;
-        private BirdView _view;
-        private StateBase _state;
+
+        public override float Speed 
+        {
+            get {return speedRelative*_gameSpeed; }
+        }
         public override Vector3 Position
         {
             get { return _view.transform.position; }
@@ -20,12 +26,12 @@ namespace SweetGame.Enemy
             }
         }
 
-        public BirdController(float speed)
+        public Bird(float speed)
         {
             this._gameSpeed = speed;
             _view = LoadView();
-
             _state = new PatrolState(this);
+            _enemyAI = new BirdAI(this);
 
             _view.OnChatchPlayer += CatchPlayer;
         }
@@ -40,16 +46,15 @@ namespace SweetGame.Enemy
 
         public override void Execute()
         {
-            Move();
+            base.Execute();
+            _enemyAI.Execute();
         }
 
         public override void Move()
         {
-            _view.transform.position += Vector3.left * _gameSpeed * speedRelative * Time.deltaTime;
-            _state.Move();
+            _state.Move(Speed);
         }
-
-        public void ChangeState(StateBase state)
+        public override void ChangeState(StateBase state)
         {
             _state = state;
         }

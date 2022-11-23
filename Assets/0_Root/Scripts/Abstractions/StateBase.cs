@@ -12,6 +12,6 @@ namespace SweetGame.Abstractions
             _enemy = enemy;
         }
 
-        public abstract void Move();
+        public abstract void Move(float speed);
     }
 }

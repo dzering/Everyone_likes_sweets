@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
-    private BirdController _birdController;
+    private Bird _birdController;
     void Start()
     {
-        _birdController = new BirdController(1.5f);
+        _birdController = new Bird(1.5f);
     }
 
     // Update is called once per frame

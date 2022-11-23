@@ -22,11 +22,11 @@ namespace SweetGame.Game
 
         private EnemyFactory enemyFactory;
 
-        private ListExecutiveObject listExecutiveObjects;
+        private ListExecutiveObject _listExecutiveObjects;
 
         protected override void OnDispose()
         {
-            listExecutiveObjects.ClearList();
+            _listExecutiveObjects.ClearList();
             player.OnDead -= GameOver;
             JoostenProductions.UpdateManager.UnsubscribeFromUpdate(Update);
         }
@@ -35,7 +35,7 @@ namespace SweetGame.Game
         {
             _context = profileGame;
             _placeForUI = placeForUI;
-            listExecutiveObjects = new ListExecutiveObject();
+            _listExecutiveObjects = _context.ExecutiveObjects;
            
             player = new CakeController();
             player.OnDead += GameOver;
@@ -43,12 +43,16 @@ namespace SweetGame.Game
 
             BackgroundController backgroundController = assetsContext.Inject(new BackgroundController());
             backgroundController.Init();
-            listExecutiveObjects.AddExecuteObject(backgroundController);
+            _listExecutiveObjects.AddExecuteObject(backgroundController);
 
             SpriteAnimator spriteAnimator = assetsContext.Inject(new SpriteAnimator());
+
             _spawner = new Spawner(_context);
             _spawner.CreateEnemy(new BirdCreator());
             _spawner.CreateEnemy(new ChildCreator());
+
+
+            
           //  boardField = new BoardField(spawnController.Points);
 
             JoostenProductions.UpdateManager.SubscribeToUpdate(Update);
@@ -57,9 +61,9 @@ namespace SweetGame.Game
         private void Update()
         {
             SpriteAnimator.instance.Update();
-            for (int i = 0; i < listExecutiveObjects.Length; i++)
+            for (int i = 0; i < _listExecutiveObjects.Length; i++)
             {
-                var execute = listExecutiveObjects[i];
+                var execute = _listExecutiveObjects[i];
                 if (execute == null)
                     continue;
 

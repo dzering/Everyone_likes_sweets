@@ -5,10 +5,22 @@ namespace SweetGame.Enemy.States
 {
     public class PatrolState : StateBase
     {
-        public PatrolState(EnemyBase enemy) : base(enemy) { }
-        public override void Move()
+        private float _time;
+        private float _amplitude=0.03f;
+        private float _speedYscale = 5;
+        public PatrolState(EnemyBase enemy) : base(enemy) 
         {
-            Debug.Log($"Enemy {_enemy.GetType()} is pattroling"); 
+            Debug.Log($"Patrol state is activated {_enemy.GetType()}");
+        }
+        public override void Move(float speed)
+        {
+            _time += Time.deltaTime;
+            _enemy.Position += Vector3.left * speed * Time.deltaTime;
+
+            float y = Mathf.Cos(_time * speed * _speedYscale / Mathf.PI) * _amplitude;
+
+            _enemy.Position = new Vector3(_enemy.Position.x, _enemy.Position.y + y, 0);
+
         }
     }
 }

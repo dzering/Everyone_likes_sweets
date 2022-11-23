@@ -7,7 +7,7 @@ namespace SweetGame.Game.Spawn
     {
         public override EnemyBase CreateEnemy(float gameSpeed)
         {
-            return new BirdController(gameSpeed);
+            return new Bird(gameSpeed);
         }
     }
 }
