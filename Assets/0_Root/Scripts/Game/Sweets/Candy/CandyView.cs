@@ -10,7 +10,7 @@ namespace SweetGame.Game.Sweets
         private UnityAction OnDeath;
 
         [SerializeField] public float Gravity = -9.81f;
-        [SerializeField] public float JumpForce = 10;
+        [SerializeField] public float JumpForce = 3;
 
 
         public void Init(UnityAction action)

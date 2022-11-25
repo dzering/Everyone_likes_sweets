@@ -9,13 +9,16 @@ namespace SweetGame.Enemy
     {
         private int _amountAttack = 1;
         private int _currentAttack;
+
         private BirdView _view;
         private StateBase _state;
-        private float speedRelative = 1;
-        private float _gameSpeed; 
+
+        private float _speedRelative = 1;
+        private float _speedGame;
+        private float _speed;
         public override float Speed 
         {
-            get {return speedRelative*_gameSpeed; }
+            get {return _speed; }
         }
         public override Vector3 Position
         {
@@ -28,7 +31,8 @@ namespace SweetGame.Enemy
 
         public Bird(float speed)
         {
-            this._gameSpeed = speed;
+            _speedGame = speed;
+            _speed = _speedGame * _speedRelative;
             _view = LoadView();
             _state = new PatrolState(this);
             EnemiAI = new BirdAI(this);

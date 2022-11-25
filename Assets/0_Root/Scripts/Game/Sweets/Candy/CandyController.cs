@@ -18,8 +18,11 @@ namespace SweetGame.Game.Sweets
 
         private float velocity;
 
+        private bool canPressed;
+
         public CandyController()
         {
+            canPressed = true;
             velocity = 0;
             playerView = LoadView();
             playerView.Init(Death);
@@ -43,8 +46,15 @@ namespace SweetGame.Game.Sweets
         private void Update()
         {
 
-            if (Input.GetKey(KeyCode.Space))
+            if (canPressed && Input.GetButtonDown("Space"))
+            {
                 velocity = jumpForce;
+                canPressed = false;
+            }
+            if (Input.GetButtonUp("Space"))
+            {
+                canPressed = true;
+            }
 
             velocity += gravity * Time.deltaTime;
             playerView.transform.Translate(new Vector3(0, velocity * Time.deltaTime, 0));

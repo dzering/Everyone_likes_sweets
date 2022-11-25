@@ -21,7 +21,7 @@ namespace SweetGame.Enemy
         {
             _enemy = enemy;
             _timer = new Timer(TIME_INTERVAL_CHECKING);
-            PlayerPosition = UnityEngine.Object.FindObjectOfType<PlayerViewBase>().transform;
+            PlayerTransform = UnityEngine.Object.FindObjectOfType<PlayerViewBase>().transform;
             _timer.OnAlarm += Checks;
         }
 
@@ -32,7 +32,8 @@ namespace SweetGame.Enemy
 
         private void Checks()
         {
-            var result = CheckDistanceToTarget(PlayerPosition);
+            var result = CheckDistanceToTarget(PlayerTransform);
+            CheckAngel();
 
             if (result == _isCurrent)
                 return;
@@ -59,11 +60,17 @@ namespace SweetGame.Enemy
             if(result)
                 color = Color.green;
 
-            Debug.DrawLine(PlayerPosition.position, _enemy.Position, color, 10f);
+            Debug.DrawLine(PlayerTransform.position, _enemy.Position, color, 10f);
             Debug.Log(result);
             #endregion
 
             return result;
+        }
+
+        private void CheckAngel()
+        {
+            var angel = Vector3.Angle(PlayerTransform.position, _enemy.Position);
+            Debug.Log(angel);
         }
     }
 }

@@ -43,8 +43,11 @@ namespace SweetGame.Game.Sweets
         private void Update()
         {
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetButtonDown("Jump"))
+            {
                 velocity = jumpForce;
+            }
+
 
             velocity += gravity * Time.deltaTime;
             playerView.transform.Translate(new Vector3(0, velocity * Time.deltaTime, 0));
