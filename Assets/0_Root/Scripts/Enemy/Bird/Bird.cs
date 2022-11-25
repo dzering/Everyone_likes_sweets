@@ -7,12 +7,12 @@ namespace SweetGame.Enemy
 {
     public class Bird : EnemyBase, IFly
     {
+        private int _amountAttack = 1;
+        private int _currentAttack;
         private BirdView _view;
-        private EnemiAI _enemyAI;
         private StateBase _state;
         private float speedRelative = 1;
-        private float _gameSpeed;
-
+        private float _gameSpeed; 
         public override float Speed 
         {
             get {return speedRelative*_gameSpeed; }
@@ -31,7 +31,7 @@ namespace SweetGame.Enemy
             this._gameSpeed = speed;
             _view = LoadView();
             _state = new PatrolState(this);
-            _enemyAI = new BirdAI(this);
+            EnemiAI = new BirdAI(this);
 
             _view.OnChatchPlayer += CatchPlayer;
         }
@@ -47,7 +47,7 @@ namespace SweetGame.Enemy
         public override void Execute()
         {
             base.Execute();
-            _enemyAI.Execute();
+            EnemiAI.Execute();
         }
 
         public override void Move()
@@ -56,7 +56,11 @@ namespace SweetGame.Enemy
         }
         public override void ChangeState(StateBase state)
         {
+            if (_currentAttack > _amountAttack)
+                return;
+
             _state = state;
+            _currentAttack++;
         }
 
         public void CatchPlayer() { }

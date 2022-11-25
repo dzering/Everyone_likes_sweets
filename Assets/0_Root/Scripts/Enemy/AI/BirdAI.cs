@@ -11,7 +11,6 @@ namespace SweetGame.Enemy
         private const float DISTANCE_TO_TARGET = 7f;
         private const float TIME_INTERVAL_CHECKING = 0.2f;
 
-        private Transform _playerTransform;
         private EnemyBase _enemy;
         private ITimer _timer;
 
@@ -22,7 +21,7 @@ namespace SweetGame.Enemy
         {
             _enemy = enemy;
             _timer = new Timer(TIME_INTERVAL_CHECKING);
-            _playerTransform = UnityEngine.Object.FindObjectOfType<PlayerViewBase>().transform;
+            PlayerPosition = UnityEngine.Object.FindObjectOfType<PlayerViewBase>().transform;
             _timer.OnAlarm += Checks;
         }
 
@@ -33,7 +32,7 @@ namespace SweetGame.Enemy
 
         private void Checks()
         {
-            var result = CheckDistanceToTarget(_playerTransform);
+            var result = CheckDistanceToTarget(PlayerPosition);
 
             if (result == _isCurrent)
                 return;
@@ -60,7 +59,7 @@ namespace SweetGame.Enemy
             if(result)
                 color = Color.green;
 
-            Debug.DrawLine(_playerTransform.position, _enemy.Position, color, 10f);
+            Debug.DrawLine(PlayerPosition.position, _enemy.Position, color, 10f);
             Debug.Log(result);
             #endregion
 

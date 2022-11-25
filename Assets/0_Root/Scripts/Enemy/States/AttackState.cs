@@ -6,16 +6,22 @@ namespace SweetGame.Enemy.States
 {
     public sealed class AttackState : StateBase
     {
+        private Vector3 _attackDirection;
+        private float _speedMultiplier = 1.5f;
         public AttackState(EnemyBase enemy) : base(enemy)
         {
             Debug.Log($"Attack state is activated {_enemy.GetType()}");
+            _attackDirection = DirectionCalculate(_enemy.EnemiAI.PlayerPosition.position).normalized;
         }
 
         public override void Move(float speed)
         {
-            _enemy.Position += Vector3.left * speed * Time.deltaTime;
+            _enemy.Position += _attackDirection * speed * _speedMultiplier * Time.deltaTime;
+        }
 
-            Debug.Log($"Enemy {_enemy.GetType()} is attacking");
+        private Vector3 DirectionCalculate(Vector3 target)
+        {
+            return target - _enemy.Position;
         }
     }
 }

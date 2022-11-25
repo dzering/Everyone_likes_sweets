@@ -16,4 +16,6 @@ MonoBehaviour:
   - TypeEnemy: 0
     position: {x: 10, y: 4}
   - TypeEnemy: 1
-    position: {x: 10, y: -4}
+    position: {x: 10, y: -5.037104}
+  - TypeEnemy: 0
+    position: {x: 10, y: 3}

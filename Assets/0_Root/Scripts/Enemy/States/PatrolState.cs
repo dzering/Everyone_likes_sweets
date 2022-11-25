@@ -8,10 +8,12 @@ namespace SweetGame.Enemy.States
         private float _time;
         private float _amplitude=0.03f;
         private float _speedYscale = 5;
+
         public PatrolState(EnemyBase enemy) : base(enemy) 
         {
             Debug.Log($"Patrol state is activated {_enemy.GetType()}");
         }
+
         public override void Move(float speed)
         {
             _time += Time.deltaTime;

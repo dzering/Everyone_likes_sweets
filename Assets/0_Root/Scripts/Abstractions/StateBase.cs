@@ -1,5 +1,5 @@
 ﻿using SweetGame.Abstractions;
-
+using UnityEngine;
 
 namespace SweetGame.Abstractions
 {
@@ -11,7 +11,6 @@ namespace SweetGame.Abstractions
         {
             _enemy = enemy;
         }
-
         public abstract void Move(float speed);
     }
 }
