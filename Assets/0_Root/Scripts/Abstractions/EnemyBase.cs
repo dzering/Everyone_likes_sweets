@@ -1,10 +1,12 @@
 ﻿using SweetGame.Enemy;
+using System;
 using UnityEngine;
 
 namespace SweetGame.Abstractions
 {
     public abstract class EnemyBase : InteractiveObject, IMove
     {
+        public Action<EnemyBase> OnDied;
         public EnemiAI EnemiAI { get; protected set; }
         public abstract Vector3 Position { get; set; }
         public abstract float Speed { get;}

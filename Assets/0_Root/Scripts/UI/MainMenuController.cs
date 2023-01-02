@@ -51,9 +51,7 @@ namespace SweetGame.UI
         private void ChooseNext()
         {
             profileGame.currentPlayer = profileGame.currentPlayer.Next();
-            view.Image.sprite = ChoosePlayer();
-
-            Debug.Log(profileGame.currentPlayer.ToString());
+            //view.Image.sprite = ChoosePlayer();
         }
 
         private Sprite ChoosePlayer()
@@ -66,8 +64,6 @@ namespace SweetGame.UI
                     SweetType.Candy => new CandyController(),
                     _ => throw new ArgumentException(nameof(SweetType))
                 };
-
-            Debug.Log(sweetController.ToString());
 
             Sprite sprite = sweetController.Sweet?.GetComponent<SpriteRenderer>().sprite;
             

@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using SweetGame.Abstractions;
 using SweetGame.Enemy.States;
-
+using System;
+using Object = UnityEngine.Object;
 
 namespace SweetGame.Enemy
 {
-    public class Bird : EnemyBase, IFly
+    public class Bird : EnemyBase, IFly, IDisposable
     {
         private int _amountAttack = 1;
         private int _currentAttack;
@@ -37,7 +38,13 @@ namespace SweetGame.Enemy
             _state = new PatrolState(this);
             EnemiAI = new BirdAI(this);
 
-            _view.OnChatchPlayer += CatchPlayer;
+            _view.OnCatchPlayer += CatchPlayer;
+            _view.OnInteraction += Interaction;
+        }
+
+        ~Bird()
+        {
+            Debug.Log(nameof(Bird) + " Delited");
         }
         
         private BirdView LoadView()
@@ -69,14 +76,37 @@ namespace SweetGame.Enemy
 
         public void CatchPlayer() { }
 
-        public override void Interaction()
+        public override void Interaction(InteractionType type)
         {
-            throw new System.NotImplementedException();
+            switch (type)
+            {
+                case InteractionType.None:
+                    break;
+                case InteractionType.Deadly:
+                    Died();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Died()
+        {
+            Dispose();
         }
 
         public override void SetPosition(Vector3 position)
         {
             _view.transform.position = position;
+        }
+
+        public void Dispose()
+        {
+            OnDied?.Invoke(this);
+            _view.OnCatchPlayer -= CatchPlayer;
+            _view.OnInteraction -= Interaction;
+            GameObject.Destroy(_view.gameObject);
+            Debug.Log("Dispose " + nameof(Bird));
         }
     }
 }

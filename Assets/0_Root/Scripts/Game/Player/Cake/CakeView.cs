@@ -2,6 +2,7 @@
 using SweetGame.Abstractions;
 using UnityEngine.Events;
 
+
 namespace SweetGame.Game.Sweets
 {
     internal sealed class CakeView : PlayerViewBase
@@ -18,16 +19,24 @@ namespace SweetGame.Game.Sweets
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.TryGetComponent(out InteractiveObject interactible))
+            if (collision.CompareTag("Border"))
             {
-                interactible.Interaction();
+                Debug.Log("Interaction Player with boarder");
             }
+            //if (collision.TryGetComponent(out InteractiveObject interactible))
+            //{
+            //    interactible.Interaction();
+            //}
 
-            if (interactible is EnemyBase)
-            {
-                OnDeath?.Invoke();
-            }
+            //if (interactible is EnemyBase)
+            //{
+            //    OnDeath?.Invoke();
+            //}
         }
 
+        public void Interaction()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

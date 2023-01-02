@@ -8,7 +8,7 @@ namespace SweetGame
 {
     public sealed class ListExecutiveObject : IEnumerator, IEnumerable, IDisposable
     {
-        private IExecute[] executiveObjects;
+        public IExecute[] executiveObjects;
         private int position = -1;
         public int Length => executiveObjects.Length;
 
@@ -50,9 +50,9 @@ namespace SweetGame
             int j = 0;
             for (int i = 0; i < executiveObjects.Length; i++)
             {
-                if(  Object.ReferenceEquals(executiveObjects[i], execute))
-                {
-                    executes[j] = execute;
+                if(!Object.ReferenceEquals(executiveObjects[i], execute)) 
+                {                                                         
+                    executes[j] = executiveObjects[i];
                     j++;
                 }
             }

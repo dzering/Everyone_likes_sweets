@@ -35,7 +35,7 @@ namespace SweetGame.Enemy
             return obj.GetComponent<ChildView>();
         }
 
-        public override void Interaction()
+        public override void Interaction(InteractionType type)
         {
             throw new System.NotImplementedException();
         }

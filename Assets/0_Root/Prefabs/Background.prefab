@@ -1288,9 +1288,10 @@ GameObject:
   - component: {fileID: 2430118514639110352}
   - component: {fileID: 2362035333795437729}
   - component: {fileID: 6190700194839807717}
-  m_Layer: 0
+  - component: {fileID: 126128005986318043}
+  m_Layer: 6
   m_Name: Hills Layer 05 (2)
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1375,6 +1376,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relativeSpeed: 0.9
+--- !u!114 &126128005986318043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012567849941969022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d997e28788a2ad246b74e046b3f4507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4793461130321275108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,9 +1693,9 @@ GameObject:
   - component: {fileID: 2238384335052899193}
   - component: {fileID: 2987129194091518795}
   - component: {fileID: 2803870592440463152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hills Layer 05
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2268,9 +2281,9 @@ GameObject:
   - component: {fileID: 1898177668613612234}
   - component: {fileID: 4907297386351251008}
   - component: {fileID: 7360518904774862216}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hills Layer 05 (1)
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

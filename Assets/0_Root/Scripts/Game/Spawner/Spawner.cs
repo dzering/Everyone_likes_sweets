@@ -1,6 +1,7 @@
 ﻿using SweetGame.Abstractions;
 using SweetGame.Data.Spawner;
 using SweetGame.Enemy;
+using System;
 using System.Collections.Generic;
 using Random = System.Random;
 
@@ -18,11 +19,13 @@ namespace SweetGame.Game.Spawn
             _spawnPointsConfig = _context.SpawnPointsConfig;
         }
 
+
         public void CreateEnemy(EnemyCreator enemyCreator)
         {
             var enemy = enemyCreator.CreateEnemy(_context.GameSpeed);
             _context.ExecutiveObjects.AddExecuteObject(enemy);
             SetEnemyPosition(enemy);
+            enemy.OnDied += Remove;
         }
 
         private void SetEnemyPosition(EnemyBase enemy)
@@ -43,6 +46,16 @@ namespace SweetGame.Game.Spawn
             var points = _spawnPointsConfig.GetStackOfPoints(type);
             var position = points[random.Next(0, points.Count)].position;
             enemy.Position = position;
+        }
+
+        private void Remove(EnemyBase enemy)
+        {
+            if(enemy is IExecute)
+            {
+                var execute = (IExecute)enemy;
+                _context.ExecutiveObjects.RemoveExecuteObject(execute);
+                enemy.OnDied -= Remove;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SweetGame.Enemy
             throw new System.NotImplementedException();
         }
 
-        public override void Interaction()
+        public override void Interaction(InteractionType type)
         {
             throw new System.NotImplementedException();
         }

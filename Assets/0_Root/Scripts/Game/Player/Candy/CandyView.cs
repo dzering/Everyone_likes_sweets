@@ -22,7 +22,7 @@ namespace SweetGame.Game.Sweets
         {
             if (collision.TryGetComponent(out InteractiveObject interactible))
             {
-                interactible.Interaction();
+                interactible.Interaction(InteractionType.Deadly);
             }
 
             if (interactible is EnemyBase)

@@ -6,9 +6,10 @@ using UnityEngine;
 
 namespace SweetGame.Enemy
 {
-    public sealed class BirdView : ViewBase
+    public sealed class BirdView : EnemyView
     {
-        public Action OnChatchPlayer;
+        public Action OnCatchPlayer;   
+        public event Action<InteractionType> OnInteraction;
         private void Start()
         {
             SpriteAnimator.instance.StartAnimation(GetComponent<SpriteRenderer>(), Track.Bird_1_fly, true, 10);
@@ -21,7 +22,12 @@ namespace SweetGame.Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            OnChatchPlayer?.Invoke();
+            OnCatchPlayer?.Invoke();
+        }
+
+        public override void Interaction(InteractionType type)
+        {
+            OnInteraction?.Invoke(type);
         }
     }
 }

@@ -39,7 +39,8 @@ namespace SweetGame
                 case StateGame.None:
                     break;
                 case StateGame.Menu:
-                    mainMenuController = new MainMenuController(profileGame, placeForUI);
+                    //mainMenuController = new MainMenuController(profileGame, placeForUI);
+                    gameController = new GameController(profileGame, assetsContext, placeForUI);
                     break;
                 case StateGame.Game:
                     gameController = new GameController(profileGame, assetsContext, placeForUI);

@@ -52,8 +52,8 @@ namespace SweetGame.Game
             _spawner.CreateEnemy(new ChildCreator());
 
 
-            
-          //  boardField = new BoardField(spawnController.Points);
+
+            new Border();
 
             JoostenProductions.UpdateManager.SubscribeToUpdate(Update);
         }

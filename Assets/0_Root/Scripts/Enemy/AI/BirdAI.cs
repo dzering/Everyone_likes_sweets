@@ -33,7 +33,6 @@ namespace SweetGame.Enemy
         private void Checks()
         {
             var result = CheckDistanceToTarget(PlayerTransform);
-            CheckAngel();
 
             if (result == _isCurrent)
                 return;
@@ -65,12 +64,6 @@ namespace SweetGame.Enemy
             #endregion
 
             return result;
-        }
-
-        private void CheckAngel()
-        {
-            var angel = Vector3.Angle(PlayerTransform.position, _enemy.Position);
-            Debug.Log(angel);
         }
     }
 }

@@ -58,6 +58,9 @@ namespace SweetGame.Game.Sweets
             JoostenProductions.UpdateManager.UnsubscribeFromUpdate(Update);
         }
 
-
+        public void Interaction()
+        {
+            Debug.Log("Interactions player with boarder");
+        }
     }
 }
