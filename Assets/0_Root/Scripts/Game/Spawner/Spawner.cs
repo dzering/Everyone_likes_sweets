@@ -58,4 +58,24 @@ namespace SweetGame.Game.Spawn
             }
         }
     }
+
+
+    public static class EnemiesStorage
+    {
+        private static List<EnemyBase> enemies = new List<EnemyBase>();
+
+        public static void Add(EnemyBase enemy)
+        {
+            enemies.Add(enemy);
+        }
+
+        public static void DisposeEnemies()
+        {
+            foreach (var item in enemies)
+            {
+                if (item is Bird)
+                    ((Bird)item).Dispose();
+            }
+        }
+    }
 }

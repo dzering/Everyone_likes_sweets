@@ -6,7 +6,7 @@ namespace SweetGame.Enemy.States
     public class PatrolState : StateBase
     {
         private float _time;
-        private float _amplitude=0.03f;
+        private float _amplitude=0.003f;
         private float _speedYscale = 5;
 
         public PatrolState(EnemyBase enemy) : base(enemy) 
