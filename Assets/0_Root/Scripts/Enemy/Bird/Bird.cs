@@ -8,15 +8,15 @@ namespace SweetGame.Enemy
 {
     public class Bird : EnemyBase, IFly, IDisposable
     {
-        private int _amountAttack = 1;
+        private readonly int _amountAttack = 1;
         private int _currentAttack;
 
-        private BirdView _view;
+        private readonly BirdView _view;
         private StateBase _state;
 
-        private float _speedRelative = 1;
-        private float _speedGame;
-        private float _speed;
+        private readonly float _speedRelative = 1;
+        private readonly float _speedGame;
+        private readonly float _speed;
         public override float Speed 
         {
             get {return _speed; }

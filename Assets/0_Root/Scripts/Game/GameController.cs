@@ -50,9 +50,7 @@ namespace SweetGame.Game
             _spawner = new Spawner(_context);
             _spawner.CreateEnemy(new BirdCreator());
             _spawner.CreateEnemy(new ChildCreator());
-
-
-
+            
             new Border();
 
             JoostenProductions.UpdateManager.SubscribeToUpdate(Update);

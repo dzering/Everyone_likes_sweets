@@ -10,7 +10,8 @@ namespace SweetGame.Game.Sweets
     {
         public UnityAction OnDead;
         private readonly ResourcePath path = new ResourcePath("Prefabs/Sweets/Cake");
-
+        private InputService _inputService;
+        
         private CakeView playerView;
 
         private float gravity;
@@ -26,6 +27,7 @@ namespace SweetGame.Game.Sweets
             gravity = playerView.Gravity;
             jumpForce = playerView.JumpForce;
             UpdateManager.SubscribeToUpdate(Update);
+            _inputService = MainController.InputService;
         }
         private CakeView LoadView()
         {
@@ -42,13 +44,11 @@ namespace SweetGame.Game.Sweets
 
         private void Update()
         {
-
-            if (Input.GetButtonDown("Jump"))
+            if (_inputService.IsJumpButtonDown)
             {
                 velocity = jumpForce;
             }
-
-
+            
             velocity += gravity * Time.deltaTime;
             playerView.transform.Translate(new Vector3(0, velocity * Time.deltaTime, 0));
         }

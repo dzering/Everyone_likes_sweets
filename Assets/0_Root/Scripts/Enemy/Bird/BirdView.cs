@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SweetGame.Enemy
 {
-    public sealed class BirdView : EnemyView
+    public sealed class BirdView : MonoBehaviour
     {
         public Action OnCatchPlayer;   
         public event Action<InteractionType> OnInteraction;
@@ -25,7 +25,7 @@ namespace SweetGame.Enemy
             OnCatchPlayer?.Invoke();
         }
 
-        public override void Interaction(InteractionType type)
+        public void Interaction(InteractionType type)
         {
             OnInteraction?.Invoke(type);
         }
