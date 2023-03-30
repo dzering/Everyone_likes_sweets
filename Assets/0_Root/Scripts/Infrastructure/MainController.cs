@@ -20,7 +20,7 @@ namespace SweetGame
 
         public MainController(GameContext profileGame, AssetsContext assetsContext, Transform placeForUI)
         {
-            GameStateMachine = new GameStateMachine();
+           // GameStateMachine = new GameStateMachine(TODO);
             
             this.placeForUI = placeForUI;
             this.profileGame = profileGame;
