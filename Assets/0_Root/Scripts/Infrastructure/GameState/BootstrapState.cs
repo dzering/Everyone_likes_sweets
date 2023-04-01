@@ -1,5 +1,4 @@
 using System;
-using SweetGame.Game;
 using UnityEngine;
 
 namespace SweetGame
@@ -24,7 +23,7 @@ namespace SweetGame
 
         private void EnterLoadLevel()
         {
-            
+            _gameStateMachine.Enter<LoadLevelState>();
         }
 
         private void RegisterServices()
@@ -34,7 +33,6 @@ namespace SweetGame
         
         public void Exit()
         {
-            throw new NotImplementedException();
         }
 
         public static InputService RegisterInputService()

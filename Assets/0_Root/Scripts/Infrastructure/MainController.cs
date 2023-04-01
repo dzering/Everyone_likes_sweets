@@ -9,8 +9,7 @@ namespace SweetGame
     internal class MainController : BaseController
     {
         public static InputService InputService;
-        public GameStateMachine GameStateMachine;
-        
+
         private readonly GameContext profileGame;
         private readonly AssetsContext assetsContext;
         private readonly Transform placeForUI;
@@ -20,8 +19,6 @@ namespace SweetGame
 
         public MainController(GameContext profileGame, AssetsContext assetsContext, Transform placeForUI)
         {
-           // GameStateMachine = new GameStateMachine(TODO);
-            
             this.placeForUI = placeForUI;
             this.profileGame = profileGame;
             this.assetsContext = assetsContext;

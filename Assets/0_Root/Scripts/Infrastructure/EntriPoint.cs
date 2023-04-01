@@ -20,8 +20,7 @@ namespace SweetGame
         {
             _context = gameObject.GetComponent<GameContext>();
             _mainController = new MainController(_context, assetsContext, placeForUI);
-            _mainController.GameStateMachine.Enter<BootstrapState>();
-            
+
             _context.State.Value = StateGame.Menu;
         }
 
