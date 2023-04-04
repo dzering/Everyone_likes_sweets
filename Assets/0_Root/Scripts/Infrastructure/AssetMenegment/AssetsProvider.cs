@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SweetGame
 {
-    public sealed class Assets : IAssets
+    public sealed class AssetsProvider : IAssets
     {
         public GameObject Instantiate(string path)
         {

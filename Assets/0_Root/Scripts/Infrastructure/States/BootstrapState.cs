@@ -9,16 +9,19 @@ namespace SweetGame
         private const string NAME_MAIN_SCENE = "Main";
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoad;
+        private readonly AllServices _services;
 
-        public BootstrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoad)
+        public BootstrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoad, AllServices services)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoad = sceneLoad;
+            _services = services;
+            
+            RegisterServices();
         }
 
         public void Enter()
         {
-            RegisterServices();
             _sceneLoad.Load(name: INITIAL, onLoaded: EnterLoadLevel);
         }
 
@@ -29,9 +32,10 @@ namespace SweetGame
 
         private void RegisterServices()
         {
-            AllServices.Container.RegisterSingle<IInputService>(InputService());
-            AllServices.Container.RegisterSingle<IGameFactory>(
-                new GameFactory(AllServices.Container.Single<IAssets>()));
+            _services.RegisterSingle<IInputService>(InputService());
+            _services.RegisterSingle<IAssets>(new AssetsProvider());
+            _services.RegisterSingle<IGameFactory>(
+                new GameFactory(_services.Single<IAssets>()));
         }
         
         public void Exit()
