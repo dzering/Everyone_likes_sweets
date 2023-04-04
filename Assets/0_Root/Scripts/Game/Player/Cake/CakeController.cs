@@ -6,7 +6,7 @@ using JoostenProductions;
 
 namespace SweetGame.Game.Sweets
 {
-    internal class CakeController : PlayerController
+    internal class CakeController : PlayerController, ISavedProgress
     {
         public UnityAction OnDead;
         private readonly ResourcePath path = new ResourcePath("Prefabs/Sweets/Cake");
@@ -61,6 +61,16 @@ namespace SweetGame.Game.Sweets
         public void Interaction()
         {
             Debug.Log("Interactions player with boarder");
+        }
+
+        public void LoadProgress(PlayerProgress playerProgress)
+        {
+           
+        }
+
+        public void UpdateProgress(PlayerProgress playerProgress)
+        {
+            playerProgress.WordData.Position = playerView.transform.position.AsVectorData();
         }
     }
 }

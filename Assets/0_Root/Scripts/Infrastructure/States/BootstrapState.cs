@@ -1,4 +1,5 @@
 using System;
+using SweetGame.Services.PersistentProgress;
 using UnityEngine;
 
 namespace SweetGame
@@ -34,6 +35,7 @@ namespace SweetGame
         {
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAssets>(new AssetsProvider());
+            _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(_services.Single<IAssets>()));
         }
