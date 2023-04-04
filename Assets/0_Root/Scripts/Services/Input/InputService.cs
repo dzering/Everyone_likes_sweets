@@ -1,3 +1,5 @@
+using SweetGame;
+
 public abstract class InputService : IInputService
 {
     protected const string BUTTON_FIRE = "Jump";

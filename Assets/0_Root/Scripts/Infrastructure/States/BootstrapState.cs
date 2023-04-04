@@ -29,8 +29,7 @@ namespace SweetGame
 
         private void RegisterServices()
         {
-            MainController.InputService = RegisterInputService();
-
+            AllServices.Container.RegisterSingle<IInputService>(InputService());
             AllServices.Container.RegisterSingle<IGameFactory>(
                 new GameFactory(AllServices.Container.Single<IAssets>()));
         }
@@ -39,7 +38,7 @@ namespace SweetGame
         {
         }
 
-        public static InputService RegisterInputService()
+        public static InputService InputService()
         {
             if (Application.isEditor)
                 return new InputServiceMobile();

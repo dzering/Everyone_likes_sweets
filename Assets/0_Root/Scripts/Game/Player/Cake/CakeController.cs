@@ -10,7 +10,7 @@ namespace SweetGame.Game.Sweets
     {
         public UnityAction OnDead;
         private readonly ResourcePath path = new ResourcePath("Prefabs/Sweets/Cake");
-        private InputService _inputService;
+        private IInputService _inputService;
         
         private CakeView playerView;
 
@@ -27,7 +27,7 @@ namespace SweetGame.Game.Sweets
             gravity = playerView.Gravity;
             jumpForce = playerView.JumpForce;
             UpdateManager.SubscribeToUpdate(Update);
-            _inputService = MainController.InputService;
+            _inputService = AllServices.Container.Single<IInputService>();
         }
         private CakeView LoadView()
         {

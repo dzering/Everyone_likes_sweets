@@ -8,8 +8,6 @@ namespace SweetGame
 {
     internal class MainController : BaseController
     {
-        public static InputService InputService;
-
         private readonly GameContext profileGame;
         private readonly AssetsContext assetsContext;
         private readonly Transform placeForUI;
