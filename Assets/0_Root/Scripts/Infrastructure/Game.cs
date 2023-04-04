@@ -5,8 +5,8 @@ public class Game
     public readonly GameStateMachine GameStateMachine;
     public static InputService InputService;
 
-    public Game(ICoroutineRunner coroutineRunner)
+    public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
     {
-        GameStateMachine = new GameStateMachine(new SceneLoader(coroutineRunner));
+        GameStateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingCurtain);
     }
 }

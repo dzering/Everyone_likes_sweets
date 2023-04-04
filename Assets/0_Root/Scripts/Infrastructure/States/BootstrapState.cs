@@ -6,6 +6,7 @@ namespace SweetGame
     public class BootstrapState : IState
     {
         private const string INITIAL = "Initial";
+        private const string NAME_MAIN_SCENE = "Main";
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoad;
 
@@ -23,12 +24,15 @@ namespace SweetGame
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadLevelState>();
+            _gameStateMachine.Enter<LoadLevelState, string>(NAME_MAIN_SCENE);
         }
 
         private void RegisterServices()
         {
             MainController.InputService = RegisterInputService();
+
+            AllServices.Container.RegisterSingle<IGameFactory>(
+                new GameFactory(AllServices.Container.Single<IAssets>()));
         }
         
         public void Exit()

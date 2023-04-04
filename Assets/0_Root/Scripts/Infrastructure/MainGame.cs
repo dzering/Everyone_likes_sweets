@@ -5,10 +5,11 @@ using SweetGame.Game.Spawn;
 using SweetGame.Utils.AssetsInjector;
 using SweetGame.Background;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace SweetGame
 {
-    internal class EntriPoint : MonoBehaviour
+    internal class MainGame : MonoBehaviour
     {
         [SerializeField] private AssetsContext assetsContext;
         [SerializeField] private Transform placeForUI;
@@ -18,6 +19,7 @@ namespace SweetGame
 
         private void Awake()
         {
+            var pref = Object.Instantiate(placeForUI);
             _context = gameObject.GetComponent<GameContext>();
             _mainController = new MainController(_context, assetsContext, placeForUI);
 
