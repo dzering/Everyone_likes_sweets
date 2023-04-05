@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SweetGame.Services.PersistentProgress;
 
 namespace SweetGame
 {
@@ -15,6 +16,10 @@ namespace SweetGame
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>()),
                 [typeof(GameLoopState)] = new GameLoopState(this),
+                [typeof(LoadProgressState)] = new LoadProgressState(
+                    this, 
+                    services.Single<IPersistentProgressService>(), 
+                    services.Single<ISaveLoadService>()),
             };
         }
 

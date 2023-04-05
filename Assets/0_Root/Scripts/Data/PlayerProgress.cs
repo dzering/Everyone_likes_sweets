@@ -7,5 +7,9 @@ namespace SweetGame
     public class PlayerProgress
     {
         public WorldData WordData;
+
+        public PlayerProgress(string initialLevel)
+        {
+        }
     }
 }

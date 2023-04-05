@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 using JoostenProductions;
+using UnityEngine.SceneManagement;
 
 namespace SweetGame.Game.Sweets
 {
@@ -65,12 +66,28 @@ namespace SweetGame.Game.Sweets
 
         public void LoadProgress(PlayerProgress playerProgress)
         {
+            if (CurrentLevel() == playerProgress.WordData.PositionOnLevel.Level)
+            {
+                Vector3Data savedPosition = playerProgress.WordData.PositionOnLevel.Position;
+                if(savedPosition != null)
+                    Warp(to: savedPosition);
+            }
            
         }
 
-        public void UpdateProgress(PlayerProgress playerProgress)
+        private void Warp(Vector3Data to)
         {
-            playerProgress.WordData.Position = playerView.transform.position.AsVectorData();
+            playerView.transform.position = to.AsUnityVector();
+        }
+
+        public void UpdateProgress(PlayerProgress playerProgress) =>
+            playerProgress.WordData.PositionOnLevel = 
+                new PositionOnLevel(
+                    CurrentLevel(), playerView.transform.position.AsVectorData());
+
+        private static string CurrentLevel()
+        {
+            return SceneManager.GetActiveScene().name;
         }
     }
 }
