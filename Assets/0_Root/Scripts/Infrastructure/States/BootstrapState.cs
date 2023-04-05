@@ -28,7 +28,7 @@ namespace SweetGame
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadLevelState, string>(NAME_MAIN_SCENE);
+            _gameStateMachine.Enter<LoadProgressState>();
         }
 
         private void RegisterServices()
@@ -36,6 +36,7 @@ namespace SweetGame
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAssets>(new AssetsProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService());
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(_services.Single<IAssets>()));
         }
