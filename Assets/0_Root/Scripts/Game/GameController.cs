@@ -15,7 +15,7 @@ namespace SweetGame.Game
         private readonly GameContext _context;
         private readonly Transform _placeForUI;
        
-        private CakeController player;
+        private CakeController _player;
         private readonly Spawner _spawner;
 
         private BoardField boardField;
@@ -27,17 +27,18 @@ namespace SweetGame.Game
         protected override void OnDispose()
         {
             _listExecutiveObjects.ClearList();
-            player.OnDead -= GameOver;
+            _player.OnDead -= GameOver;
             JoostenProductions.UpdateManager.UnsubscribeFromUpdate(Update);
         }
 
-        public GameController(GameContext profileGame, AssetsContext assetsContext, Transform placeForUI)
+        public GameController(GameContext profileGame, AssetsContext assetsContext, Transform placeForUI, CakeController player)
         {
+            _player = player;
+            
             _context = profileGame;
             _placeForUI = placeForUI;
             _listExecutiveObjects = _context.ExecutiveObjects;
-           
-            player = new CakeController();
+
             player.OnDead += GameOver;
 
 

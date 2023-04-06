@@ -25,7 +25,9 @@ namespace SweetGame
 
         private void OnLoaded()
         {
-            _gameFactory.CreateMainGame();
+            _gameFactory.CreatePlayer();
+            _gameFactory.CreateHUD();
+            
             _stateMachine.Enter<GameLoopState>();
         }
 

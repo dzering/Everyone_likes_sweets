@@ -7,13 +7,13 @@ using UnityEngine.SceneManagement;
 
 namespace SweetGame.Game.Sweets
 {
-    internal class CakeController : PlayerController, ISavedProgress
+    public class CakeController : PlayerController, ISavedProgress
     {
         public UnityAction OnDead;
         private readonly ResourcePath path = new ResourcePath("Prefabs/Sweets/Cake");
         private IInputService _inputService;
         
-        private CakeView playerView;
+        private CakeView _playerView;
 
         private float gravity;
         private float jumpForce;
@@ -23,10 +23,10 @@ namespace SweetGame.Game.Sweets
         public CakeController()
         {
             velocity = 0;
-            playerView = LoadView();
-            playerView.Init(Death);
-            gravity = playerView.Gravity;
-            jumpForce = playerView.JumpForce;
+            _playerView = LoadView();
+            _playerView.Init(Death);
+            gravity = _playerView.Gravity;
+            jumpForce = _playerView.JumpForce;
             UpdateManager.SubscribeToUpdate(Update);
             _inputService = AllServices.Container.Single<IInputService>();
         }
@@ -51,7 +51,7 @@ namespace SweetGame.Game.Sweets
             }
             
             velocity += gravity * Time.deltaTime;
-            playerView.transform.Translate(new Vector3(0, velocity * Time.deltaTime, 0));
+            _playerView.transform.Translate(new Vector3(0, velocity * Time.deltaTime, 0));
         }
 
         protected override void OnDispose()
@@ -77,13 +77,13 @@ namespace SweetGame.Game.Sweets
 
         private void Warp(Vector3Data to)
         {
-            playerView.transform.position = to.AsUnityVector();
+            _playerView.transform.position = to.AsUnityVector();
         }
 
         public void UpdateProgress(PlayerProgress playerProgress) =>
             playerProgress.WordData.PositionOnLevel = 
                 new PositionOnLevel(
-                    CurrentLevel(), playerView.transform.position.AsVectorData());
+                    CurrentLevel(), _playerView.transform.position.AsVectorData());
 
         private static string CurrentLevel()
         {
