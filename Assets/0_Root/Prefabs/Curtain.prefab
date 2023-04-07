@@ -59,7 +59,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cc576114367460f95cdaf6b1fb234a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _curtain: {fileID: 5402030723960477776}
 --- !u!1 &5926081259081138702
 GameObject:
   m_ObjectHideFlags: 0
