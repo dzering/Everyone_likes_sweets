@@ -7,7 +7,7 @@ using SweetGame.Utils;
 namespace SweetGame.Editors
 {
     [CustomEditor(typeof(SpawnPointsConfig))]
-    public class SpawnPointsEditor : Editor
+    public class SpawnPointsEditor : UnityEditor.Editor
     {
         private SpawnPointsConfig config; 
         public override void OnInspectorGUI()
