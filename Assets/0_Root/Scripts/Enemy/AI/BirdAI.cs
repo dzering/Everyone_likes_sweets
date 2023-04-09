@@ -8,6 +8,7 @@ namespace SweetGame.Enemy
 {
     public sealed class BirdAI : EnemiAI
     {
+        private IGameFactory _gameFactory;
         private const float DISTANCE_TO_TARGET = 7f;
         private const float TIME_INTERVAL_CHECKING = 0.2f;
 
@@ -21,8 +22,26 @@ namespace SweetGame.Enemy
         {
             _enemy = enemy;
             _timer = new Timer(TIME_INTERVAL_CHECKING);
-            PlayerTransform = UnityEngine.Object.FindObjectOfType<PlayerViewBase>().transform;
             _timer.OnAlarm += Checks;
+            
+            _gameFactory = AllServices.Container.Single<IGameFactory>();
+            
+            if(_gameFactory.Player != null)
+                InitializePlayerTransform();
+            else
+            {
+                _gameFactory.PlayerCreated += PlayerInitialize;
+            }
+        }
+
+        private void PlayerInitialize()
+        {
+            InitializePlayerTransform();
+        }
+
+        private void InitializePlayerTransform()
+        {
+            Player = _gameFactory.Player.transform;
         }
 
         public override void Execute()
@@ -32,7 +51,9 @@ namespace SweetGame.Enemy
 
         private void Checks()
         {
-            var result = CheckDistanceToTarget(PlayerTransform);
+            bool result = false;
+            if(Player!=null) 
+                result = CheckDistanceToTarget(Player);
 
             if (result == _isCurrent)
                 return;
@@ -59,7 +80,7 @@ namespace SweetGame.Enemy
             if(result)
                 color = Color.green;
 
-            Debug.DrawLine(PlayerTransform.position, _enemy.Position, color, 10f);
+            Debug.DrawLine(Player.position, _enemy.Position, color, 10f);
             Debug.Log(result);
             #endregion
 

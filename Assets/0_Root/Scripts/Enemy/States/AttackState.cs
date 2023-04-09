@@ -11,7 +11,7 @@ namespace SweetGame.Enemy.States
         public AttackState(EnemyBase enemy) : base(enemy)
         {
             Debug.Log($"Attack state is activated {_enemy.GetType()}");
-            _attackDirection = DirectionCalculate(_enemy.EnemiAI.PlayerTransform.position).normalized;
+            _attackDirection = DirectionCalculate(_enemy.EnemiAI.Player.position).normalized;
         }
 
         public override void Move(float speed)

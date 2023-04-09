@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using SweetGame.Game.Sweets;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SweetGame
@@ -16,7 +18,15 @@ namespace SweetGame
         public List<ISavedProgress> ProgressWriter { get; } = new List<ISavedProgress>();
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
 
-        public GameObject CreatePlayer() => InstantiateRegister(AssetPath.PLAYER_PATH);
+        public GameObject Player { get; private set; }
+        public event Action PlayerCreated;
+
+        public GameObject CreatePlayer()
+        {
+            Player = InstantiateRegister(AssetPath.PLAYER_PATH);
+            PlayerCreated?.Invoke();
+            return Player;
+        }
 
         public GameObject CreateHUD() => InstantiateRegister(AssetPath.HUD_PATH);
 
