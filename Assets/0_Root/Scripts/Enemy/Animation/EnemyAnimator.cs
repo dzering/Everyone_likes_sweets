@@ -1,0 +1,101 @@
+using System;
+using UnityEngine;
+
+namespace SweetGame.Enemy
+{
+    public class EnemyAnimator : MonoBehaviour, IAnimationStateReader
+    {
+        public Action<AnimatorState> EnteredAnimation;
+        public Action<AnimatorState> ExitedAnimation;
+        
+        private Animator _animator;
+
+        private static readonly int Die = Animator.StringToHash("die");
+        private static readonly int Hurt = Animator.StringToHash("hurt");
+        private static readonly int TripOver = Animator.StringToHash("tripOver");
+        private static readonly int Attack = Animator.StringToHash("attack");
+        private static readonly int Idle = Animator.StringToHash("idle");
+        private static readonly int IsLookUp = Animator.StringToHash("isLookUp");
+        private static readonly int IsRun = Animator.StringToHash("isRun");
+        private static readonly int IsJump = Animator.StringToHash("isJump");
+
+        private readonly int _dieStateHash = Animator.StringToHash("Die");
+        private readonly int _hurtStateHash = Animator.StringToHash("Hurt");
+        private readonly int _tripOverStateHash = Animator.StringToHash("TripOver");
+        private readonly int _attackStateHash = Animator.StringToHash("Attack");
+        private readonly int _idleStateHash = Animator.StringToHash("Idle");
+        private readonly int _isLookUpStateHash = Animator.StringToHash("LookUp");
+        private readonly int _isRunStateHash = Animator.StringToHash("Run");
+        private readonly int _isJumpStateHash = Animator.StringToHash("Jump");
+
+        private void Awake() => _animator = GetComponent<Animator>();
+
+        public void PlayDeath() => _animator.SetTrigger(Die);
+        public void PlayHurt() => _animator.SetTrigger(Hurt);
+        public void PlayTripOver() => _animator.SetTrigger(TripOver);
+        public void PlayAttack() => _animator.SetTrigger(Attack);
+        public void PlayIdle() => _animator.SetTrigger(Idle);
+        
+        public void PlayLookUp() 
+        {
+            if (!_animator.GetBool(IsLookUp))
+            _animator.SetBool(IsLookUp, true);
+            else 
+            _animator.SetBool(IsLookUp, false);
+        }
+        public void PlayRun()
+        {
+            if (!_animator.GetBool(IsRun))
+                _animator.SetBool(IsRun, true);
+            else
+                _animator.SetBool(IsRun, false);
+        }
+        public void PlayJump()
+        {
+            if (!_animator.GetBool(IsJump))
+                _animator.SetBool(IsJump, true);
+            else
+                _animator.SetBool(IsJump, false);
+        }
+        
+        public void EnteredState(int hashState)
+        {
+            State = StateFor(hashState);
+            EnteredAnimation?.Invoke(State);
+        }
+
+        public void ExitState(int hashState)
+        {
+            ExitedAnimation?.Invoke(State);
+        }
+
+        public AnimatorState State { get; private set; }
+
+        private AnimatorState StateFor(int stateHash)
+        {
+            AnimatorState state;
+            if (stateHash == _idleStateHash)
+                state = AnimatorState.Idle;
+            else if (stateHash == _attackStateHash)
+                state = AnimatorState.Attack;
+            else if (stateHash == _dieStateHash)
+                state = AnimatorState.Die;
+            else if (stateHash == _hurtStateHash)
+                state = AnimatorState.Hurt;
+            else if (stateHash == _isJumpStateHash)
+                state = AnimatorState.Jump;
+            else if (stateHash == _isRunStateHash)
+                state = AnimatorState.Run;
+            else if (stateHash == _isLookUpStateHash)
+                state = AnimatorState.LookUp;
+            else if(stateHash == _tripOverStateHash)
+                state = AnimatorState.TripOver;
+            else
+            {
+                state = AnimatorState.None;
+            }
+
+            return state;
+        }
+    }
+}
