@@ -7,7 +7,7 @@ namespace SweetGame.Enemy
     {
         public Action<AnimatorState> EnteredAnimation;
         public Action<AnimatorState> ExitedAnimation;
-        
+
         private Animator _animator;
 
         private static readonly int Die = Animator.StringToHash("die");
@@ -35,11 +35,27 @@ namespace SweetGame.Enemy
         public void PlayTripOver() => _animator.SetTrigger(TripOver);
         public void PlayAttack() => _animator.SetTrigger(Attack);
         public void PlayIdle() => _animator.SetTrigger(Idle);
-        
+
+        public void PlayLookUp()
+        {
+            _animator.SetBool(IsLookUp, !_animator.GetBool(IsLookUp));
+        }
+
+        public void PlayRun()
+        {
+            _animator.SetBool(IsRun, !_animator.GetBool(IsRun));
+        }
+
+        public void PlayJump()
+        {
+            _animator.SetBool(IsJump, !_animator.GetBool(IsJump));
+        }
+
         public void EnteredState(int hashState)
         {
             State = StateFor(hashState);
             EnteredAnimation?.Invoke(State);
+            Debug.Log(State.ToString());
         }
 
         public void ExitState(int hashState)
@@ -66,7 +82,7 @@ namespace SweetGame.Enemy
                 state = AnimatorState.Run;
             else if (stateHash == _isLookUpStateHash)
                 state = AnimatorState.LookUp;
-            else if(stateHash == _tripOverStateHash)
+            else if (stateHash == _tripOverStateHash)
                 state = AnimatorState.TripOver;
             else
             {

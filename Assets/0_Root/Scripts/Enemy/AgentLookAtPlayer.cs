@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SweetGame.Enemy
@@ -15,6 +17,10 @@ namespace SweetGame.Enemy
         {
             EnemyAnimator.PlayLookUp();
         }
-        
+
+        private void OnDisable()
+        {
+            EnemyAnimator.PlayLookUp();
+        }
     }
 }

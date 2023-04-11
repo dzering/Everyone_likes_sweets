@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SweetGame.Animations
 {
@@ -10,18 +11,18 @@ namespace SweetGame.Animations
         [Serializable]
         public class SpritesSequence
         {
-            public Track Track;
+            [FormerlySerializedAs("Track")] public AnimationTrack _animationTrack;
             public List<Sprite> Sprites = new List<Sprite>();
         }
 
         public List<SpritesSequence> Sprites = new List<SpritesSequence>(); 
 
-        public List<Sprite> GetAnimations(Track track)
+        public List<Sprite> GetAnimations(AnimationTrack animationTrack)
         {
             List<Sprite> sprites = new List<Sprite>();
             for (int i = 0; i < Sprites.Count; i++)
             {
-                if(Sprites[i].Track == track)
+                if(Sprites[i]._animationTrack == animationTrack)
                 {
                     sprites = Sprites[i].Sprites;
                     return sprites;

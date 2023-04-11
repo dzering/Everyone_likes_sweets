@@ -59,7 +59,7 @@ namespace SweetGame.Game
 
         private void Update()
         {
-            SpriteAnimator.instance.Update();
+            //SpriteAnimator.instance.Update();
             for (int i = 0; i < _listExecutiveObjects.Length; i++)
             {
                 var execute = _listExecutiveObjects[i];

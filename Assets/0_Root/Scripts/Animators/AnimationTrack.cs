@@ -1,6 +1,6 @@
 ﻿namespace SweetGame.Animations
 {
-    public enum Track
+    public enum AnimationTrack
     {
         Bird_1_fly
     }
