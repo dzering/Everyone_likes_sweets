@@ -9,7 +9,7 @@ namespace SweetGame.Enemy
 {
     public class Attack : MonoBehaviour
     {
-        [SerializeField] private float _effectiveDistance = 0.25f;
+        [SerializeField] private float _effectiveDistance = 2f;
         public EnemyAnimator EnemyAnimator;
         public float CoolDownTime = 3f;
         public float Damage = 10f;
@@ -21,7 +21,7 @@ namespace SweetGame.Enemy
         private bool _isAttacking;
         private int _layerMask;
         private readonly Collider2D[] _hits = new Collider2D[1];
-        private float Radius = 0.25f;
+        private float Radius = 1f;
         private bool _attackIsActive;
 
 
@@ -54,7 +54,6 @@ namespace SweetGame.Enemy
         {
             if (Hit(out Collider2D hit))
             {
-                PhysicsDebug.DrawDebug(StartPoint(), Radius, 2);
                 hit.transform.GetComponent<PlayerHealth>().TakeDamage(Damage);
                 Debug.Log(hit.name);
             }
@@ -62,6 +61,7 @@ namespace SweetGame.Enemy
 
         private bool Hit(out Collider2D hit)
         {
+            PhysicsDebug.DrawDebug(StartPoint(), Radius, 100);
             int hitsCount =  Physics2D.OverlapCircleNonAlloc(StartPoint(), Radius, _hits, _layerMask);
 
             hit = _hits.FirstOrDefault();
@@ -70,7 +70,7 @@ namespace SweetGame.Enemy
 
         private Vector2 StartPoint()
         {
-            return new Vector2(transform.position.x, transform.position.y + 0.25f) +
+            return new Vector2(transform.position.x, transform.position.y + 2f) +
                    Vector2.left * _effectiveDistance;
         }
 
