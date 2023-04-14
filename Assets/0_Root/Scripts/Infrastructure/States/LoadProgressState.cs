@@ -32,6 +32,14 @@ namespace SweetGame
             _progressService.PlayerProgress = _saveLoadService.LoadProgress() ?? NewProgress();
         }
 
-        private PlayerProgress NewProgress() => new PlayerProgress("Main");
+        private PlayerProgress NewProgress()
+        {
+            var playerProgress = new PlayerProgress("Main");
+            
+            playerProgress.Health.MaxHealth = 50;
+            playerProgress.Health.ResetHealth();
+            
+            return playerProgress;
+        }
     }
 }
