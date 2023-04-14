@@ -1,4 +1,6 @@
+using SweetGame.Game.Sweets;
 using SweetGame.Services.PersistentProgress;
+using SweetGame.UI;
 using UnityEngine;
 
 namespace SweetGame
@@ -49,8 +51,14 @@ namespace SweetGame
 
         private void InitGameWorld()
         {
-            _gameFactory.CreatePlayer();
-            _gameFactory.CreateHUD();
+            GameObject player = _gameFactory.CreatePlayer();
+            InitialHud(player);
+        }
+
+        private void InitialHud(GameObject player)
+        {
+            GameObject hud = _gameFactory.CreateHUD();
+            hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponentInChildren<PlayerHealth>());
         }
 
         public void Exit()

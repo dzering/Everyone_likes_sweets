@@ -131,6 +131,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 423308738, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423308738, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: CoolDownTime
       value: 3
       objectReference: {fileID: 0}
@@ -144,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3972301218106118512, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4767211815473661765, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -160,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9147419779140118756, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9178090177391721229, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_Name

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using SweetGame.Game.Sweets;
 using SweetGame.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -11,9 +12,11 @@ namespace SweetGame.Enemy
         [SerializeField] private float _effectiveDistance = 0.25f;
         public EnemyAnimator EnemyAnimator;
         public float CoolDownTime = 3f;
+        public float Damage = 10f;
+        
         private Transform _playerTransform;
         private IGameFactory _gameFactory;
-        
+
         private float _coolDownTime;
         private bool _isAttacking;
         private int _layerMask;
@@ -52,6 +55,8 @@ namespace SweetGame.Enemy
             if (Hit(out Collider2D hit))
             {
                 PhysicsDebug.DrawDebug(StartPoint(), Radius, 2);
+                hit.transform.GetComponent<PlayerHealth>().TakeDamage(Damage);
+                Debug.Log(hit.name);
             }
         }
 
