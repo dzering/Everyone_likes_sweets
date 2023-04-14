@@ -6,14 +6,13 @@ namespace SweetGame.Enemy
     public class Aggro : MonoBehaviour
     {
         public TriggerObserver TriggerObserver;
-        
         public AgentLookAtPlayer AgentLookAtPlayer;
+        
         public Follow EnemyMove;
+        public float CoolDownTime;
         
         private Coroutine _switchCoroutine;
-
-        public float CoolDownTime;
-        private bool _hasTarget;
+        private bool _hasAgroTarget;
 
         private void Start()
         {
@@ -25,9 +24,9 @@ namespace SweetGame.Enemy
 
         private void TriggerEnter(Collider2D obj)
         {
-            if (!_hasTarget)
+            if (!_hasAgroTarget)
             {
-                _hasTarget = true;
+                _hasAgroTarget = true;
                 StopSwitchCoroutine();
             
                 SwitchMove(false);
@@ -37,9 +36,9 @@ namespace SweetGame.Enemy
 
         private void TriggerExit(Collider2D obj)
         {
-            if (_hasTarget)
+            if (_hasAgroTarget)
             {
-                _hasTarget = false;
+                _hasAgroTarget = false;
                 _switchCoroutine = StartCoroutine(SwitchStateAfterCoolDown());
             }
         }

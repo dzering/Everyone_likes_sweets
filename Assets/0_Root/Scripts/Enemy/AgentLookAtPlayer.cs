@@ -1,26 +1,24 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SweetGame.Enemy
 {
     public class AgentLookAtPlayer : MonoBehaviour
     {
-        public EnemyAnimator EnemyAnimator;
+        [SerializeField] private EnemyAnimator _enemyAnimator;
 
-        public void Start()
-        {
+        public void Start() => 
             LookAtPlayer();
-        }
 
-        private void LookAtPlayer()
-        {
-            EnemyAnimator.PlayLookUp();
-        }
+        private void LookAtPlayer() => 
+            _enemyAnimator.PlayLookUp();
 
-        private void OnDisable()
-        {
-            EnemyAnimator.PlayLookUp();
-        }
+        private void OnEnable() =>
+            LookAtPlayer();
+
+        private void OnDisable() =>
+            LookAtPlayer();
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System;
 using UnityEngine;
 
 namespace SweetGame.Enemy
@@ -28,18 +29,21 @@ namespace SweetGame.Enemy
         private readonly int _isRunStateHash = Animator.StringToHash("Run");
         private readonly int _isJumpStateHash = Animator.StringToHash("Jump");
 
-        private void Awake() => _animator = GetComponent<Animator>();
+        private void Awake() => 
+            _animator = GetComponent<Animator>();
+        public void PlayDeath() => 
+            _animator.SetTrigger(Die);
+        public void PlayHurt() =>
+            _animator.SetTrigger(Hurt);
+        public void PlayTripOver() => 
+            _animator.SetTrigger(TripOver);
+        public void PlayAttack() => 
+            _animator.SetTrigger(Attack);
+        public void PlayIdle() => 
+            _animator.SetTrigger(Idle);
 
-        public void PlayDeath() => _animator.SetTrigger(Die);
-        public void PlayHurt() => _animator.SetTrigger(Hurt);
-        public void PlayTripOver() => _animator.SetTrigger(TripOver);
-        public void PlayAttack() => _animator.SetTrigger(Attack);
-        public void PlayIdle() => _animator.SetTrigger(Idle);
-
-        public void PlayLookUp()
-        {
+        public void PlayLookUp() => 
             _animator.SetBool(IsLookUp, !_animator.GetBool(IsLookUp));
-        }
 
         public void PlayRun()
         {

@@ -1,10 +1,14 @@
 using System;
+using System.Linq;
+using SweetGame.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SweetGame.Enemy
 {
     public class Attack : MonoBehaviour
     {
+        [SerializeField] private float _effectiveDistance = 0.25f;
         public EnemyAnimator EnemyAnimator;
         public float CoolDownTime = 3f;
         private Transform _playerTransform;
@@ -12,12 +16,17 @@ namespace SweetGame.Enemy
         
         private float _coolDownTime;
         private bool _isAttacking;
+        private int _layerMask;
+        private readonly Collider2D[] _hits = new Collider2D[1];
+        private float Radius = 0.25f;
+        private bool _attackIsActive;
 
 
         private void Awake()
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _gameFactory.PlayerCreated += OnPlayerCreated;
+            _layerMask =  1 << LayerMask.NameToLayer("Player");
         }
 
         private void Update()
@@ -28,16 +37,37 @@ namespace SweetGame.Enemy
                 return;
             }
             
-            if(!_isAttacking)
+            if(_attackIsActive && !_isAttacking)
                StartAttack();  
         }
 
-        private bool CoolDownCheck()
+        public void AttackDisable() => 
+            _attackIsActive = false;
+
+        public void AttackEnable() => 
+            _attackIsActive = true;
+
+        private void OnAttack()
         {
-            return _coolDownTime > 0;
+            if (Hit(out Collider2D hit))
+            {
+                PhysicsDebug.DrawDebug(StartPoint(), Radius, 2);
+            }
         }
 
-        private void OnAttack(){}
+        private bool Hit(out Collider2D hit)
+        {
+            int hitsCount =  Physics2D.OverlapCircleNonAlloc(StartPoint(), Radius, _hits, _layerMask);
+
+            hit = _hits.FirstOrDefault();
+            return hitsCount > 0;
+        }
+
+        private Vector2 StartPoint()
+        {
+            return new Vector2(transform.position.x, transform.position.y + 0.25f) +
+                   Vector2.left * _effectiveDistance;
+        }
 
         private void OnAttackEnded()
         {
@@ -49,6 +79,11 @@ namespace SweetGame.Enemy
         {
             _isAttacking = true;
             EnemyAnimator.PlayAttack();
+        }
+
+        private bool CoolDownCheck()
+        {
+            return _coolDownTime > 0;
         }
 
         private void OnPlayerCreated() => 

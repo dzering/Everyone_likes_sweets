@@ -132,7 +132,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 423308738, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: CoolDownTime
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 423308739, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3590085345127408608, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972301218106118512, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4767211815473661765, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.025179418
+      objectReference: {fileID: 0}
+    - target: {fileID: 4767211815473661765, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.99968296
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290118648730408351, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147419779140118756, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9178090177391721229, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_Name
