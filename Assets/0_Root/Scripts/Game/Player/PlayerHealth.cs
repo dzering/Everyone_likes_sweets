@@ -6,7 +6,7 @@ namespace SweetGame.Game.Sweets
 {
     public class PlayerHealth : MonoBehaviour, ISavedProgress
     {
-        public Action HealthChange;
+        public Action OnChangeHealth;
         private Health _health;
 
         public float MaxHealth
@@ -23,7 +23,7 @@ namespace SweetGame.Game.Sweets
                 if(_health.CurrentHealth != value)
                 {
                     _health.CurrentHealth = value;
-                    HealthChange?.Invoke();
+                    OnChangeHealth?.Invoke();
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace SweetGame.Game.Sweets
         {
             playerProgress.Health.CurrentHealth = CurrentHealth;
             playerProgress.Health.MaxHealth = MaxHealth;
-            HealthChange?.Invoke();
+            OnChangeHealth?.Invoke();
         }
 
         public void TakeDamage(float damage)

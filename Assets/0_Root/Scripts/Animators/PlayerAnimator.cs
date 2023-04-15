@@ -13,9 +13,11 @@ namespace SweetGame.Enemy
 
         private static readonly int IsMove = Animator.StringToHash("isMove");
         private static readonly int Hurt = Animator.StringToHash("hurt");
+        private static readonly int Die = Animator.StringToHash("die");
 
         private readonly int _moveStateHash = Animator.StringToHash("Move");
         private readonly int _hitStateHash = Animator.StringToHash("Hurt");
+        private readonly int _dieStateHash = Animator.StringToHash("Die");
 
         public AnimatorState State { get; private set; }
 
@@ -27,6 +29,9 @@ namespace SweetGame.Enemy
 
         public void PlayHurt() =>
             _animator.SetTrigger(Hurt);
+
+        public void PlayDie() =>
+            _animator.SetTrigger(Die);
 
         public void EnteredState(int hashState)
         {
@@ -45,6 +50,8 @@ namespace SweetGame.Enemy
                 state = AnimatorState.Idle;
             else if (stateHash == _hitStateHash)
                 state = AnimatorState.Hurt;
+            else if (stateHash == _dieStateHash)
+                state = AnimatorState.Die;
             else
                 state = AnimatorState.None;
 
