@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace SweetGame
 {
-    public class Player : MonoBehaviour, ISavedProgress
+    public class PlayerCharacter : MonoBehaviour, ISavedProgress
     {
         [SerializeField] private float _gravity = -9.81f;
         [SerializeField] private float _jumpForce = 10f;

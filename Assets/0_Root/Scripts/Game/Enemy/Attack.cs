@@ -29,7 +29,7 @@ namespace SweetGame.Enemy
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _gameFactory.PlayerCreated += OnPlayerCreated;
-            _layerMask =  1 << LayerMask.NameToLayer("Player");
+            _layerMask =  1 << LayerMask.NameToLayer("PlayerCharacter");
         }
 
         private void Update()
