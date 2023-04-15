@@ -7,7 +7,10 @@ namespace SweetGame.Game.Sweets
     public class PlayerHealth : MonoBehaviour, ISavedProgress
     {
         public Action OnChangeHealth;
+        
+        [SerializeField] private PlayerAnimator _animator;
         private Health _health;
+        
 
         public float MaxHealth
         {
@@ -27,9 +30,7 @@ namespace SweetGame.Game.Sweets
                 }
             }
         }
-
-        [SerializeField] private PlayerAnimator _animator;
-
+        
         public void LoadProgress(PlayerProgress playerProgress)
         {
             _health = playerProgress.Health;

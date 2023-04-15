@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4066063045994913688}
   - component: {fileID: 4066063045994913691}
   - component: {fileID: 4066063045994913690}
+  - component: {fileID: 3966932516463025855}
+  - component: {fileID: 3492007933916670054}
   m_Layer: 0
   m_Name: BirdView
   m_TagString: Untagged
@@ -141,3 +143,29 @@ MonoBehaviour:
   SpriteAnimator: {fileID: 4066063045994913691}
   SpriteRenderer: {fileID: 4066063045994913689}
   Speed: 1
+--- !u!114 &3966932516463025855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066063045994913693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea604604120c4aecba1d7916e8e39344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3492007933916670054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066063045994913693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630e77f8c4c04c82b792d2c0b8db64a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 100
+  TriggerObserver: {fileID: 3966932516463025855}

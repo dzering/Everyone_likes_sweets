@@ -11,6 +11,8 @@ namespace SweetGame.Game.Sweets
     {
         public PlayerHealth PlayerHealth;
         public PlayerAnimator PlayerAnimator;
+        public PlayerMove PlayerMove;
+        
         public GameObject DieVFX;
         
         private bool _isDead;
@@ -30,7 +32,7 @@ namespace SweetGame.Game.Sweets
         private void Die()
         {
             _isDead = true;
-            
+            PlayerMove.enabled = false;
             PlayerAnimator.PlayDie();
             Instantiate(DieVFX, transform.position, quaternion.identity);
         }
