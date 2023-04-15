@@ -6,30 +6,6 @@ namespace SweetGame
 {
     public class PlayerCharacter : MonoBehaviour, ISavedProgress
     {
-        [SerializeField] private float _gravity = -9.81f;
-        [SerializeField] private float _jumpForce = 10f;
-        
-        private IInputService _inputService;
-        
-        private float _velocity;
-        public void Awake()
-        {
-            _velocity = 0;
-            _inputService = AllServices.Container.Single<IInputService>();
-        }
-
-        private void Update()
-        {
-            if (_inputService.IsJumpButtonDown)
-            {
-                _velocity = _jumpForce;
-            }
-
-            _velocity += _gravity * Time.deltaTime;
-            transform.Translate(new Vector3(0, _velocity * Time.deltaTime, 0));
-        }
-
-
         public void LoadProgress(PlayerProgress playerProgress)
         {
             if (CurrentLevel() == playerProgress.WordData.PositionOnLevel.Level)
