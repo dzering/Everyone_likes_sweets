@@ -19,8 +19,8 @@ TagManager:
   - AttackZone
   - DamageZone
   - VFX
-  - 
-  - 
+  - IsHit
+  - Hitting
   - 
   - 
   - 
