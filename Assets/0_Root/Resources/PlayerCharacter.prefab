@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 437862417657084443}
   - component: {fileID: -3983459348093817879}
   - component: {fileID: -356705738892420839}
+  - component: {fileID: -1341866242406522043}
   m_Layer: 7
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -268,4 +269,18 @@ MonoBehaviour:
   PlayerHealth: {fileID: -5104757306278550812}
   PlayerAnimator: {fileID: -3654004899176005726}
   PlayerMove: {fileID: -3983459348093817879}
+  PlayerAttack: {fileID: -1341866242406522043}
   DieVFX: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+--- !u!114 &-1341866242406522043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8744143728706948575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52d38029eeb49f2824b1d9991f96454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bomb: {fileID: 766466193329339978, guid: 9eb08e55b7f7340f892b0f4033b0753c, type: 3}

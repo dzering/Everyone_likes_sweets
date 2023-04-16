@@ -1,5 +1,6 @@
 using System;
 using SweetGame.Enemy;
+using SweetGame.Game.Player;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace SweetGame.Game.Sweets
         public PlayerHealth PlayerHealth;
         public PlayerAnimator PlayerAnimator;
         public PlayerMove PlayerMove;
+        public PlayerAttack PlayerAttack;
         
         public GameObject DieVFX;
         
@@ -33,6 +35,7 @@ namespace SweetGame.Game.Sweets
         {
             _isDead = true;
             PlayerMove.enabled = false;
+            PlayerAttack.enabled = false;
             PlayerAnimator.PlayDie();
             Instantiate(DieVFX, transform.position, quaternion.identity);
         }
