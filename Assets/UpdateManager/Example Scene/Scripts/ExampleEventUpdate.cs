@@ -1,18 +1,20 @@
-using JoostenProductions;
 using UnityEngine;
 
-public class ExampleEventUpdate : MonoBehaviour {
-    private int i;
+namespace UpdateManager.Example_Scene.Scripts
+{
+    public class ExampleEventUpdate : MonoBehaviour {
+        private int i;
 
-    private void OnEnable() {
-        UpdateManager.SubscribeToUpdate(EventUpdate);
-    }
+        private void OnEnable() {
+            UpdateManager.Scripts.UpdateManager.SubscribeToUpdate(EventUpdate);
+        }
 
-    private void OnDisable() {
-        UpdateManager.UnsubscribeFromUpdate(EventUpdate);
-    }
+        private void OnDisable() {
+            UpdateManager.Scripts.UpdateManager.UnsubscribeFromUpdate(EventUpdate);
+        }
 
-    private void EventUpdate() {
-        i++;
+        private void EventUpdate() {
+            i++;
+        }
     }
 }

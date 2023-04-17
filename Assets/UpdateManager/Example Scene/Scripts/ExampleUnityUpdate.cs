@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public class ExampleUnityUpdate : MonoBehaviour {
-    private int i;
+namespace UpdateManager.Example_Scene.Scripts
+{
+    public class ExampleUnityUpdate : MonoBehaviour {
+        private int i;
 
-    private void Update() {
-        i++;
+        private void Update() {
+            i++;
+        }
     }
 }

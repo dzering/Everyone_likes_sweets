@@ -1,9 +1,12 @@
-﻿using JoostenProductions;
+﻿using UpdateManager.Scripts;
 
-public class ExampleUpdateManagerUpdate : OverridableMonoBehaviour {
-    private int i;
+namespace UpdateManager.Example_Scene.Scripts
+{
+    public class ExampleUpdateManagerUpdate : OverridableMonoBehaviour {
+        private int i;
 
-    public override void UpdateMe() {
-        i++;
+        public override void UpdateMe() {
+            i++;
+        }
     }
 }

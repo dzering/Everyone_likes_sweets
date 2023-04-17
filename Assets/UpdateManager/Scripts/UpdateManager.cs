@@ -1,4 +1,5 @@
 ﻿using System;
+using UpdateManager.Scripts.Utility;
 
 /// <summary>
 /// Made by Feiko Joosten
@@ -13,7 +14,7 @@
 /// UpdateManager will handle all of the update calls
 /// </summary>
 
-namespace JoostenProductions {
+namespace UpdateManager.Scripts {
     public class UpdateManager : SingletonBehaviour<UpdateManager> {
         // If someone needs this on scene switch, it'll be recreated. Will have to add proper cleanup support in case this is set to true
         protected override bool DoNotDestroyOnLoad { get { return false; } }

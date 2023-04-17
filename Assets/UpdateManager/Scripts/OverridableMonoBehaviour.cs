@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace JoostenProductions {
+namespace UpdateManager.Scripts {
     public class OverridableMonoBehaviour : MonoBehaviour {
         [SerializeField] private bool addOnEnable = true;
         [SerializeField] private bool removeOnDisable = true;

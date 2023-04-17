@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace JoostenProductions {
+namespace UpdateManager.Scripts.Utility {
     public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour {
         protected abstract bool DoNotDestroyOnLoad { get; }
         protected static bool isShuttingDown = false;
