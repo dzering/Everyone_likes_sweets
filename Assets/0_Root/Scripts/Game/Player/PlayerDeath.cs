@@ -20,10 +20,10 @@ namespace SweetGame.Game.Sweets
         private bool _isDead;
 
         private void Start() => 
-            PlayerHealth.OnChangeHealth += HealthChange;
+            PlayerHealth.ChangeHealth += HealthChange;
 
         private void OnDestroy() => 
-            PlayerHealth.OnChangeHealth -= HealthChange;
+            PlayerHealth.ChangeHealth -= HealthChange;
 
         private void HealthChange()
         {

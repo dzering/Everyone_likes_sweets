@@ -9,11 +9,11 @@ namespace SweetGame.Game.Enemy
     {
         public EnemyAnimator EnemyAnimator;
         private float _health;
-        private float _currentHealth;
+        private float _currentHealth = 10f;
 
-        public event Action ChangeHealth ;
+        public event Action ChangeHealth;
 
-        public float Health
+        public float MaxHealth
         {
             get => _health;
             set => _health = value;
@@ -27,12 +27,12 @@ namespace SweetGame.Game.Enemy
 
         public void TakeDamage(float damage)
         {
-            if (CurrentHealth > 0)
-            {
-                CurrentHealth -= damage;
-                EnemyAnimator.PlayHurt();
-                ChangeHealth?.Invoke();
-            }
+            if (CurrentHealth < 0)
+                return;
+
+            CurrentHealth -= damage;
+            EnemyAnimator.PlayHurt();
+            ChangeHealth?.Invoke();
         }
     }
 }

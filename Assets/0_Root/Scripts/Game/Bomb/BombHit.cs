@@ -9,11 +9,11 @@ namespace SweetGame.Game.Player
     public class BombHit : MonoBehaviour
     {
         public float Damage;
-        private int _layerMask;
-        private readonly Collider2D[] _hits = new Collider2D[3];
         public float ExplosureRadius = 2;
         public GameObject ExplosureVFX;
         public TriggerObserver TriggerObserver;
+        private int _layerMask;
+        private readonly Collider2D[] _hits = new Collider2D[3];
 
         private void Start()
         {
@@ -23,7 +23,7 @@ namespace SweetGame.Game.Player
 
         private void OnExplosure(Collider2D obj)
         {
-            InstantiateEffect();
+            SpawnExplosionFx();
             DamageTargets();
             Destroy(gameObject);
         }
@@ -36,7 +36,7 @@ namespace SweetGame.Game.Player
             }
         }
 
-        private void InstantiateEffect() => 
+        private void SpawnExplosionFx() => 
             Instantiate(ExplosureVFX, transform.position, Quaternion.identity);
 
         public int Hit()=> 

@@ -1,12 +1,13 @@
 using System;
 using SweetGame.Enemy;
+using SweetGame.Game.Enemy;
 using UnityEngine;
 
 namespace SweetGame.Game.Sweets
 {
-    public class PlayerHealth : MonoBehaviour, ISavedProgress
+    public class PlayerHealth : MonoBehaviour, ISavedProgress, IHealth
     {
-        public Action OnChangeHealth;
+        public event Action ChangeHealth;
         
         [SerializeField] private PlayerAnimator _animator;
         private Health _health;
@@ -26,7 +27,7 @@ namespace SweetGame.Game.Sweets
                 if(_health.CurrentHealth != value)
                 {
                     _health.CurrentHealth = value;
-                    OnChangeHealth?.Invoke();
+                    ChangeHealth?.Invoke();
                 }
             }
         }
@@ -40,7 +41,7 @@ namespace SweetGame.Game.Sweets
         {
             playerProgress.Health.CurrentHealth = CurrentHealth;
             playerProgress.Health.MaxHealth = MaxHealth;
-            OnChangeHealth?.Invoke();
+            ChangeHealth?.Invoke();
         }
 
         public void TakeDamage(float damage)

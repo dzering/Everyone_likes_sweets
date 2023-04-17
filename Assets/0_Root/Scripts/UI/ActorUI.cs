@@ -10,7 +10,7 @@ namespace SweetGame.UI
         private PlayerHealth _playerHealth;
 
         private void OnDestroy() => 
-            _playerHealth.OnChangeHealth -= UpdateUI;
+            _playerHealth.ChangeHealth -= UpdateUI;
 
         public void UpdateUI() => 
             HpBar.SetValue(_playerHealth.CurrentHealth, _playerHealth.MaxHealth);
@@ -18,7 +18,7 @@ namespace SweetGame.UI
         public void Construct(PlayerHealth playerHealth)
         {
             _playerHealth = playerHealth;
-            playerHealth.OnChangeHealth += UpdateUI;
+            playerHealth.ChangeHealth += UpdateUI;
         }
     }
 }

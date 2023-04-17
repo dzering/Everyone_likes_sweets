@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa26a62b3f9477cab961c1b979838c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  Damage: 100
   ExplosureRadius: 2
   ExplosureVFX: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
   TriggerObserver: {fileID: 3157935538466449742}
