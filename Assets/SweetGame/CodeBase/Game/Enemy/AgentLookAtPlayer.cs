@@ -5,7 +5,7 @@ namespace SweetGame.CodeBase.Game.Enemy
 {
     public class AgentLookAtPlayer : MonoBehaviour
     {
-        [SerializeField] private EnemyAnimator _enemyAnimator;
+        public EnemyAnimator _enemyAnimator;
 
         public void Start() => 
             LookAtPlayer();

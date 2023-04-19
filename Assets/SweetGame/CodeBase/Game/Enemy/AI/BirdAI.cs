@@ -31,7 +31,7 @@ namespace SweetGame.CodeBase.Game.Enemy.AI
                 InitializePlayerTransform();
             else
             {
-                _gameFactory.PlayerCreated += PlayerInitialize;
+                //_gameFactory.PlayerCreated += PlayerInitialize;
             }
         }
 

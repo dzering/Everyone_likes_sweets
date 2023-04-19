@@ -5,19 +5,20 @@ using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SweetGame.CodeBase.Game.Enemy
 {
     public class Attack : MonoBehaviour
     {
         private const string LAYER_NAME = "PlayerCharacter";
-        [SerializeField] private float _effectiveDistance = 2f;
+      
+         public float EffectiveDistance;
         public EnemyAnimator EnemyAnimator;
-        public float CoolDownTime = 3f;
-        public float Damage = 10f;
+        public float CoolDownTime;
+        public float Damage;
         
         private Transform _playerTransform;
-        private IGameFactory _gameFactory;
 
         private float _coolDownTime;
         private bool _isAttacking;
@@ -29,8 +30,6 @@ namespace SweetGame.CodeBase.Game.Enemy
 
         private void Awake()
         {
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-            _gameFactory.PlayerCreated += OnPlayerCreated;
             _layerMask =  1 << LayerMask.NameToLayer(LAYER_NAME);
         }
 
@@ -73,7 +72,7 @@ namespace SweetGame.CodeBase.Game.Enemy
         private Vector2 StartPoint()
         {
             return new Vector2(transform.position.x, transform.position.y + 2f) +
-                   Vector2.left * _effectiveDistance;
+                   Vector2.left * EffectiveDistance;
         }
 
         private void OnAttackEnded()
@@ -88,12 +87,10 @@ namespace SweetGame.CodeBase.Game.Enemy
             EnemyAnimator.PlayAttack();
         }
 
-        private bool CoolDownCheck()
-        {
-            return _coolDownTime > 0;
-        }
+        private bool CoolDownCheck() => 
+            _coolDownTime > 0;
 
-        private void OnPlayerCreated() => 
-            _playerTransform = _gameFactory.Player.transform;
+        public void Construct(Transform playerTransform) => 
+            _playerTransform = playerTransform;
     }
 }

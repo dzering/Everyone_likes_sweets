@@ -38,16 +38,15 @@ namespace SweetGame.CodeBase.Infrastructure.States
 
         private void RegisterServices()
         {
+            RegisterStaticDataService();
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAssets>(new AssetsProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IGameFactory>(
-                new GameFactory(_services.Single<IAssets>()));
+                new GameFactory(_services.Single<IAssets>(), _services.Single<IStaticDataService>()));
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
                 _services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
             _services.RegisterSingle<ISaveTrigger>(new SaveTrigger(_services.Single<ISaveLoadService>()));
-           
-            RegisterStaticDataService();
         }
 
         private void RegisterStaticDataService()
