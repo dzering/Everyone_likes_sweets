@@ -10,6 +10,7 @@ namespace SweetGame.CodeBase.Game.Enemy
 {
     public class Attack : MonoBehaviour
     {
+        private const string LAYER_NAME = "PlayerCharacter";
         [SerializeField] private float _effectiveDistance = 2f;
         public EnemyAnimator EnemyAnimator;
         public float CoolDownTime = 3f;
@@ -22,7 +23,7 @@ namespace SweetGame.CodeBase.Game.Enemy
         private bool _isAttacking;
         private int _layerMask;
         private readonly Collider2D[] _hits = new Collider2D[1];
-        private float Radius = 1f;
+        private float Attack_Radius = 1f;
         private bool _attackIsActive;
 
 
@@ -30,7 +31,7 @@ namespace SweetGame.CodeBase.Game.Enemy
         {
             _gameFactory = AllServices.Container.Single<IGameFactory>();
             _gameFactory.PlayerCreated += OnPlayerCreated;
-            _layerMask =  1 << LayerMask.NameToLayer("PlayerCharacter");
+            _layerMask =  1 << LayerMask.NameToLayer(LAYER_NAME);
         }
 
         private void Update()
@@ -62,8 +63,8 @@ namespace SweetGame.CodeBase.Game.Enemy
 
         private bool Hit(out Collider2D hit)
         {
-            PhysicsDebug.DrawDebug(StartPoint(), Radius, 100);
-            int hitsCount =  Physics2D.OverlapCircleNonAlloc(StartPoint(), Radius, _hits, _layerMask);
+            PhysicsDebug.DrawDebug(StartPoint(), Attack_Radius, 100);
+            int hitsCount =  Physics2D.OverlapCircleNonAlloc(StartPoint(), Attack_Radius, _hits, _layerMask);
 
             hit = _hits.FirstOrDefault();
             return hitsCount > 0;
