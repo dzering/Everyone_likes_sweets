@@ -4,6 +4,7 @@ using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.Input;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Infrastructure.Services.SaveLoad;
+using SweetGame.CodeBase.StaticData;
 using UnityEngine;
 
 namespace SweetGame.CodeBase.Infrastructure.States
@@ -45,8 +46,17 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
                 _services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
             _services.RegisterSingle<ISaveTrigger>(new SaveTrigger(_services.Single<ISaveLoadService>()));
+           
+            RegisterStaticDataService();
         }
-        
+
+        private void RegisterStaticDataService()
+        {
+            IStaticDataService staticDataService = new StaticDataService();
+            staticDataService.LoadEnemies();
+            _services.RegisterSingle<IStaticDataService>(staticDataService);
+        }
+
         public void Exit()
         {
         }
