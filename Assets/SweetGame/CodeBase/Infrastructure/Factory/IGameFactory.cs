@@ -17,5 +17,6 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         void CleanUp();
         GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
         void Register(ISavedProgressReader progressReader);
+        GameObject CrateLoot();
     }
 }

@@ -4,5 +4,6 @@ namespace SweetGame.CodeBase.Infrastructure.AssetMenegment
     {
         public const string PLAYER_PATH = "PlayerCharacter";
         public const string HUD_PATH = "HUD";
+        public const string LOOT_PATH = "Loot/Loot";
     }
 }

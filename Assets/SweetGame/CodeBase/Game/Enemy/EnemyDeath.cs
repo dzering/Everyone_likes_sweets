@@ -8,11 +8,12 @@ namespace SweetGame.CodeBase.Game.Enemy
     [RequireComponent(typeof(EnemyAnimator), typeof(EnemyHealth))]
     public class EnemyDeath : MonoBehaviour
     {
+        public event Action OnDeath;
+        
         public EnemyAnimator Animator;
         public EnemyHealth Health;
         public GameObject DeathFx;
 
-        public event Action OnDeath;
 
         private void Start() => 
             Health.ChangeHealth += OnChangeHealth;

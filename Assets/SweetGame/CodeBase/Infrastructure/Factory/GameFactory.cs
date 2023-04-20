@@ -61,6 +61,9 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             attack.CoolDownTime = enemyData.CoolDownTimeAttack;
             attack.EffectiveDistance = enemyData.AttackRadius;
 
+            LootSpawner lootSpawner = enemy.GetComponentInChildren<LootSpawner>();
+            lootSpawner.Construct(this);
+
             return enemy;
         }
 
@@ -86,5 +89,8 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             
             ProgressReaders.Add(progressReader);
         }
+
+        public GameObject CrateLoot() => 
+            InstantiateRegister(AssetPath.LOOT_PATH);
     }
 }

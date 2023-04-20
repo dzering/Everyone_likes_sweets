@@ -12,7 +12,7 @@ namespace SweetGame.CodeBase.Game.Enemy
 
         private void Start()
         {
-            _enemyAnimator.PlayRun();
+            //_enemyAnimator.PlayRun();
             Debug.Log("Enemy Start");
         }
 
