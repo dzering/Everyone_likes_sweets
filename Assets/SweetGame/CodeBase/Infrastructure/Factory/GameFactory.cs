@@ -17,12 +17,14 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
     public class GameFactory : IGameFactory
     {
         private readonly IAssets _assets;
-        private IStaticDataService _staticData;
+        private readonly IStaticDataService _staticData;
+        private readonly IRandomService _randomService;
 
-        public GameFactory(IAssets assets, IStaticDataService staticData)
+        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService)
         {
             _assets = assets;
             _staticData = staticData;
+            _randomService = randomService;
         }
 
         public List<ISavedProgress> ProgressWriter { get; } = new List<ISavedProgress>();
@@ -62,7 +64,7 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             attack.EffectiveDistance = enemyData.AttackRadius;
 
             LootSpawner lootSpawner = enemy.GetComponentInChildren<LootSpawner>();
-            lootSpawner.Construct(this);
+            lootSpawner.Construct(this, _randomService);
 
             return enemy;
         }

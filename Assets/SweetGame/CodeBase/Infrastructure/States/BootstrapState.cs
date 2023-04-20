@@ -1,3 +1,4 @@
+using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Infrastructure.AssetMenegment;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;
@@ -39,11 +40,16 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticDataService();
+            IRandomService randomService = new UnityRandomService();
+            
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAssets>(new AssetsProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<IGameFactory>(
-                new GameFactory(_services.Single<IAssets>(), _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IGameFactory>(new GameFactory(
+                _services.Single<IAssets>(),
+                _services.Single<IStaticDataService>(),
+                randomService));
+            
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
                 _services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
             _services.RegisterSingle<ISaveTrigger>(new SaveTrigger(_services.Single<ISaveLoadService>()));
