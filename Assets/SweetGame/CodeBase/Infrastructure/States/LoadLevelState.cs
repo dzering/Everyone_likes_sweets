@@ -15,18 +15,18 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
-        private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IProgressService _progressService;
 
         public LoadLevelState(GameStateMachine stateMachine, 
             SceneLoader sceneLoader, 
             LoadingCurtain loadingCurtain, 
-            IGameFactory gameFactory, IPersistentProgressService persistentProgressService)
+            IGameFactory gameFactory, IProgressService progressService)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
             _gameFactory = gameFactory;
-            _persistentProgressService = persistentProgressService;
+            _progressService = progressService;
         }
 
         public void Enter(string sceneName)
@@ -48,7 +48,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
         {
             foreach (var progressReader in _gameFactory.ProgressReaders)
             {
-                progressReader.LoadProgress(_persistentProgressService.PlayerProgress);
+                progressReader.LoadProgress(_progressService.PlayerProgress);
                 
             }
         }

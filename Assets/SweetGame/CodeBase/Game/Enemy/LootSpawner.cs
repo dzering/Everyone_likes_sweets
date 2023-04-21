@@ -26,13 +26,19 @@ namespace SweetGame.CodeBase.Game.Enemy
 
         private void SpawnLoot()
         {
-            GameObject loot = _factory.CrateLoot();
+            LootPiece loot = _factory.CrateLoot();
             loot.transform.position =  transform.position + Vector3.up * 0.5f;
-            var lootItem = new Loot()
+           
+            var lootItem = GenerateLoot();
+            loot.Initialize(lootItem);
+        }
+
+        private Loot GenerateLoot()
+        {
+            return new Loot()
             {
                 Value = _random.GetRandom(_min, _max)
             };
-
         }
 
         public void SetLoot(int min, int max)

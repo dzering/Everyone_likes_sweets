@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
@@ -17,6 +18,6 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         void CleanUp();
         GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
         void Register(ISavedProgressReader progressReader);
-        GameObject CrateLoot();
+        LootPiece CrateLoot();
     }
 }

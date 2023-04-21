@@ -5,6 +5,7 @@ using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Enemy.AI;
 using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.AssetMenegment;
+using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI;
@@ -19,12 +20,14 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
+        private readonly IProgressService _progressService;
 
-        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService)
+        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService, IProgressService progressService)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
+            _progressService = progressService;
         }
 
         public List<ISavedProgress> ProgressWriter { get; } = new List<ISavedProgress>();
@@ -65,6 +68,7 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
 
             LootSpawner lootSpawner = enemy.GetComponentInChildren<LootSpawner>();
             lootSpawner.Construct(this, _randomService);
+            lootSpawner.SetLoot(enemyData.LootMin, enemyData.LootMax);
 
             return enemy;
         }
@@ -92,7 +96,11 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             ProgressReaders.Add(progressReader);
         }
 
-        public GameObject CrateLoot() => 
-            InstantiateRegister(AssetPath.LOOT_PATH);
+        public LootPiece CrateLoot()
+        {
+            var lootPiece = InstantiateRegister(AssetPath.LOOT_PATH).GetComponent<LootPiece>();
+            lootPiece.Construct(_progressService.PlayerProgress.WordData);
+            return lootPiece;
+        }
     }
 }

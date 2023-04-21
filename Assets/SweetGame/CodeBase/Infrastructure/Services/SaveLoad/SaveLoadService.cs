@@ -7,11 +7,11 @@ namespace SweetGame.CodeBase.Infrastructure.Services.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService
     {
-        private readonly IPersistentProgressService _progressService;
+        private readonly IProgressService _progressService;
         private readonly IGameFactory _gameFactory;
         private const string PROGRESS_KEY = "Progress";
 
-        public SaveLoadService(IPersistentProgressService progressService, IGameFactory gameFactory)
+        public SaveLoadService(IProgressService progressService, IGameFactory gameFactory)
         {
             _progressService = progressService;
             _gameFactory = gameFactory;

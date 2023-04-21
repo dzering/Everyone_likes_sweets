@@ -9,7 +9,7 @@ namespace SweetGame.CodeBase.StaticData
         public EnemyTypeId EnemyTypeId;
 
         public int LootMin;
-        public float LootMax;
+        public int LootMax;
         
         [Range(1, 30)] public float Damage;
         [Range(0.5f, 1)] public float AttackRadius;

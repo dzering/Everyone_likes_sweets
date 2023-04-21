@@ -18,11 +18,11 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _state = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>()),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IProgressService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this),
                 [typeof(LoadProgressState)] = new LoadProgressState(
                     this, 
-                    services.Single<IPersistentProgressService>(), 
+                    services.Single<IProgressService>(), 
                     services.Single<ISaveLoadService>()),
             };
         }

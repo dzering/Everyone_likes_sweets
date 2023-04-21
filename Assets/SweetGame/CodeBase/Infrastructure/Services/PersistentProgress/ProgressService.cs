@@ -2,8 +2,8 @@ using SweetGame.CodeBase.Data;
 
 namespace SweetGame.CodeBase.Infrastructure.Services.PersistentProgress
 {
-    public interface IPersistentProgressService : IService
+    public sealed class ProgressService : IProgressService
     {
-        PlayerProgress PlayerProgress { get; set; }
+        public PlayerProgress PlayerProgress { get; set; }
     }
 }
