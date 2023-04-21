@@ -41,7 +41,13 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             return Player;
         }
 
-        public GameObject CreateHUD() => InstantiateRegister(AssetPath.HUD_PATH);
+        public GameObject CreateHUD()
+        {
+            GameObject hud = InstantiateRegister(AssetPath.HUD_PATH);
+            hud.GetComponentInChildren<LootCounter>().Construct(_progressService.PlayerProgress.WordData);
+            
+            return hud;
+        }
 
         public void CleanUp()
         {
