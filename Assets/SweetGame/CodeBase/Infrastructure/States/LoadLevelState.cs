@@ -1,10 +1,11 @@
 using SweetGame.CodeBase.Game.Player;
-using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Logic;
+using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SweetGame.CodeBase.Infrastructure.States
 {
@@ -16,17 +17,19 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
         private readonly IProgressService _progressService;
+        private readonly IStaticDataService _staticDataService;
 
         public LoadLevelState(GameStateMachine stateMachine, 
             SceneLoader sceneLoader, 
             LoadingCurtain loadingCurtain, 
-            IGameFactory gameFactory, IProgressService progressService)
+            IGameFactory gameFactory, IProgressService progressService, IStaticDataService staticDataService)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _staticDataService = staticDataService;
         }
 
         public void Enter(string sceneName)
@@ -62,10 +65,12 @@ namespace SweetGame.CodeBase.Infrastructure.States
 
         private void InitSpawners()
         {
-            foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag(SPAWNER))
+            string sceneKey = SceneManager.GetActiveScene().name;
+            LevelStaticData levelStaticData = _staticDataService.ForLevel(sceneKey);
+
+            foreach (var spawnerData in levelStaticData.EnemySpawnersData)
             {
-                EnemySpawner spawner = spawnerObject.GetComponent<EnemySpawner>();
-                _gameFactory.Register(spawner);
+                _gameFactory.CreateSpawner(spawnerData.SpawnerId, spawnerData.EnemyTypeId, spawnerData.Position);
             }
         }
 

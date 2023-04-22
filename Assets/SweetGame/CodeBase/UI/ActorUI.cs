@@ -1,5 +1,4 @@
 using SweetGame.CodeBase.Game.Enemy;
-using SweetGame.CodeBase.Game.Player;
 using UnityEngine;
 
 namespace SweetGame.CodeBase.UI

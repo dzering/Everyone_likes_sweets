@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using SweetGame.CodeBase.Data;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SweetGame.CodeBase.Game.Enemy

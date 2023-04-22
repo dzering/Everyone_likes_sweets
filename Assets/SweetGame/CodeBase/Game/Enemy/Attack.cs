@@ -1,11 +1,8 @@
 using System.Linq;
 using SweetGame.CodeBase.Animators;
 using SweetGame.CodeBase.Game.Player;
-using SweetGame.CodeBase.Infrastructure.Factory;
-using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SweetGame.CodeBase.Game.Enemy
 {

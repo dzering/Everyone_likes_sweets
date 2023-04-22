@@ -4,18 +4,4 @@ namespace SweetGame.CodeBase.Infrastructure.Services.SaveLoad
     {
         void Save();
     }
-
-    class SaveTrigger : ISaveTrigger
-    {
-        private readonly ISaveLoadService _saveLoadService;
-
-        public SaveTrigger(ISaveLoadService saveLoadService)
-        {
-            _saveLoadService = saveLoadService;
-        }
-        public void Save()
-        {
-            _saveLoadService.SaveProgress();
-        }
-    }
 }

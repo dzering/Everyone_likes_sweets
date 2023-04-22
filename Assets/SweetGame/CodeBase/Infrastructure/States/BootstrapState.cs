@@ -40,6 +40,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticDataService();
+            
             IRandomService randomService = new UnityRandomService();
             
             _services.RegisterSingle<IInputService>(InputService());

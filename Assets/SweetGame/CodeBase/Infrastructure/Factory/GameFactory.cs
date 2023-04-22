@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
-using SweetGame.CodeBase.Data;
 using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Enemy.AI;
 using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.AssetMenegment;
-using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI;
@@ -22,6 +19,11 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         private readonly IRandomService _randomService;
         private readonly IProgressService _progressService;
 
+        public List<ISavedProgress> ProgressWriter { get; } = new List<ISavedProgress>();
+        public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
+
+        public GameObject Player { get; private set; }
+
         public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService, IProgressService progressService)
         {
             _assets = assets;
@@ -29,11 +31,6 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             _randomService = randomService;
             _progressService = progressService;
         }
-
-        public List<ISavedProgress> ProgressWriter { get; } = new List<ISavedProgress>();
-        public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-
-        public GameObject Player { get; private set; }
 
         public GameObject CreatePlayer()
         {
@@ -77,6 +74,22 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             lootSpawner.SetLoot(enemyData.LootMin, enemyData.LootMax);
 
             return enemy;
+        }
+
+        public void CreateSpawner(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position)
+        {
+            SpawnPoint spawnPoint = InstantiateRegister(AssetPath.SPAWNER, position)
+                .GetComponent<SpawnPoint>();
+            spawnPoint.Construct(this);
+            spawnPoint.EnemyTypeId = enemyTypeId;
+            spawnPoint.Id = spawnerId;
+        }
+
+        private GameObject InstantiateRegister(string prefabPath, Vector3 position)
+        {
+            GameObject gameObject = _assets.Instantiate(prefabPath, position);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
         }
 
         private GameObject InstantiateRegister(string prefabPath)

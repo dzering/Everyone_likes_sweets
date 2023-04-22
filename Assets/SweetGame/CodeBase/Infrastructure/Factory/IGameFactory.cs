@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Spawner;
@@ -17,7 +16,7 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         List<ISavedProgressReader> ProgressReaders { get; }
         void CleanUp();
         GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
-        void Register(ISavedProgressReader progressReader);
+        void CreateSpawner(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
         LootPiece CrateLoot();
     }
 }

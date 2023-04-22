@@ -7,5 +7,6 @@ namespace SweetGame.CodeBase.StaticData
     {
         void LoadEnemies();
         EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId);
+        LevelStaticData ForLevel(string sceneKey);
     }
 }
