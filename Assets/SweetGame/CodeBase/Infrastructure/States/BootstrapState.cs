@@ -59,6 +59,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
         {
             IStaticDataService staticDataService = new StaticDataService();
             staticDataService.LoadEnemies();
+            staticDataService.LoadSpawners();
             _services.RegisterSingle<IStaticDataService>(staticDataService);
         }
 
