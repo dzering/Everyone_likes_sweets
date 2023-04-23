@@ -1,7 +1,5 @@
 using SweetGame.CodeBase.Data;
-using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
-using SweetGame.CodeBase.Infrastructure.Services.SaveLoad;
 using TMPro;
 using UnityEngine;
 
