@@ -6,6 +6,8 @@ using SweetGame.CodeBase.Infrastructure.Services.Input;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Infrastructure.Services.SaveLoad;
 using SweetGame.CodeBase.StaticData;
+using SweetGame.CodeBase.UI.Services.Factory;
+using SweetGame.CodeBase.UI.Services.WindowsService;
 using UnityEngine;
 
 namespace SweetGame.CodeBase.Infrastructure.States
@@ -53,6 +55,10 @@ namespace SweetGame.CodeBase.Infrastructure.States
                 _services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
                 randomService, _services.Single<IProgressService>()));
+            
+            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
+                _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
         }
 
         private void RegisterStaticDataService()
@@ -60,6 +66,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
             IStaticDataService staticDataService = new StaticDataService();
             staticDataService.LoadEnemies();
             staticDataService.LoadSpawners();
+            staticDataService.LoadWindows();
             _services.RegisterSingle<IStaticDataService>(staticDataService);
         }
 

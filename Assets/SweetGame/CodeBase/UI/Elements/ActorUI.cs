@@ -1,7 +1,7 @@
 using SweetGame.CodeBase.Game.Enemy;
 using UnityEngine;
 
-namespace SweetGame.CodeBase.UI
+namespace SweetGame.CodeBase.UI.Elements
 {
     public class ActorUI : MonoBehaviour
     {

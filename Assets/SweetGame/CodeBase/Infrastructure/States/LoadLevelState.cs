@@ -4,6 +4,7 @@ using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Logic;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI;
+using SweetGame.CodeBase.UI.Elements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

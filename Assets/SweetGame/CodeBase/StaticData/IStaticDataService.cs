@@ -1,5 +1,6 @@
 using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Services;
+using SweetGame.CodeBase.UI.Services.WindowsService;
 
 namespace SweetGame.CodeBase.StaticData
 {
@@ -9,5 +10,7 @@ namespace SweetGame.CodeBase.StaticData
         EnemyStaticData ForEnemy(EnemyTypeId enemyTypeId);
         LevelStaticData ForLevel(string sceneKey);
         void LoadSpawners();
+        WindowConfig ForWindows(WindowID windowID);
+        void LoadWindows();
     }
 }

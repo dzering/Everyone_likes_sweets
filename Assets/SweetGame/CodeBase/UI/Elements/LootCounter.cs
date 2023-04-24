@@ -3,7 +3,7 @@ using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using TMPro;
 using UnityEngine;
 
-namespace SweetGame.CodeBase.UI
+namespace SweetGame.CodeBase.UI.Elements
 {
     public class LootCounter: MonoBehaviour, ISavedProgressReader
     {

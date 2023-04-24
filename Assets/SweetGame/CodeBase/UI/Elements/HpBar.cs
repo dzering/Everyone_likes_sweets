@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SweetGame.CodeBase.UI
+namespace SweetGame.CodeBase.UI.Elements
 {
     public class HpBar : MonoBehaviour
     {
