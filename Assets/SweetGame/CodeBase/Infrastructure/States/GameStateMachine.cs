@@ -6,6 +6,8 @@ using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Infrastructure.Services.SaveLoad;
 using SweetGame.CodeBase.Logic;
 using SweetGame.CodeBase.StaticData;
+using SweetGame.CodeBase.UI.Services.Factory;
+using SweetGame.CodeBase.UI.Services.WindowsService;
 
 namespace SweetGame.CodeBase.Infrastructure.States
 {
@@ -22,7 +24,9 @@ namespace SweetGame.CodeBase.Infrastructure.States
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, 
                     services.Single<IGameFactory>(), 
                     services.Single<IProgressService>(), 
-                    services.Single<IStaticDataService>()),
+                    services.Single<IStaticDataService>(), 
+                    services.Single<IWindowsService>(),
+                    services.Single<IUIFactory>()),
                 
                 [typeof(GameLoopState)] = new GameLoopState(this),
                 [typeof(LoadProgressState)] = new LoadProgressState(

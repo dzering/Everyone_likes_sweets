@@ -5,6 +5,8 @@ using SweetGame.CodeBase.Logic;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI;
 using SweetGame.CodeBase.UI.Elements;
+using SweetGame.CodeBase.UI.Services.Factory;
+using SweetGame.CodeBase.UI.Services.WindowsService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,12 +21,17 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private readonly IGameFactory _gameFactory;
         private readonly IProgressService _progressService;
         private readonly IStaticDataService _staticDataService;
+        private readonly IWindowsService _windowService;
+        private IUIFactory _uiFactory;
 
-        public LoadLevelState(GameStateMachine stateMachine, 
-            SceneLoader sceneLoader, 
-            LoadingCurtain loadingCurtain, 
-            IGameFactory gameFactory, IProgressService progressService, IStaticDataService staticDataService)
+        public LoadLevelState(GameStateMachine stateMachine,
+            SceneLoader sceneLoader,
+            LoadingCurtain loadingCurtain,
+            IGameFactory gameFactory, IProgressService progressService, IStaticDataService staticDataService,
+            IWindowsService windowService, IUIFactory uiFactory)
         {
+            _windowService = windowService;
+            _uiFactory = uiFactory;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
@@ -59,10 +66,15 @@ namespace SweetGame.CodeBase.Infrastructure.States
 
         private void InitGameWorld()
         {
+            InitUiRoot(_uiFactory);
             InitSpawners();
             GameObject player = _gameFactory.CreatePlayer();
             InitialHud(player);
+            
         }
+
+        private void InitUiRoot(IUIFactory uiFactory) => 
+            uiFactory.CreateUIRoot();
 
         private void InitSpawners()
         {
@@ -79,11 +91,11 @@ namespace SweetGame.CodeBase.Infrastructure.States
         {
             GameObject hud = _gameFactory.CreateHUD();
             hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponentInChildren<PlayerHealth>());
+            WindowButton windowButton = hud.GetComponentInChildren<WindowButton>();
+            windowButton.Construct(_windowService);
         }
 
-        public void Exit()
-        {
+        public void Exit() => 
             _loadingCurtain.Hide();
-        }
     }
 }

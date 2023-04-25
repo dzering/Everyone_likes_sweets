@@ -57,7 +57,8 @@ namespace SweetGame.CodeBase.Infrastructure.States
                 randomService, _services.Single<IProgressService>()));
             
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
-                _services.Single<IStaticDataService>()));
+                _services.Single<IStaticDataService>(),
+                _services.Single<IProgressService>()));
             _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
         }
 
