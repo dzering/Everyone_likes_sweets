@@ -2,6 +2,7 @@ using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Infrastructure.AssetMenegment;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;
+using SweetGame.CodeBase.Infrastructure.Services.Ads;
 using SweetGame.CodeBase.Infrastructure.Services.Input;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Infrastructure.Services.SaveLoad;
@@ -34,17 +35,13 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _sceneLoad.Load(name: INITIAL, onLoaded: EnterLoadLevel);
         }
 
-        private void EnterLoadLevel()
-        {
-            _gameStateMachine.Enter<LoadProgressState>();
-        }
-
         private void RegisterServices()
         {
             RegisterStaticDataService();
-            
+            RegisterAdService();
             IRandomService randomService = new UnityRandomService();
-            
+
+
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAssets>(new AssetsProvider());
             _services.RegisterSingle<IProgressService>(new ProgressService());
@@ -60,6 +57,18 @@ namespace SweetGame.CodeBase.Infrastructure.States
                 _services.Single<IStaticDataService>(),
                 _services.Single<IProgressService>()));
             _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
+        }
+
+        private void EnterLoadLevel()
+        {
+            _gameStateMachine.Enter<LoadProgressState>();
+        }
+
+        private void RegisterAdService()
+        {
+            IAdService adService = new AdService();
+            adService.Initialize();
+            _services.RegisterSingle<IAdService>(adService);
         }
 
         private void RegisterStaticDataService()
