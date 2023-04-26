@@ -3,7 +3,6 @@ using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Logic;
 using SweetGame.CodeBase.StaticData;
-using SweetGame.CodeBase.UI;
 using SweetGame.CodeBase.UI.Elements;
 using SweetGame.CodeBase.UI.Services.Factory;
 using SweetGame.CodeBase.UI.Services.WindowsService;

@@ -12,6 +12,11 @@ namespace SweetGame.CodeBase.Data
         {
             Collected += loot.Value;
             ChangeLoot?.Invoke();
+        } 
+        public void Add(int loot)
+        {
+            Collected += loot;
+            ChangeLoot?.Invoke();
         }
     }
 }

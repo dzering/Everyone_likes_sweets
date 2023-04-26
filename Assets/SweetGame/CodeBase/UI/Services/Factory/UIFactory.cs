@@ -1,5 +1,5 @@
-using System;
 using SweetGame.CodeBase.Infrastructure.AssetMenegment;
+using SweetGame.CodeBase.Infrastructure.Services.Ads;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI.Services.WindowsService;
@@ -16,20 +16,23 @@ namespace SweetGame.CodeBase.UI.Services.Factory
         private readonly IStaticDataService _dataService;
         private Transform _uiRoot;
         private readonly IProgressService _progressService;
+        private IAdService _adService;
 
 
-        public UIFactory(IAssets asset, IStaticDataService dataService, IProgressService progressService)
+        public UIFactory(IAssets asset, IStaticDataService dataService, IProgressService progressService,
+            IAdService adService)
         {
             _asset = asset;
             _dataService = dataService;
             _progressService = progressService;
+            _adService = adService;
         }
 
         public void CreateShop()
         {
             WindowConfig config = _dataService.ForWindows(WindowID.Shop);
-            WindowBase windowBase = Object.Instantiate(config.Prefab, _uiRoot);
-            windowBase.Construct(_progressService);
+            ShopWindow windowBase = Object.Instantiate(config.Prefab, _uiRoot) as ShopWindow;
+            windowBase.Construct(_adService, _progressService);
         }
 
         public void CreateUIRoot() => 

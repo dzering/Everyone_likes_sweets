@@ -1,4 +1,3 @@
-using System;
 using SweetGame.CodeBase.Data;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using UnityEngine;

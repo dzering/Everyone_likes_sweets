@@ -13,7 +13,8 @@ namespace SweetGame.CodeBase.Infrastructure.Services.Ads
         private const string REWARDED_VIDEO_PLACEMENT_ID = "Rewarded_iOS";
 
         public bool IsRewardedVideoReady => Advertisement.IsReady(REWARDED_VIDEO_PLACEMENT_ID);
-        
+        public int Reward => 23;
+
         public event Action OnRewardedVideoReady;
         private Action _onVideoFinished;
 

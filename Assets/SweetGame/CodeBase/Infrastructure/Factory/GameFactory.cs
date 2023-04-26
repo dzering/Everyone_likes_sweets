@@ -5,7 +5,6 @@ using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.AssetMenegment;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.StaticData;
-using SweetGame.CodeBase.UI;
 using SweetGame.CodeBase.UI.Elements;
 using Unity.Mathematics;
 using UnityEngine;
