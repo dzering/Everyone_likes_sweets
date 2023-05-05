@@ -1,5 +1,5 @@
 using SweetGame.CodeBase.Game.Enemy;
-using SweetGame.CodeBase.Infrastructure.AssetMenegment;
+using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.Ads;

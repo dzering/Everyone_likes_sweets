@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Enemy.AI;
 using SweetGame.CodeBase.Game.Spawner;
-using SweetGame.CodeBase.Infrastructure.AssetMenegment;
+using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI.Elements;
@@ -120,6 +120,11 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             var lootPiece = InstantiateRegister(AssetPath.LOOT_PATH).GetComponent<LootPiece>();
             lootPiece.Construct(_progressService.PlayerProgress.WordData);
             return lootPiece;
+        }
+
+        public void CreateBackground()
+        {
+            GameObject Background = InstantiateRegister(AssetPath.BACKGROUND_PATH);
         }
     }
 }

@@ -69,7 +69,13 @@ namespace SweetGame.CodeBase.Infrastructure.States
             InitSpawners();
             GameObject player = _gameFactory.CreatePlayer();
             InitialHud(player);
-            
+            InitBackground();
+
+        }
+
+        private void InitBackground()
+        {
+            _gameFactory.CreateBackground();
         }
 
         private void InitUiRoot(IUIFactory uiFactory) => 

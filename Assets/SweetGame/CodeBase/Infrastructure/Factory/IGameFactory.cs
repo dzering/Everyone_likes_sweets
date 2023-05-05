@@ -18,5 +18,6 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
         void CreateSpawner(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
         LootPiece CrateLoot();
+        void CreateBackground();
     }
 }

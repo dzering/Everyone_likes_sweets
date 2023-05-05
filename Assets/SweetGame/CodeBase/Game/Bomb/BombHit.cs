@@ -1,10 +1,12 @@
 using SweetGame.CodeBase.Game.Enemy;
+using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using UnityEngine;
 
 namespace SweetGame.CodeBase.Game.Bomb
 {
     public class BombHit : MonoBehaviour
     {
+        private const string LAYER_IS_HIT = LayersName.IS_HIT_LAYER;
         public float Damage;
         public float ExplosureRadius = 2;
         public GameObject ExplosureVFX;
@@ -14,7 +16,7 @@ namespace SweetGame.CodeBase.Game.Bomb
 
         private void Start()
         {
-            _layerMask = 1 << LayerMask.NameToLayer("IsHit");
+            _layerMask = 1 << LayerMask.NameToLayer(LAYER_IS_HIT);
             TriggerObserver.TriggerEnter += OnExplosure;
         }
 
