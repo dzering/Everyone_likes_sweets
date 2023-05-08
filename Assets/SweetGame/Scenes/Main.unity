@@ -134,7 +134,8 @@ GameObject:
   - component: {fileID: 280466829}
   - component: {fileID: 280466828}
   - component: {fileID: 280466827}
-  m_Layer: 0
+  - component: {fileID: 280466830}
+  m_Layer: 14
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,6 +195,27 @@ Transform:
   m_Father: {fileID: 1531466089}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &280466830
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280466826}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &294672816
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +567,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2657412632292225796, guid: 5bc0bfff7ebe642ad929fcf3abfeed41, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3492007933916670054, guid: 5bc0bfff7ebe642ad929fcf3abfeed41, type: 3}
       propertyPath: TriggerObserver
       value: 
@@ -596,6 +622,10 @@ PrefabInstance:
     - target: {fileID: 4066063045994913693, guid: 5bc0bfff7ebe642ad929fcf3abfeed41, type: 3}
       propertyPath: m_Name
       value: BirdView
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077578499113887414, guid: 5bc0bfff7ebe642ad929fcf3abfeed41, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8518994049686951256, guid: 5bc0bfff7ebe642ad929fcf3abfeed41, type: 3}
       propertyPath: m_RootOrder
