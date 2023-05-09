@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SweetGame.CodeBase.Game.Destructor;
 using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Enemy.AI;
 using SweetGame.CodeBase.Game.Spawner;
@@ -74,6 +75,12 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             lootSpawner.SetLoot(enemyData.LootMin, enemyData.LootMax);
 
             return enemy;
+        }
+
+        public void CreateDestructor(string destructorId, Vector3 position)
+        {
+            Destructor destructor = InstantiateRegister(AssetPath.DESTRUCTOR, position).GetComponent<Destructor>();
+            destructor.ID = destructorId;
         }
 
         public void CreateSpawner(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position)

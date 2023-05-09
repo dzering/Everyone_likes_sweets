@@ -18,7 +18,13 @@ public class LevelStaticDataEditor : UnityEditor.Editor
         if (GUILayout.Button("Collect"))
         {
             levelStateData.EnemySpawnersData = FindObjectsOfType<SpawnMarker>()
-                .Select(x => new EnemySpawnerData(x.GetComponent<UniqueId>().Id, x.EnemyTypeId, x.transform.position))
+                .Select(x => new EnemySpawnerData(x.GetComponent<UniqueId>().Id, 
+                    x.EnemyTypeId, 
+                    x.transform.position))
+                .ToList();
+
+            levelStateData.DestructorData = FindObjectsOfType<DestructorMarker>()
+                .Select(x => new DestructorData(x.GetComponent<UniqueId>().Id, x.transform.position))
                 .ToList();
 
             levelStateData.LevelKey = SceneManager.GetActiveScene().name;

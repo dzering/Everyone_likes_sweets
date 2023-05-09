@@ -1,13 +1,12 @@
 using SweetGame.CodeBase.Game.Enemy;
-using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SweetGame.CodeBase.Game.Destructor
 {
     public class Destructor : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _observer;
+        public string ID;
 
         private void Start()
         {

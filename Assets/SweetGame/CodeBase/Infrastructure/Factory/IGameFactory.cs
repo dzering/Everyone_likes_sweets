@@ -19,5 +19,6 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         void CreateSpawner(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
         LootPiece CrateLoot();
         void CreateBackground();
+        void CreateDestructor(string destructorId, Vector3 position);
     }
 }

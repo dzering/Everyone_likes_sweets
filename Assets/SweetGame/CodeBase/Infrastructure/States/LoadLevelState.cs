@@ -67,10 +67,21 @@ namespace SweetGame.CodeBase.Infrastructure.States
         {
             InitUiRoot(_uiFactory);
             InitSpawners();
+            InitDestructor();
             GameObject player = _gameFactory.CreatePlayer();
             InitialHud(player);
             InitBackground();
 
+        }
+
+        private void InitDestructor()
+        {
+            string sceneKey = SceneManager.GetActiveScene().name;
+            LevelStaticData levelStaticData = _staticDataService.ForLevel(sceneKey);
+            foreach (var destructorData in levelStaticData.DestructorData)
+            {
+                _gameFactory.CreateDestructor(destructorData.DestructorId, destructorData.Position);
+            }
         }
 
         private void InitBackground()

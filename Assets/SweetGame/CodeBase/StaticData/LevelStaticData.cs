@@ -9,5 +9,6 @@ namespace SweetGame.CodeBase.StaticData
         public string LevelKey;
 
         public List<EnemySpawnerData> EnemySpawnersData;
+        public List<DestructorData> DestructorData;
     }
 }
