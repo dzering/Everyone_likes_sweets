@@ -1,5 +1,6 @@
 using SweetGame.CodeBase.Data;
 using SweetGame.CodeBase.Infrastructure.Factory;
+using SweetGame.CodeBase.Infrastructure.Services;
 using UnityEngine;
 
 namespace SweetGame.CodeBase.Game.Enemy

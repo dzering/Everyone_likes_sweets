@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Spawner;
+using SweetGame.CodeBase.StaticData.Windows;
 using SweetGame.CodeBase.UI.Services.WindowsService;
 using UnityEngine;
 
@@ -8,7 +10,7 @@ namespace SweetGame.CodeBase.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private const string PATH_ENEMIES = "StaticData/EnemyStaticData";
+        private const string PATH_ENEMIES = "StaticData/Enemies";
         private const string PATH_LEVELS = "StaticData/Levels";
         private const string WINDOWS_STATIC_DATA_PATH = "StaticData/Windows/WindowsStaticData";
         private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;

@@ -1,4 +1,4 @@
-namespace SweetGame.CodeBase.Game.Enemy
+namespace SweetGame.CodeBase.Infrastructure.Services
 {
     public interface IRandomService
     {

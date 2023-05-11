@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace SweetGame.CodeBase.Game.Enemy
 {
-    [RequireComponent(typeof(EnemyAnimator), typeof(EnemyHealth))]
+    [RequireComponent(typeof(AnimatorBase), typeof(EnemyHealth))]
     public class EnemyDeath : MonoBehaviour
     {
         public event Action OnDeath;
         
-        public EnemyAnimator Animator;
+        public AnimatorBase AnimatorBase;
         public EnemyHealth Health;
         public GameObject DeathFx;
 
@@ -33,7 +33,7 @@ namespace SweetGame.CodeBase.Game.Enemy
         {
             Health.ChangeHealth -= OnChangeHealth;
             SpawnDeathFx();
-            Animator.PlayDeath();
+            AnimatorBase.PlayDeath();
             OnDeath?.Invoke();
             StartCoroutine(DestroyTimer());
         }

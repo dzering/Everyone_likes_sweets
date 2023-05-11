@@ -1,17 +1,18 @@
 using SweetGame.CodeBase.Animators;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SweetGame.CodeBase.Game.Enemy.Bird
 {
     public class Fly : MonoBehaviour
     {
-        public SpriteAnimator SpriteAnimator;
+        [FormerlySerializedAs("SpriteAnimator")] public SpriteAnimatorBase _spriteAnimatorBase;
         public SpriteRenderer SpriteRenderer;
         public float Speed;
 
         private void Start()
         {
-            SpriteAnimator.StartAnimation(SpriteRenderer, AnimationTrack.Bird_1_fly, true, 10);
+            _spriteAnimatorBase.StartAnimation(SpriteRenderer, AnimationTrack.Bird_1_fly, true, 10);
            
         }
 
@@ -22,7 +23,7 @@ namespace SweetGame.CodeBase.Game.Enemy.Bird
 
         private void OnDisable()
         {
-            SpriteAnimator.StopAnimation(SpriteRenderer);
+            _spriteAnimatorBase.StopAnimation(SpriteRenderer);
         }
     }
 }

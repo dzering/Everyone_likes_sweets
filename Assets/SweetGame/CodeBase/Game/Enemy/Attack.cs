@@ -6,12 +6,13 @@ using UnityEngine;
 
 namespace SweetGame.CodeBase.Game.Enemy
 {
+    [RequireComponent(typeof(AnimatorBase))]
     public class Attack : MonoBehaviour
     {
         private const string LAYER_NAME = "PlayerCharacter";
       
-         public float EffectiveDistance;
-        public EnemyAnimator EnemyAnimator;
+        public float EffectiveDistance;
+        public AnimatorBase AnimatorBase;
         public float CoolDownTime;
         public float Damage;
         
@@ -81,7 +82,7 @@ namespace SweetGame.CodeBase.Game.Enemy
         private void StartAttack()
         {
             _isAttacking = true;
-            EnemyAnimator.PlayAttack();
+            AnimatorBase.PlayAttack();
         }
 
         private bool CoolDownCheck() => 

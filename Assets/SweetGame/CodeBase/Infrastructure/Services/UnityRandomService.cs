@@ -1,6 +1,6 @@
 using System;
 
-namespace SweetGame.CodeBase.Game.Enemy
+namespace SweetGame.CodeBase.Infrastructure.Services
 {
     public class UnityRandomService : IRandomService
     {

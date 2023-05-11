@@ -1,4 +1,5 @@
 using SweetGame.CodeBase.Game.Enemy;
+using SweetGame.CodeBase.Infrastructure;
 using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using UnityEngine;
 

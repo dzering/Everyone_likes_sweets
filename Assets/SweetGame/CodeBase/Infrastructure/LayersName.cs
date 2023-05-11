@@ -1,4 +1,4 @@
-namespace SweetGame.CodeBase.Infrastructure.AssetManagement
+namespace SweetGame.CodeBase.Infrastructure
 {
     public static class LayersName
     {

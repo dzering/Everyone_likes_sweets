@@ -1,4 +1,4 @@
-namespace SweetGame.CodeBase.Game.Spawner
+namespace SweetGame.CodeBase.Game.Enemy
 {
     public enum EnemyTypeId
     {

@@ -1,12 +1,13 @@
 using SweetGame.CodeBase.Animators;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SweetGame.CodeBase.Game.Enemy
 {
     public class EnemyMove : Follow
     {
         [SerializeField] private float _speed = 1f;
-        [SerializeField] private EnemyAnimator _enemyAnimator;
+        [FormerlySerializedAs("_enemyAnimator")] [SerializeField] private EnemyAnimatorBase _enemyAnimatorBase;
 
         public float Speed { get => _speed; private set => _speed = value; }
 
@@ -28,9 +29,9 @@ namespace SweetGame.CodeBase.Game.Enemy
             transform.Translate(Vector3.left * Time.deltaTime * Speed);
 
         private void OnDisable() => 
-            _enemyAnimator.PlayRun();
+            _enemyAnimatorBase.PlayRun();
 
         private void OnEnable() => 
-            _enemyAnimator.PlayRun();
+            _enemyAnimatorBase.PlayRun();
     }
 }

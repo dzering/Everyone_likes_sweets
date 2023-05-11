@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace SweetGame.CodeBase.Game.Enemy
 {
-    [RequireComponent(typeof(EnemyAnimator))]
+    [RequireComponent(typeof(AnimatorBase))]
     public class EnemyHealth : MonoBehaviour, IHealth
     {
-        public EnemyAnimator EnemyAnimator;
+        public AnimatorBase EnemyAnimatorBase;
         private float _health;
         private float _currentHealth = 10f;
 
@@ -31,7 +31,7 @@ namespace SweetGame.CodeBase.Game.Enemy
                 return;
 
             CurrentHealth -= damage;
-            EnemyAnimator.PlayHurt();
+            EnemyAnimatorBase.PlayDamage();
             ChangeHealth?.Invoke();
         }
     }

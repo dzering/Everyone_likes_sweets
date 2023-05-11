@@ -2,6 +2,7 @@ using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using SweetGame.CodeBase.Infrastructure.Services.Ads;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.StaticData;
+using SweetGame.CodeBase.StaticData.Windows;
 using SweetGame.CodeBase.UI.Services.WindowsService;
 using SweetGame.CodeBase.UI.Windows;
 using UnityEngine;
