@@ -9,7 +9,7 @@ namespace SweetGame.CodeBase.Game.Enemy
     public class EnemyDeath : MonoBehaviour
     {
         public event Action OnDeath;
-        
+
         public AnimatorBase AnimatorBase;
         public EnemyHealth Health;
         public GameObject DeathFx;
@@ -18,8 +18,10 @@ namespace SweetGame.CodeBase.Game.Enemy
         private void Start() => 
             Health.ChangeHealth += OnChangeHealth;
 
-        private void OnDestroy() => 
+        private void OnDestroy()
+        {
             Health.ChangeHealth -= OnChangeHealth;
+        }
 
         private void OnChangeHealth()
         {
