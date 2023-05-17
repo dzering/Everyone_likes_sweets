@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using SweetGame.CodeBase.Game.Enemy;
-using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.StaticData.Windows;
 using SweetGame.CodeBase.UI.Services.WindowsService;
 using UnityEngine;

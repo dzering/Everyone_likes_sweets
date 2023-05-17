@@ -25,7 +25,7 @@ namespace SweetGame.CodeBase.Game.Enemy
             EnemyDeath.OnDeath += SpawnLoot;
         }
 
-        private void SpawnLoot()
+        private void SpawnLoot(EnemyDeath enemyDeath)
         {
             LootPiece loot = _factory.CrateLoot();
             loot.transform.position =  transform.position + Vector3.up * 0.5f;

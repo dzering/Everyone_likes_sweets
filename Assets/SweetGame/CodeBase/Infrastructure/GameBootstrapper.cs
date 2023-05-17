@@ -15,5 +15,10 @@ namespace SweetGame.CodeBase.Infrastructure
         
             DontDestroyOnLoad(this);
         }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
     }
 }

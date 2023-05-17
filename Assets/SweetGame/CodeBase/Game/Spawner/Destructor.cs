@@ -13,8 +13,11 @@ namespace SweetGame.CodeBase.Game.Spawner
             _observer.TriggerEnter += OnTrigger;
         }
 
-        private void OnTrigger(Collider2D obj) => 
-            Destroy(obj.transform.parent.gameObject);
+        private void OnTrigger(Collider2D obj)
+        {
+            IDestructible destructible = obj.GetComponentInParent<IDestructible>();
+            destructible?.DestructObject();
+        }
     }
     
 }

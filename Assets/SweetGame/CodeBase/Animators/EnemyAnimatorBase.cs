@@ -1,5 +1,4 @@
 using System;
-using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Logic.Animator;
 using UnityEngine;
 

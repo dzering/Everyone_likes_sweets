@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using SweetGame.CodeBase.Game.Player;
+using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Logic;
@@ -57,21 +59,17 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private void InformProgressReaders()
         {
             foreach (var progressReader in _gameFactory.ProgressReaders)
-            {
                 progressReader.LoadProgress(_progressService.PlayerProgress);
-                
-            }
         }
 
         private void InitGameWorld()
         {
             InitUiRoot(_uiFactory);
+            GameObject player = _gameFactory.CreatePlayer();
             InitSpawners();
             InitDestructor();
-            GameObject player = _gameFactory.CreatePlayer();
             InitialHud(player);
             InitBackground();
-
         }
 
         private void InitDestructor()
@@ -97,10 +95,14 @@ namespace SweetGame.CodeBase.Infrastructure.States
             string sceneKey = SceneManager.GetActiveScene().name;
             LevelStaticData levelStaticData = _staticDataService.ForLevel(sceneKey);
 
+            List<ISpawnPoint> spawnPoints = new List<ISpawnPoint>();
             foreach (var spawnerData in levelStaticData.EnemySpawnersData)
             {
-                _gameFactory.CreateSpawner(spawnerData.SpawnerId, spawnerData.EnemyTypeId, spawnerData.Position);
+                SpawnPoint spawnPoint = _gameFactory.CreateSpawnPoint(spawnerData.SpawnerId, spawnerData.EnemyTypeId, spawnerData.Position);
+                spawnPoints.Add(spawnPoint);
             }
+
+            _gameFactory.CreateSpawner(spawnPoints, _sceneLoader.CoroutineRunner);
         }
 
         private void InitialHud(GameObject player)

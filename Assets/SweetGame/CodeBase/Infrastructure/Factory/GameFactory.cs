@@ -83,13 +83,19 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             destructor.ID = destructorId;
         }
 
-        public void CreateSpawner(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position)
+        public void CreateSpawner(List<ISpawnPoint> spawnPoints, ICoroutineRunner coroutine)
+        {
+            Spawner spawner = new Spawner(spawnPoints, coroutine);
+        }
+
+        public SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position)
         {
             SpawnPoint spawnPoint = InstantiateRegister(AssetPath.SPAWNER, position)
                 .GetComponent<SpawnPoint>();
             spawnPoint.Construct(this);
             spawnPoint.EnemyTypeId = enemyTypeId;
             spawnPoint.Id = spawnerId;
+            return spawnPoint;
         }
 
         private GameObject InstantiateRegister(string prefabPath, Vector3 position)

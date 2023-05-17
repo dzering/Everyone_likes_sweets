@@ -1,5 +1,4 @@
 using SweetGame.CodeBase.Game.Enemy;
-using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.StaticData.Windows;
 using SweetGame.CodeBase.UI.Services.WindowsService;

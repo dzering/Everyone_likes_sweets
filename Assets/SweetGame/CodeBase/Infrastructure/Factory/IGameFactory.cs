@@ -16,9 +16,10 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         List<ISavedProgressReader> ProgressReaders { get; }
         void CleanUp();
         GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
-        void CreateSpawner(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
+        SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
         LootPiece CrateLoot();
         void CreateBackground();
         void CreateDestructor(string destructorId, Vector3 position);
+        void CreateSpawner(List<ISpawnPoint> spawnPoints, ICoroutineRunner coroutine);
     }
 }

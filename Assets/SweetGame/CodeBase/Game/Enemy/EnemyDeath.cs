@@ -6,9 +6,9 @@ using UnityEngine;
 namespace SweetGame.CodeBase.Game.Enemy
 {
     [RequireComponent(typeof(AnimatorBase), typeof(EnemyHealth))]
-    public class EnemyDeath : MonoBehaviour
+    public class EnemyDeath : MonoBehaviour, IDestructible
     {
-        public event Action OnDeath;
+        public event Action<EnemyDeath> OnDeath;
 
         public AnimatorBase AnimatorBase;
         public EnemyHealth Health;
@@ -36,7 +36,7 @@ namespace SweetGame.CodeBase.Game.Enemy
             Health.ChangeHealth -= OnChangeHealth;
             SpawnDeathFx();
             AnimatorBase.PlayDeath();
-            OnDeath?.Invoke();
+            OnDeath?.Invoke(this);
             StartCoroutine(DestroyTimer());
         }
 
@@ -46,6 +46,12 @@ namespace SweetGame.CodeBase.Game.Enemy
         private IEnumerator DestroyTimer()
         {
             yield return new WaitForSeconds(2f);
+            Destroy(gameObject);
+        }
+
+        public void DestructObject()
+        {
+            OnDeath?.Invoke(this);
             Destroy(gameObject);
         }
     }
