@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SweetGame/Scenes/Main.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/SweetGame/Scenes/Initial.unity
     guid: 3b8dda59475f444f28fae66c9fb9a501
+  - enabled: 1
+    path: Assets/SweetGame/Scenes/Menu.unity
+    guid: c246f114ae5924020a3a1ae19d1c442f
+  - enabled: 1
+    path: Assets/SweetGame/Scenes/Main.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

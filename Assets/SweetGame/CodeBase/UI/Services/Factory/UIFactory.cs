@@ -18,15 +18,17 @@ namespace SweetGame.CodeBase.UI.Services.Factory
         private Transform _uiRoot;
         private readonly IProgressService _progressService;
         private IAdService _adService;
+        private readonly IMenuService _menuService;
 
 
         public UIFactory(IAssets asset, IStaticDataService dataService, IProgressService progressService,
-            IAdService adService)
+            IAdService adService, IMenuService menuService)
         {
             _asset = asset;
             _dataService = dataService;
             _progressService = progressService;
             _adService = adService;
+            _menuService = menuService;
         }
 
         public void CreateShop()
@@ -34,6 +36,13 @@ namespace SweetGame.CodeBase.UI.Services.Factory
             WindowConfig config = _dataService.ForWindows(WindowID.Shop);
             ShopWindow windowBase = Object.Instantiate(config.Prefab, _uiRoot) as ShopWindow;
             windowBase.Construct(_adService, _progressService);
+        }
+
+        public void CreateMainMenu()
+        {
+            GameObject obj = _asset.Instantiate(AssetPath.MAIN_MENU_PATH, _uiRoot, true);
+            MainMenu mainMenu = obj.GetComponent<MainMenu>();
+            mainMenu.Construct(_menuService);
         }
 
         public void CreateUIRoot() => 

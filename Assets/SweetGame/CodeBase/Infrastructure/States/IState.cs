@@ -4,14 +4,4 @@ namespace SweetGame.CodeBase.Infrastructure.States
     {
         void Enter();
     }
-    
-    public interface IPayloadState<TPayload> : IExitableState
-    {
-        void Enter(TPayload payload);
-    }
-
-    public interface IExitableState
-    {
-        void Exit();
-    }
 }

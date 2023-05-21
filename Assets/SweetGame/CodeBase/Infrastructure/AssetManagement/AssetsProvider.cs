@@ -16,5 +16,11 @@ namespace SweetGame.CodeBase.Infrastructure.AssetManagement
             GameObject pref = Resources.Load<GameObject>(prefabPath);
             return GameObject.Instantiate(pref, position, Quaternion.identity);
         }
+
+        public GameObject Instantiate(string prefPath, Transform transform, bool b)
+        {
+            GameObject pref = Resources.Load<GameObject>(prefPath);
+            return GameObject.Instantiate(pref, transform);
+        }
     }
 }

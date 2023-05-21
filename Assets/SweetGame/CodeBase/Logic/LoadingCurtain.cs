@@ -6,7 +6,7 @@ namespace SweetGame.CodeBase.Logic
     public sealed class LoadingCurtain : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _curtain;
-        private float _curtainAlpha = 0.06f;
+        private float _curtainAlpha = 0.12f;
 
         private void Awake()
         {

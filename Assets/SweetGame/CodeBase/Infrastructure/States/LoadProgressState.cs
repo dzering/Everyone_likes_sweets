@@ -20,7 +20,10 @@ namespace SweetGame.CodeBase.Infrastructure.States
         public void Enter()
         {
             LoadProgressOrNotNew();
-            _gameStateMachine.Enter<LoadLevelState, string>(_progressService.PlayerProgress.WordData.PositionOnLevel.Level);
+            // _gameStateMachine.Enter<LoadLevelState, string>(_progressService
+            //     .PlayerProgress.WordData.PositionOnLevel.Level);
+            
+            _gameStateMachine.Enter<LoadMenuState, string>("Menu");
         }
 
         public void Exit()

@@ -8,5 +8,6 @@ namespace SweetGame.CodeBase.Infrastructure.AssetManagement
         public const string SPAWNER = "Enemy/SpawnPoint";
         public const string BACKGROUND_PATH = "Background/Background";
         public const string DESTRUCTOR = "Enemy/Destructor";
+        public const string MAIN_MENU_PATH = "UI/Menu/MainMenu";
     }
 }

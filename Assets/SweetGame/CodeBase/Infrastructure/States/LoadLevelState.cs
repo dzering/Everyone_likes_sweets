@@ -15,7 +15,6 @@ namespace SweetGame.CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPayloadState<string>
     {
-        private const string SPAWNER = "Spawner";
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
@@ -47,6 +46,9 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _gameFactory.CleanUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
+
+        public void Exit() => 
+            _loadingCurtain.Hide();
 
         private void OnLoaded()
         {
@@ -112,8 +114,5 @@ namespace SweetGame.CodeBase.Infrastructure.States
             WindowButton windowButton = hud.GetComponentInChildren<WindowButton>();
             windowButton.Construct(_windowService);
         }
-
-        public void Exit() => 
-            _loadingCurtain.Hide();
     }
 }
