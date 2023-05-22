@@ -38,11 +38,12 @@ namespace SweetGame.CodeBase.UI.Services.Factory
             windowBase.Construct(_adService, _progressService);
         }
 
-        public void CreateMainMenu()
+        public GameObject CreateMainMenu()
         {
             GameObject obj = _asset.Instantiate(AssetPath.MAIN_MENU_PATH, _uiRoot, true);
             MainMenu mainMenu = obj.GetComponent<MainMenu>();
             mainMenu.Construct(_menuService);
+            return obj;
         }
 
         public void CreateUIRoot() => 

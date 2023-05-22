@@ -1,4 +1,5 @@
 using SweetGame.CodeBase.Infrastructure.Services;
+using UnityEngine;
 
 namespace SweetGame.CodeBase.UI.Services.Factory
 {
@@ -6,6 +7,6 @@ namespace SweetGame.CodeBase.UI.Services.Factory
     {
         void CreateShop();
         void CreateUIRoot();
-        void CreateMainMenu();
+        GameObject CreateMainMenu();
     }
 }

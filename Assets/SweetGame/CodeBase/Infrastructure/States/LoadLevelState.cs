@@ -111,8 +111,6 @@ namespace SweetGame.CodeBase.Infrastructure.States
         {
             GameObject hud = _gameFactory.CreateHUD();
             hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponentInChildren<PlayerHealth>());
-            WindowButton windowButton = hud.GetComponentInChildren<WindowButton>();
-            windowButton.Construct(_windowService);
         }
     }
 }
