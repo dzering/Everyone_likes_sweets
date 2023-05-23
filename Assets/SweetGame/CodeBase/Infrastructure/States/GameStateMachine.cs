@@ -11,9 +11,15 @@ using SweetGame.CodeBase.UI.Services.WindowsService;
 
 namespace SweetGame.CodeBase.Infrastructure.States
 {
-    public class GameStateMachine
+    public interface IGameStateMachine
     {
-        private Dictionary<Type, IExitableState> _state;
+        void Enter<TState>() where TState : class, IState;
+        void Enter<TState, TPayload>(TPayload payLoad) where TState : class, IPayloadState<TPayload>;
+    }
+
+    public class GameStateMachine : IGameStateMachine
+    {
+        private readonly Dictionary<Type, IExitableState> _state;
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services)

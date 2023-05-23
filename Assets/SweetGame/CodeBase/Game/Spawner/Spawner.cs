@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Infrastructure;
 using UnityEngine;
 

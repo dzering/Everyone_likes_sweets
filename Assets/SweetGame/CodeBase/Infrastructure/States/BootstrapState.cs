@@ -6,7 +6,6 @@ using SweetGame.CodeBase.Infrastructure.Services.Input;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.Infrastructure.Services.SaveLoad;
 using SweetGame.CodeBase.StaticData;
-using SweetGame.CodeBase.UI;
 using SweetGame.CodeBase.UI.Services.Factory;
 using SweetGame.CodeBase.UI.Services.WindowsService;
 using UnityEngine;
@@ -53,12 +52,11 @@ namespace SweetGame.CodeBase.Infrastructure.States
                 _services.Single<IStaticDataService>(),
                 randomService, _services.Single<IProgressService>()));
 
-            _services.RegisterSingle<IMenuService>(new MenuService(_gameStateMachine, _services.Single<IProgressService>()));
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
-                _services.Single<IProgressService>(), 
-                _services.Single<IAdService>(),
-                _services.Single<IMenuService>()));
+                _services.Single<IProgressService>(),
+                _services.Single<IAdService>()));
+                
             _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
         }
 
