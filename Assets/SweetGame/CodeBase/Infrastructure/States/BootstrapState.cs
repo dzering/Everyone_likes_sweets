@@ -39,24 +39,25 @@ namespace SweetGame.CodeBase.Infrastructure.States
             RegisterStaticDataService();
             RegisterAdService();
             IRandomService randomService = new UnityRandomService();
-
-
+            
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAssets>(new AssetsProvider());
             _services.RegisterSingle<IProgressService>(new ProgressService());
-            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
-                _services.Single<IProgressService>(), _services.Single<IGameFactory>()));
-            _services.RegisterSingle<ISaveTrigger>(new SaveTrigger(_services.Single<ISaveLoadService>()));
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                 _services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
                 randomService, _services.Single<IProgressService>()));
-
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
+                _services.Single<IProgressService>(), 
+                _services.Single<IGameFactory>()));
+            _services.RegisterSingle<ISaveTrigger>(new SaveTrigger(
+                _services.Single<ISaveLoadService>()));
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
                 _services.Single<IProgressService>(),
                 _services.Single<IAdService>()));
-                
+
+
             _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
         }
 

@@ -1,5 +1,6 @@
 using System;
 
+
 namespace SweetGame.CodeBase.Data
 {
     [Serializable]

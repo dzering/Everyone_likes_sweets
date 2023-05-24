@@ -23,8 +23,9 @@ namespace SweetGame.CodeBase.Infrastructure.Services.SaveLoad
             {
                 writer.UpdateProgress(_progressService.PlayerProgress);
             }
-            
-            PlayerPrefs.SetString(PROGRESS_KEY, _progressService.PlayerProgress.ToJson());
+
+            string json = _progressService.PlayerProgress.ToJson();
+            PlayerPrefs.SetString(PROGRESS_KEY, json);
         }
 
         public PlayerProgress LoadProgress() => 

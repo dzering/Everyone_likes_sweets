@@ -38,7 +38,8 @@ namespace SweetGame.CodeBase.Infrastructure.States
                 [typeof(LoadProgressState)] = new LoadProgressState(
                     this, 
                     services.Single<IProgressService>(), 
-                    services.Single<ISaveLoadService>()),
+                    services.Single<ISaveLoadService>(),
+                    services.Single<ISaveTrigger>()),
                 [typeof(LoadMenuState)] = new LoadMenuState(this, sceneLoader, 
                     services.Single<IGameFactory>(),
                     services.Single<IUIFactory>(),

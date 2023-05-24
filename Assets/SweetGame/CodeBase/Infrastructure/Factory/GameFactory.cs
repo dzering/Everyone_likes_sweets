@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SweetGame.CodeBase.Game.Counter;
 using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Enemy.AI;
 using SweetGame.CodeBase.Game.Spawner;
@@ -8,6 +9,7 @@ using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI.Elements;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -74,6 +76,9 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(enemyData.LootMin, enemyData.LootMax);
 
+            Counter counter = enemy.GetComponentInChildren<Counter>();
+            counter.Constract(_progressService);
+
             return enemy;
         }
 
@@ -115,9 +120,7 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         private void RegisterProgressWatchers(GameObject player)
         {
             foreach (ISavedProgressReader progressReader in player.GetComponentsInChildren<ISavedProgressReader>())
-            {
                 Register(progressReader);
-            }
         }
 
         public void Register(ISavedProgressReader progressReader)

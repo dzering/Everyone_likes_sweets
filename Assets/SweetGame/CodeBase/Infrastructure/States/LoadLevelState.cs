@@ -79,15 +79,11 @@ namespace SweetGame.CodeBase.Infrastructure.States
             string sceneKey = SceneManager.GetActiveScene().name;
             LevelStaticData levelStaticData = _staticDataService.ForLevel(sceneKey);
             foreach (var destructorData in levelStaticData.DestructorData)
-            {
                 _gameFactory.CreateDestructor(destructorData.DestructorId, destructorData.Position);
-            }
         }
 
-        private void InitBackground()
-        {
+        private void InitBackground() => 
             _gameFactory.CreateBackground();
-        }
 
         private void InitUiRoot(IUIFactory uiFactory) => 
             uiFactory.CreateUIRoot();
