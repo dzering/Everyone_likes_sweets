@@ -46,7 +46,8 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                 _services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
-                randomService, _services.Single<IProgressService>()));
+                randomService, _services.Single<IProgressService>(),
+                _gameStateMachine));
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
                 _services.Single<IProgressService>(), 
                 _services.Single<IGameFactory>()));

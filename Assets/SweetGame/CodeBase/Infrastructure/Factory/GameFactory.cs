@@ -6,10 +6,11 @@ using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
+using SweetGame.CodeBase.Infrastructure.States;
 using SweetGame.CodeBase.StaticData;
 using SweetGame.CodeBase.UI.Elements;
+using SweetGame.CodeBase.UI.Menu;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -21,18 +22,27 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IProgressService _progressService;
+        private readonly GameStateMachine _stateMachine;
 
         public List<ISavedProgress> ProgressWriter { get; } = new List<ISavedProgress>();
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
 
         public GameObject Player { get; private set; }
 
-        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService, IProgressService progressService)
+        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService randomService,
+            IProgressService progressService, GameStateMachine stateMachine)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
             _progressService = progressService;
+            _stateMachine = stateMachine;
+        }
+
+        public void CleanUp()
+        {
+            ProgressReaders.Clear();
+            ProgressWriter.Clear();
         }
 
         public GameObject CreatePlayer()
@@ -45,14 +55,9 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         {
             GameObject hud = InstantiateRegister(AssetPath.HUD_PATH);
             hud.GetComponentInChildren<LootCounter>().Construct(_progressService.PlayerProgress.WordData);
+            hud.GetComponentInChildren<SceneButton>().Construct(_stateMachine);
             
             return hud;
-        }
-
-        public void CleanUp()
-        {
-            ProgressReaders.Clear();
-            ProgressWriter.Clear();
         }
 
         public GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent)
@@ -84,43 +89,25 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
 
         public void CreateDestructor(string destructorId, Vector3 position)
         {
-            Destructor destructor = InstantiateRegister(AssetPath.DESTRUCTOR, position).GetComponent<Destructor>();
+            Destructor destructor = InstantiateRegister(AssetPath.DESTRUCTOR_PATH, position).GetComponent<Destructor>();
             destructor.ID = destructorId;
         }
 
         public void CreateSpawner(List<ISpawnPoint> spawnPoints, ICoroutineRunner coroutine)
         {
-            Spawner spawner = new Spawner(spawnPoints, coroutine);
+            GameObject spawnerGO = InstantiateRegister(AssetPath.SPAWNER);
+            Spawner spawner = spawnerGO.GetComponentInChildren<Spawner>();
+            spawner.Construct(spawnPoints);
         }
 
         public SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position)
         {
-            SpawnPoint spawnPoint = InstantiateRegister(AssetPath.SPAWNER, position)
+            SpawnPoint spawnPoint = InstantiateRegister(AssetPath.SPAWNER_POINTS_PATH, position)
                 .GetComponent<SpawnPoint>();
             spawnPoint.Construct(this);
             spawnPoint.EnemyTypeId = enemyTypeId;
             spawnPoint.Id = spawnerId;
             return spawnPoint;
-        }
-
-        private GameObject InstantiateRegister(string prefabPath, Vector3 position)
-        {
-            GameObject gameObject = _assets.Instantiate(prefabPath, position);
-            RegisterProgressWatchers(gameObject);
-            return gameObject;
-        }
-
-        private GameObject InstantiateRegister(string prefabPath)
-        {
-            GameObject gameObject = _assets.Instantiate(prefabPath);
-            RegisterProgressWatchers(gameObject);
-            return gameObject;
-        }
-
-        private void RegisterProgressWatchers(GameObject player)
-        {
-            foreach (ISavedProgressReader progressReader in player.GetComponentsInChildren<ISavedProgressReader>())
-                Register(progressReader);
         }
 
         public void Register(ISavedProgressReader progressReader)
@@ -141,6 +128,26 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         public void CreateBackground()
         {
             GameObject Background = InstantiateRegister(AssetPath.BACKGROUND_PATH);
+        }
+
+        private GameObject InstantiateRegister(string prefabPath, Vector3 position)
+        {
+            GameObject gameObject = _assets.Instantiate(prefabPath, position);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
+        }
+
+        private GameObject InstantiateRegister(string prefabPath)
+        {
+            GameObject gameObject = _assets.Instantiate(prefabPath);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
+        }
+
+        private void RegisterProgressWatchers(GameObject player)
+        {
+            foreach (ISavedProgressReader progressReader in player.GetComponentsInChildren<ISavedProgressReader>())
+                Register(progressReader);
         }
     }
 }

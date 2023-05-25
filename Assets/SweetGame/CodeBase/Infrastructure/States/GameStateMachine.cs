@@ -11,12 +11,6 @@ using SweetGame.CodeBase.UI.Services.WindowsService;
 
 namespace SweetGame.CodeBase.Infrastructure.States
 {
-    public interface IGameStateMachine
-    {
-        void Enter<TState>() where TState : class, IState;
-        void Enter<TState, TPayload>(TPayload payLoad) where TState : class, IPayloadState<TPayload>;
-    }
-
     public class GameStateMachine : IGameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _state;
@@ -53,18 +47,18 @@ namespace SweetGame.CodeBase.Infrastructure.States
             state.Enter();
         }
 
+        public void Enter<TState, TPayload>(TPayload payLoad) where TState : class, IPayloadState<TPayload>
+        {
+            TState state = ChangeState<TState>();
+            state.Enter(payLoad);
+        }
+
         private TState ChangeState<TState>() where TState : class, IExitableState
         {
             _activeState?.Exit();
             TState state = GetState<TState>();
             _activeState = state;
             return state;
-        }
-
-        public void Enter<TState, TPayload>(TPayload payLoad) where TState : class, IPayloadState<TPayload>
-        {
-            TState state = ChangeState<TState>();
-            state.Enter(payLoad);
         }
 
         private TState GetState<TState>() where TState : class, IExitableState => 

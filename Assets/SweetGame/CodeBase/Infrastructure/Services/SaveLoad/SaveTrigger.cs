@@ -1,5 +1,3 @@
-using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
-
 namespace SweetGame.CodeBase.Infrastructure.Services.SaveLoad
 {
     class SaveTrigger : ISaveTrigger

@@ -19,7 +19,25 @@ namespace SweetGame.CodeBase.UI.Menu
         private void OnAwake() => 
             Button.onClick.AddListener(OpenScene);
 
-        private void OpenScene() =>
-            StateMachine.Enter<LoadLevelState, string>(SceneName);
+        private void OpenScene()
+        {
+            OpenScene(SceneName);
+            //StateMachine.Enter<LoadLevelState, string>(SceneName);
+        }
+
+        private void OpenScene(string sceneName)
+        {
+            switch (sceneName)
+            {
+                case "Main": 
+                    StateMachine.Enter<LoadLevelState, string>(SceneName);
+                    break;
+                case "Menu": 
+                    StateMachine.Enter<LoadMenuState, string>(SceneName);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
