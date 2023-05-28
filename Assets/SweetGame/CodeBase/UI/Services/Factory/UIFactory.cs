@@ -43,6 +43,6 @@ namespace SweetGame.CodeBase.UI.Services.Factory
         }
 
         public void CreateUIRoot() => 
-            _uiRoot ??= _asset.Instantiate(WINDOWS_UI_ROOT_PATH).transform;
+            _uiRoot = _asset.Instantiate(WINDOWS_UI_ROOT_PATH).transform;
     }
 }
