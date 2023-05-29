@@ -1,5 +1,3 @@
-using SweetGame.CodeBase.Game.Spawner;
-
 namespace SweetGame.CodeBase.Infrastructure.States
 {
     public class GameLoopState : IState

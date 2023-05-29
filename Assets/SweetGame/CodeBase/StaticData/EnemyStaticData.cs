@@ -1,5 +1,6 @@
 using SweetGame.CodeBase.Game.Enemy;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace SweetGame.CodeBase.StaticData
 {
@@ -17,7 +18,7 @@ namespace SweetGame.CodeBase.StaticData
         [Range(0.2f, 2)] public float CoolDownTimeAttack;
 
 
-        public GameObject Prefab;
+        public AssetReferenceGameObject PrefabReference;
     }
     
 }

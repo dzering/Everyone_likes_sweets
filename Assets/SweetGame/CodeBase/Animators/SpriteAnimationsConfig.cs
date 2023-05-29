@@ -1,20 +1,11 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SweetGame.CodeBase.Animators
 {
     [CreateAssetMenu(fileName = nameof(SpriteAnimationsConfig), menuName = "SweetGame/" + nameof(SpriteAnimationsConfig))]
     public class SpriteAnimationsConfig : ScriptableObject
     {
-        [Serializable]
-        public class SpritesSequence
-        {
-            [FormerlySerializedAs("Track")] public AnimationTrack _animationTrack;
-            public List<Sprite> Sprites = new List<Sprite>();
-        }
-
         public List<SpritesSequence> Sprites = new List<SpritesSequence>(); 
 
         public List<Sprite> GetAnimations(AnimationTrack animationTrack)
@@ -31,6 +22,5 @@ namespace SweetGame.CodeBase.Animators
             }
             return sprites;
         }
-
     }
 }

@@ -21,7 +21,6 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private readonly IGameFactory _gameFactory;
         private readonly IProgressService _progressService;
         private readonly IStaticDataService _staticDataService;
-        private readonly IWindowsService _windowService;
         private IUIFactory _uiFactory;
 
         public LoadLevelState(GameStateMachine stateMachine,
@@ -30,7 +29,6 @@ namespace SweetGame.CodeBase.Infrastructure.States
             IGameFactory gameFactory, IProgressService progressService, IStaticDataService staticDataService,
             IWindowsService windowService, IUIFactory uiFactory)
         {
-            _windowService = windowService;
             _uiFactory = uiFactory;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;

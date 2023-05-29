@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using SweetGame.CodeBase.Audio;
 using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Services;
@@ -15,11 +17,12 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         List<ISavedProgress> ProgressWriter { get; }
         List<ISavedProgressReader> ProgressReaders { get; }
         void CleanUp();
-        GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
+        Task<GameObject> CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
         SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
         LootPiece CrateLoot();
         void CreateBackground();
         void CreateDestructor(string destructorId, Vector3 position);
         void CreateSpawner(List<ISpawnPoint> spawnPoints, ICoroutineRunner coroutine);
+        IAudioManager CreateAudioManager();
     }
 }

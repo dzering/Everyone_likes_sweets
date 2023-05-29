@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SweetGame.CodeBase.Audio;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.PersistentProgress;
@@ -37,7 +38,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
                 [typeof(LoadMenuState)] = new LoadMenuState(this, sceneLoader, 
                     services.Single<IGameFactory>(),
                     services.Single<IUIFactory>(),
-                    services.Single<IWindowsService>()),
+                    services.Single<IWindowsService>(), services.Single<AudioService>()),
             };
         }
 

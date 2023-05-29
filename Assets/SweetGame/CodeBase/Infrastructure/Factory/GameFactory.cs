@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using SweetGame.CodeBase.Audio;
 using SweetGame.CodeBase.Game.Counter;
 using SweetGame.CodeBase.Game.Enemy;
 using SweetGame.CodeBase.Game.Enemy.AI;
@@ -12,6 +14,8 @@ using SweetGame.CodeBase.UI.Elements;
 using SweetGame.CodeBase.UI.Menu;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
 namespace SweetGame.CodeBase.Infrastructure.Factory
@@ -60,10 +64,18 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             return hud;
         }
 
-        public GameObject CreateEnemy(EnemyTypeId enemyTypeId, Transform parent)
+        public async Task<GameObject> CreateEnemy(EnemyTypeId enemyTypeId, Transform parent)
         {
             EnemyStaticData enemyData = _staticData.ForEnemy(enemyTypeId);
-            GameObject enemy = Object.Instantiate(enemyData.Prefab, parent.position, quaternion.identity);
+
+            AsyncOperationHandle<GameObject> 
+                handle = Addressables.LoadAssetAsync<GameObject>(enemyData.PrefabReference);
+
+            GameObject prefab = await handle.Task;
+
+            Addressables.Release(prefab);
+
+            GameObject enemy = Object.Instantiate(prefab, parent.position, quaternion.identity);
             
             IHealth health = enemy.GetComponent<IHealth>();
             
@@ -98,6 +110,12 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             GameObject spawnerGO = InstantiateRegister(AssetPath.SPAWNER);
             Spawner spawner = spawnerGO.GetComponentInChildren<Spawner>();
             spawner.Construct(spawnPoints);
+        }
+
+        public IAudioManager CreateAudioManager()
+        {
+            GameObject audioService = InstantiateRegister(AssetPath.AUDIO_MANAGER);
+            return audioService.GetComponent<IAudioManager>();
         }
 
         public SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position)

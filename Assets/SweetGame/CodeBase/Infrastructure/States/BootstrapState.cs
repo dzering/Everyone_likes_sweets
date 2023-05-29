@@ -1,3 +1,4 @@
+using SweetGame.CodeBase.Audio;
 using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;
@@ -36,10 +37,10 @@ namespace SweetGame.CodeBase.Infrastructure.States
 
         private void RegisterServices()
         {
+            IRandomService randomService = new UnityRandomService();
             RegisterStaticDataService();
             RegisterAdService();
-            IRandomService randomService = new UnityRandomService();
-            
+
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IAssets>(new AssetsProvider());
             _services.RegisterSingle<IProgressService>(new ProgressService());
@@ -60,11 +61,17 @@ namespace SweetGame.CodeBase.Infrastructure.States
 
 
             _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
+            
+            RegisterAudioService(_services.Single<IGameFactory>());
         }
 
-        private void EnterLoadLevel()
-        {
+        private void EnterLoadLevel() => 
             _gameStateMachine.Enter<LoadProgressState>();
+
+        private void RegisterAudioService(IGameFactory gameFactory)
+        {
+            IAudioManager audioManager = gameFactory.CreateAudioManager();
+            _services.RegisterSingle<AudioService>(new AudioService(audioManager));
         }
 
         private void RegisterAdService()
