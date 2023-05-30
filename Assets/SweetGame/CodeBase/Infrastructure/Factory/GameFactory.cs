@@ -47,6 +47,8 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriter.Clear();
+            
+            _assets.CleanUp();
         }
 
         public GameObject CreatePlayer()
@@ -67,14 +69,7 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         public async Task<GameObject> CreateEnemy(EnemyTypeId enemyTypeId, Transform parent)
         {
             EnemyStaticData enemyData = _staticData.ForEnemy(enemyTypeId);
-
-            AsyncOperationHandle<GameObject> 
-                handle = Addressables.LoadAssetAsync<GameObject>(enemyData.PrefabReference);
-
-            GameObject prefab = await handle.Task;
-
-            Addressables.Release(prefab);
-
+            GameObject prefab = await _assets.Load<GameObject>(enemyData.PrefabReference);
             GameObject enemy = Object.Instantiate(prefab, parent.position, quaternion.identity);
             
             IHealth health = enemy.GetComponent<IHealth>();
