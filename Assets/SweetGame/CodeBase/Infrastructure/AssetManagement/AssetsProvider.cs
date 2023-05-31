@@ -15,18 +15,48 @@ namespace SweetGame.CodeBase.Infrastructure.AssetManagement
         private readonly Dictionary<string, List<AsyncOperationHandle>> _handles =
             new Dictionary<string, List<AsyncOperationHandle>>();
 
+        public void Initialize() => 
+            Addressables.InitializeAsync();
+
         public async Task<T> Load<T>(AssetReference assetReference) where T : class
         {
-            if (_completedCash.TryGetValue(assetReference.AssetGUID, out AsyncOperationHandle complitedHandle))
-                return complitedHandle.Result as T;
+            if (_completedCash.TryGetValue(assetReference.AssetGUID, out AsyncOperationHandle completedHandle))
+                return completedHandle.Result as T;
+
+            return await RunWithCashOnComplete(
+                Addressables.LoadAssetAsync<T>(assetReference),
+                assetReference.AssetGUID);
+        }
+
+        public async Task<T> Load<T>(string address) where T : class
+        {
+            if (_completedCash.TryGetValue(address, out AsyncOperationHandle completedHandle))
+                return completedHandle.Result as T;
             
-            AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(assetReference);
-            handle.Completed += (h )=> 
-                _completedCash[assetReference.AssetGUID] = h;
-            
-            AddHandle(assetReference, handle);
+            return await RunWithCashOnComplete(
+                Addressables.LoadAssetAsync<T>(address),
+                address);
+        }
+
+        private async Task<T> RunWithCashOnComplete<T>(AsyncOperationHandle<T> handle, string cashKey) where T : class
+        {
+            handle.Completed += (completeHandle) =>
+                _completedCash[cashKey] = completeHandle;
+
+            AddHandle(cashKey, handle);
 
             return await handle.Task;
+        }
+
+        private void AddHandle<T>(string assetGUID, AsyncOperationHandle<T> handle) where T : class
+        {
+            if (!_handles.TryGetValue(assetGUID, out List<AsyncOperationHandle> resourceHandles))
+            {
+                resourceHandles = new List<AsyncOperationHandle>();
+                _handles[assetGUID] = resourceHandles;
+            }
+
+            _handles[assetGUID].Add(handle);
         }
 
         public void CleanUp()
@@ -34,17 +64,8 @@ namespace SweetGame.CodeBase.Infrastructure.AssetManagement
             foreach (var resourceHandles in _handles.Values)
             foreach (AsyncOperationHandle handle in resourceHandles)
                 Addressables.Release(handle);
-        }
-
-        private void AddHandle<T>(AssetReference assetReference, AsyncOperationHandle<T> handle) where T : class
-        {
-            if (!_handles.TryGetValue(assetReference.AssetGUID, out List<AsyncOperationHandle> resourceHandles))
-            {
-                resourceHandles = new List<AsyncOperationHandle>();
-                _handles[assetReference.AssetGUID] = resourceHandles;
-            }
-
-            _handles[assetReference.AssetGUID].Add(handle);
+            _completedCash.Clear();
+            _handles.Clear();
         }
 
 

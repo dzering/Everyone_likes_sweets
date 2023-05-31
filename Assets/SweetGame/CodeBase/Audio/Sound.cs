@@ -11,6 +11,8 @@ namespace SweetGame.CodeBase.Audio
         [Range(0f, 1f)]
         public float Volume;
 
+        public bool Loop;
+
         [HideInInspector]
         public AudioSource Source;
 

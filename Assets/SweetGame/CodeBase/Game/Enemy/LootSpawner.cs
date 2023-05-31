@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using SweetGame.CodeBase.Data;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;
@@ -25,22 +26,17 @@ namespace SweetGame.CodeBase.Game.Enemy
             EnemyDeath.OnDeath += SpawnLoot;
         }
 
-        private void SpawnLoot(EnemyDeath enemyDeath)
+        private async void SpawnLoot(EnemyDeath enemyDeath)
         {
-            LootPiece loot = _factory.CrateLoot();
+            LootPiece loot = await _factory.CrateLoot();
             loot.transform.position =  transform.position + Vector3.up * 0.5f;
            
             var lootItem = GenerateLoot();
             loot.Initialize(lootItem);
         }
 
-        private Loot GenerateLoot()
-        {
-            return new Loot()
-            {
-                Value = _random.GetRandom(_min, _max)
-            };
-        }
+        private Loot GenerateLoot() =>
+            new Loot() { Value = _random.GetRandom(_min, _max) };
 
         public void SetLoot(int min, int max)
         {

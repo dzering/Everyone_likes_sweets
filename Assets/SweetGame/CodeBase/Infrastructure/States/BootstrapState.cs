@@ -42,7 +42,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
             RegisterAdService();
 
             _services.RegisterSingle<IInputService>(InputService());
-            _services.RegisterSingle<IAssets>(new AssetsProvider());
+            RegisterAssetProvider();
             _services.RegisterSingle<IProgressService>(new ProgressService());
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                 _services.Single<IAssets>(),
@@ -63,6 +63,13 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
             
             RegisterAudioService(_services.Single<IGameFactory>());
+        }
+
+        private void RegisterAssetProvider()
+        {
+            AssetsProvider assetsProvider = new AssetsProvider();
+            _services.RegisterSingle<IAssets>(assetsProvider);
+            assetsProvider.Initialize();
         }
 
         private void EnterLoadLevel() => 

@@ -38,7 +38,7 @@ namespace SweetGame.CodeBase.UI.Services.Factory
 
         public GameObject CreateMainMenu()
         {
-            GameObject obj = _asset.Instantiate(AssetPath.MAIN_MENU_PATH, _uiRoot, true);
+            GameObject obj = _asset.Instantiate(AssetAddress.MAIN_MENU_PATH, _uiRoot, true);
             return obj;
         }
 

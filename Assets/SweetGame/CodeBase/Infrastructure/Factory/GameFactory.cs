@@ -43,6 +43,9 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             _stateMachine = stateMachine;
         }
 
+        public async Task WarmUp() => 
+            await _assets.Load<GameObject>(AssetAddress.LOOT);
+
         public void CleanUp()
         {
             ProgressReaders.Clear();
@@ -51,15 +54,25 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             _assets.CleanUp();
         }
 
+        public async Task<LootPiece> CrateLoot()
+        {
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.LOOT);
+            GameObject instantiateRegister = InstantiateRegisterAsync(prefab);
+            LootPiece lootPiece = instantiateRegister.GetComponent<LootPiece>();
+            lootPiece.Construct(_progressService.PlayerProgress.WordData);
+            return lootPiece;
+        }
+
         public GameObject CreatePlayer()
         {
-            Player = InstantiateRegister(AssetPath.PLAYER_PATH);
+            Player = InstantiateRegister(AssetAddress.PLAYER_PATH);
             return Player;
         }
 
-        public GameObject CreateHUD()
+        public async Task<GameObject> CreateHUD()
         {
-            GameObject hud = InstantiateRegister(AssetPath.HUD_PATH);
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.HUD);
+            GameObject hud = InstantiateRegisterAsync(prefab);
             hud.GetComponentInChildren<LootCounter>().Construct(_progressService.PlayerProgress.WordData);
             hud.GetComponentInChildren<SceneButton>().Construct(_stateMachine);
             
@@ -96,26 +109,26 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
 
         public void CreateDestructor(string destructorId, Vector3 position)
         {
-            Destructor destructor = InstantiateRegister(AssetPath.DESTRUCTOR_PATH, position).GetComponent<Destructor>();
+            Destructor destructor = InstantiateRegister(AssetAddress.DESTRUCTOR_PATH, position).GetComponent<Destructor>();
             destructor.ID = destructorId;
         }
 
         public void CreateSpawner(List<ISpawnPoint> spawnPoints, ICoroutineRunner coroutine)
         {
-            GameObject spawnerGO = InstantiateRegister(AssetPath.SPAWNER);
+            GameObject spawnerGO = InstantiateRegister(AssetAddress.SPAWNER);
             Spawner spawner = spawnerGO.GetComponentInChildren<Spawner>();
             spawner.Construct(spawnPoints);
         }
 
         public IAudioManager CreateAudioManager()
         {
-            GameObject audioService = InstantiateRegister(AssetPath.AUDIO_MANAGER);
+            GameObject audioService = InstantiateRegister(AssetAddress.AUDIO_MANAGER);
             return audioService.GetComponent<IAudioManager>();
         }
 
         public SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position)
         {
-            SpawnPoint spawnPoint = InstantiateRegister(AssetPath.SPAWNER_POINTS_PATH, position)
+            SpawnPoint spawnPoint = InstantiateRegister(AssetAddress.SPAWNER_POINTS_PATH, position)
                 .GetComponent<SpawnPoint>();
             spawnPoint.Construct(this);
             spawnPoint.EnemyTypeId = enemyTypeId;
@@ -131,16 +144,9 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
             ProgressReaders.Add(progressReader);
         }
 
-        public LootPiece CrateLoot()
-        {
-            var lootPiece = InstantiateRegister(AssetPath.LOOT_PATH).GetComponent<LootPiece>();
-            lootPiece.Construct(_progressService.PlayerProgress.WordData);
-            return lootPiece;
-        }
-
         public void CreateBackground()
         {
-            GameObject Background = InstantiateRegister(AssetPath.BACKGROUND_PATH);
+            GameObject Background = InstantiateRegister(AssetAddress.BACKGROUND_PATH);
         }
 
         private GameObject InstantiateRegister(string prefabPath, Vector3 position)
@@ -153,6 +159,13 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         private GameObject InstantiateRegister(string prefabPath)
         {
             GameObject gameObject = _assets.Instantiate(prefabPath);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
+        }
+        
+        private GameObject InstantiateRegisterAsync(GameObject prefab)
+        {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefab);
             RegisterProgressWatchers(gameObject);
             return gameObject;
         }

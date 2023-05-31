@@ -11,6 +11,8 @@ namespace SweetGame.CodeBase.Infrastructure.AssetManagement
         GameObject Instantiate(string prefabPath, Vector3 position);
         GameObject Instantiate(string prefPath, Transform transform, bool b);
         Task<T> Load<T>(AssetReference assetReference) where T : class;
+        Task<T> Load<T>(string address) where T : class;
         void CleanUp();
+        void Initialize();
     }
 }

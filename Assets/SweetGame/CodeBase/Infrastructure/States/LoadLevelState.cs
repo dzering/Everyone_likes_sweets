@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SweetGame.CodeBase.Game.Player;
 using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Factory;
@@ -42,6 +43,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
         {
             _loadingCurtain.Show();
             _gameFactory.CleanUp();
+            _gameFactory.WarmUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
@@ -101,9 +103,9 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _gameFactory.CreateSpawner(spawnPoints, _sceneLoader.CoroutineRunner);
         }
 
-        private void InitialHud(GameObject player)
+        private async void InitialHud(GameObject player)
         {
-            GameObject hud = _gameFactory.CreateHUD();
+            GameObject hud = await _gameFactory.CreateHUD();
             hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponentInChildren<PlayerHealth>());
         }
     }

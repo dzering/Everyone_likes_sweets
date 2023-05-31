@@ -1,16 +1,17 @@
+using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using SweetGame.CodeBase.Infrastructure.Services;
 using SweetGame.CodeBase.Infrastructure.Services.Input;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace SweetGame.CodeBase.Game.Player
 {
     public class PlayerAttack : MonoBehaviour
     {
-        public GameObject Bomb;
         private IInputService _input;
         private float _coolDownTime;
-        private float CoolDownTime = 2f;
+        public float CoolDownTime = 2f;
 
         private void Awake() => 
             _input = AllServices.Container.Single<IInputService>();
@@ -34,7 +35,8 @@ namespace SweetGame.CodeBase.Game.Player
             if (_input.AttackButtonUp)
             {
                 _coolDownTime = CoolDownTime;
-                Instantiate(Bomb, transform.position, quaternion.identity);
+                Addressables.InstantiateAsync(
+                    AssetAddress.BOMB, transform.position, quaternion.identity);
             }
         }
     }

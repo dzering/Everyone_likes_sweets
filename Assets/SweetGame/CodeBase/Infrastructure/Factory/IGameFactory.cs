@@ -13,16 +13,17 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
     {
         GameObject Player { get; }
         GameObject CreatePlayer();
-        GameObject CreateHUD();
+        Task<GameObject> CreateHUD();
         List<ISavedProgress> ProgressWriter { get; }
         List<ISavedProgressReader> ProgressReaders { get; }
         void CleanUp();
         Task<GameObject> CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
         SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
-        LootPiece CrateLoot();
+        Task<LootPiece> CrateLoot();
         void CreateBackground();
         void CreateDestructor(string destructorId, Vector3 position);
         void CreateSpawner(List<ISpawnPoint> spawnPoints, ICoroutineRunner coroutine);
         IAudioManager CreateAudioManager();
+        Task WarmUp();
     }
 }
