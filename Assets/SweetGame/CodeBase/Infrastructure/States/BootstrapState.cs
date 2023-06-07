@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using SweetGame.CodeBase.Audio;
 using SweetGame.CodeBase.Infrastructure.AssetManagement;
 using SweetGame.CodeBase.Infrastructure.Factory;
@@ -16,7 +17,6 @@ namespace SweetGame.CodeBase.Infrastructure.States
     public class BootstrapState : IState
     {
         private const string INITIAL = "Initial";
-        private const string NAME_MAIN_SCENE = "Main";
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoad;
         private readonly AllServices _services;
@@ -33,6 +33,10 @@ namespace SweetGame.CodeBase.Infrastructure.States
         public void Enter()
         {
             _sceneLoad.Load(name: INITIAL, onLoaded: EnterLoadLevel);
+        }
+
+        public void Exit()
+        {
         }
 
         private void RegisterServices()
@@ -52,17 +56,24 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(
                 _services.Single<IProgressService>(), 
                 _services.Single<IGameFactory>()));
+            RegisterAudioService(_services.Single<IGameFactory>());
             _services.RegisterSingle<ISaveTrigger>(new SaveTrigger(
                 _services.Single<ISaveLoadService>()));
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
                 _services.Single<IProgressService>(),
-                _services.Single<IAdService>()));
+                _services.Single<IAdService>(),
+                _services.Single<AudioService>().AudioManager,
+                _services.Single<ISaveLoadService>()));
 
 
             _services.RegisterSingle<IWindowsService>(new WindowsService(_services.Single<IUIFactory>()));
-            
-            RegisterAudioService(_services.Single<IGameFactory>());
+        }
+
+        private void RegisterAudioService(IGameFactory gameFactory)
+        {
+            IAudioManager audioManager = gameFactory.CreateAudioManager();
+            _services.RegisterSingle<AudioService>(new AudioService(audioManager));
         }
 
         private void RegisterAssetProvider()
@@ -74,12 +85,6 @@ namespace SweetGame.CodeBase.Infrastructure.States
 
         private void EnterLoadLevel() => 
             _gameStateMachine.Enter<LoadProgressState>();
-
-        private void RegisterAudioService(IGameFactory gameFactory)
-        {
-            IAudioManager audioManager = gameFactory.CreateAudioManager();
-            _services.RegisterSingle<AudioService>(new AudioService(audioManager));
-        }
 
         private void RegisterAdService()
         {
@@ -97,11 +102,7 @@ namespace SweetGame.CodeBase.Infrastructure.States
             _services.RegisterSingle<IStaticDataService>(staticDataService);
         }
 
-        public void Exit()
-        {
-        }
-
-        public static InputService InputService()
+        private static InputService InputService()
         {
             if (Application.isEditor)
                 return new InputServiceMobile();

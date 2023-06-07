@@ -19,6 +19,9 @@ namespace SweetGame.CodeBase.UI.Services.WindowsService
                 case WindowID.Shop:
                     _uiFactory.CreateShop();
                     break;
+                case WindowID.Settings:
+                    _uiFactory.CreateSettings();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(windowID), windowID, null);
             }

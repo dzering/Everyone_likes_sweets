@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using SweetGame.CodeBase.Data;
 using SweetGame.CodeBase.Infrastructure.Factory;
 using SweetGame.CodeBase.Infrastructure.Services;

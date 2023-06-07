@@ -18,12 +18,13 @@ namespace SweetGame.CodeBase.Infrastructure.Factory
         List<ISavedProgressReader> ProgressReaders { get; }
         void CleanUp();
         Task<GameObject> CreateEnemy(EnemyTypeId enemyTypeId, Transform parent);
-        SpawnPoint CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
+        Task<SpawnPoint> CreateSpawnPoint(string spawnerId, EnemyTypeId enemyTypeId, Vector3 position);
         Task<LootPiece> CrateLoot();
         void CreateBackground();
         void CreateDestructor(string destructorId, Vector3 position);
         void CreateSpawner(List<ISpawnPoint> spawnPoints, ICoroutineRunner coroutine);
         IAudioManager CreateAudioManager();
         Task WarmUp();
+        Task WarmUpUI();
     }
 }

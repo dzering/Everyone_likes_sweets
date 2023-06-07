@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using SweetGame.CodeBase.Game.Player;
 using SweetGame.CodeBase.Game.Spawner;
 using SweetGame.CodeBase.Infrastructure.Factory;
@@ -88,18 +87,18 @@ namespace SweetGame.CodeBase.Infrastructure.States
         private void InitUiRoot(IUIFactory uiFactory) => 
             uiFactory.CreateUIRoot();
 
-        private void InitSpawners()
+        private async void InitSpawners()
         {
             string sceneKey = SceneManager.GetActiveScene().name;
             LevelStaticData levelStaticData = _staticDataService.ForLevel(sceneKey);
-
             List<ISpawnPoint> spawnPoints = new List<ISpawnPoint>();
+            
             foreach (var spawnerData in levelStaticData.EnemySpawnersData)
             {
-                SpawnPoint spawnPoint = _gameFactory.CreateSpawnPoint(spawnerData.SpawnerId, spawnerData.EnemyTypeId, spawnerData.Position);
+                SpawnPoint spawnPoint = await _gameFactory.CreateSpawnPoint(spawnerData.SpawnerId, spawnerData.EnemyTypeId, spawnerData.Position);
                 spawnPoints.Add(spawnPoint);
             }
-
+            
             _gameFactory.CreateSpawner(spawnPoints, _sceneLoader.CoroutineRunner);
         }
 

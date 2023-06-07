@@ -7,12 +7,14 @@ namespace SweetGame.CodeBase.Data
     {
         public Health Health;
         public WorldData WordData;
+        public AudioData AudioData;
 
 
         public PlayerProgress(string initialLevel)
         {
             Health = new Health();
             WordData = new WorldData(initialLevel);
+            AudioData = new AudioData();
         }
     }
 }
